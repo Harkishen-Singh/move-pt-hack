@@ -22,15 +22,20 @@
 </head>
 <body>
         <script src="./js/angular.min.js"></script>
-            <script src="./js/angular-route.js"></script>
-            <script src="./js/angular.min.js.map"></script>
+        <script src="./js/angular-route.js"></script>
+        <script src="./js/angular.min.js.map"></script>
         <script src="./app.js"></script>
         <header data-ng-include="'html_components/header.html'" ></header>
         <aside data-ng-include="'html_components/sidebar.html'" data-ng-show="showSidebar" ></aside>
-        <main data-ng-view id='mainContent' style="margin-left: 230px;">
-                
-        </main>
-        <footer data-ng-include="'html_components/footer.html'" style="margin-left: 100px;margin-top: 400px;position: absolute;width: 100%;"  ></footer>
+        <div data-ng-if="showSidebar" >
+                <main data-ng-view id='mainContent' style="margin-left: 230px;"></main>
+        </div>
+        <div  data-ng-if="!showSidebar" >
+                <main data-ng-view id='mainContent' ></main>
+        </div>
+        
+        <footer data-ng-include="'html_components/footer.html'" 
+        style="margin-left: 100px;margin-top: 400px;position: absolute;width: 100%;"  ></footer>
     
 </body>
 </html>

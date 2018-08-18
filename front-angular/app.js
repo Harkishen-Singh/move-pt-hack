@@ -48,3 +48,13 @@ app.controller('dashController', function($scope,$rootScope){
     console.warn('dashboard controller called')
     $rootScope.showSidebar = true;
 })
+
+app.controller('scheduleController', function($scope,$rootScope){
+    console.warn('scheduleController called')
+    $rootScope.showSidebar = true;
+})
+
+app.controller('mapGenController', function($scope,$rootScope){
+    console.warn('mapGenController called')
+    $rootScope.showSidebar = true;
+})
