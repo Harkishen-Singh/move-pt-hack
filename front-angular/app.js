@@ -29,6 +29,9 @@ app.controller('loginController', function($scope,$location) {
             $scope.wrongpass = 'Wrong Password entered'
         }
     }
+})
 
-    
+app.controller('dashController', function($scope){
+    console.warn('dashboard controller called')
+
 })
