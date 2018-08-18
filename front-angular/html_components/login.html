@@ -1,1 +1,18 @@
-<h1>login page</h1>
+
+<div class="" style="margin-top: 10%;text-align: center;"
+>
+    
+    <form action="" style="border:2px solid pink;padding: 20px;margin-left: 20%;margin-right: 20%;
+    border-radius: 20px;" data-ng-submit="checkLogin()" >
+        Username : <input type="text" style="background-color: #F6FFFF;border-radius: 10px;text-align: center;"
+            ng-model="username"
+        /><br/><br/>
+        Password : <input type="password" style="background-color: #F6FFFF;border-radius: 10px;text-align: center;" 
+        data-ng-model="password"
+        /><br/><br/>
+        <input type="submit" class="btn btn-primary" />
+        <br/><br/>
+        {{wrongpass}}
+    </form>
+    
+</div>
