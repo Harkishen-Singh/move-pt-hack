@@ -1,0 +1,11 @@
+{
+  "name": "front-angular",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "http-server"
+  },
+  "author": "",
+  "license": "ISC"
+}
