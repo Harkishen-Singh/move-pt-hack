@@ -4,7 +4,8 @@
   "description": "hacks port-train move",
   "main": "app.js",
   "scripts": {
-    "test": "npm test && node app.js"
+    "test": "npm test && node app.js",
+"start":"http-server"
   },
   "repository": {
     "type": "git",
