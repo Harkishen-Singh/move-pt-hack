@@ -12,18 +12,31 @@ app.config(function($routeProvider,$locationProvider) {
         controller:'dashController',
         title:'Dashboard',
     })
+    .when('/schedules', {
+        templateUrl:'./html_components/schedule.html',
+        controller:'scheduleController',
+        title:'Dashboard',
+    })
+    .when('/mapGeneral', {
+        templateUrl:'./html_components/mapGeneral.html',
+        controller:'mapGenController',
+        title:'Dashboard',
+    })
 })
 
-app.controller('loginController', function($scope,$location) {
+app.controller('loginController', function($scope,$location,$rootScope) {
     console.warn('login page called')
     $scope.showHeader = false;
     $scope.title = 'Login | SignUP'
     $scope.wrongpass = '';
+    $rootScope.showSidebar = false;
     $scope.checkLogin =  function() {
         if($scope.password=='1') {
             console.warn('logged in')
             $scope.wrongpass = 'Success';
+            $rootScope.showSidebar = true;
             $location.path('/dashboard');
+            
         }
         else {
             $scope.wrongpass = 'Wrong Password entered'
@@ -31,7 +44,7 @@ app.controller('loginController', function($scope,$location) {
     }
 })
 
-app.controller('dashController', function($scope){
+app.controller('dashController', function($scope,$rootScope){
     console.warn('dashboard controller called')
-
+    $rootScope.showSidebar = true;
 })
