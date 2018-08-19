@@ -2,11 +2,15 @@
 <button class="btn btn-success" id="markerAdder" >Add Markers</button>
 
 <button class="btn btn-danger" id="cancel">Cancel</button>
-<button class="btn btn-primary" id="addDock" >Dock</button>
-<button class="btn btn-primary" id="addWare" >Warehouse</button>
-<button class="btn btn-primary" id="addRail" >Rail Line</button>
-<button class="btn btn-primary" id="addTrans" >Truck Transport</button>
-<p id="showTag" style="color: black;" > Tag : </p>
+<button class="btn btn-primary" id="addDock" onclick="onDock();" >Dock</button>
+<button class="btn btn-primary" id="addWare" onclick="onWare();" >Warehouse</button>
+<button class="btn btn-primary" id="addRail" onclick="onRail();">Rail Line</button>
+<button class="btn btn-primary" id="addTrans" onclick="onTruck();">Truck Transport</button>
+<p id="showTag" style="color: black;" > Tag : 
+    <div id="elementCreator" >
+        
+    </div>    
+</p>
 
 <img src="../cropped/pradeep.png" alt="" style="" >
 
@@ -48,6 +52,80 @@
         $('#addTrans').click(() => {
             $('#showTag').show();
         });
-    })
+    });
+    var dock_count = 0,warehouse_count=0,railline_count=0,truck_count=0;
+    function onDock() {
+        ++dock_count;
+        console.warn('created dock element tag with counter : '+dock_count);
+        
+        var tag = document.createElement('p');
+        tag.style.color = 'red';
+        tag.style.padding = '0px';
+        // tag.style.backgroundColor = 'red';
+        tag.style.borderRadius = '10px';
+        tag.style.fontSize='10px'
+        tag.innerHTML = 'Dock '+dock_count;
+        document.getElementById('elementCreator').appendChild(tag); 
+    }
+    function onWare() {
+        ++warehouse_count;
+        console.warn('created dock element tag with counter : '+dock_count);
+        
+        var tag = document.createElement('p');
+        tag.style.color = 'red';
+        tag.style.padding = '0px';
+        // tag.style.backgroundColor = 'red';
+        tag.style.borderRadius = '10px';
+        tag.style.fontSize='10px'
+        tag.innerHTML = 'Warehouse '+warehouse_count;
+        document.getElementById('elementCreator').appendChild(tag); 
+    }
+    function onRail() {
+        ++railline_count;
+        console.warn('created dock element tag with counter : '+dock_count);
+        
+        var tag = document.createElement('p');
+        tag.style.color = 'red';
+        tag.style.padding = '0px';
+        // tag.style.backgroundColor = 'red';
+        tag.style.borderRadius = '10px';
+        tag.style.fontSize='10px'
+        tag.innerHTML = 'Rail Line '+railline_count;
+        document.getElementById('elementCreator').appendChild(tag); 
+    }
+    function onTruck() {
+        ++truck_count;
+        console.warn('created dock element tag with counter : '+dock_count);
+        
+        var tag = document.createElement('p');
+        tag.style.color = 'red';
+        tag.style.padding = '0px';
+        // tag.style.backgroundColor = 'red';
+        tag.style.borderRadius = '10px';
+        tag.style.fontSize='10px'
+        tag.innerHTML = 'Roads '+truck_count;
+        document.getElementById('elementCreator').appendChild(tag); 
+    }
+
+    class Markers {
+        constructor(type, x, y, name) {
+            this.markerType = type;
+            this.x_cord = x;
+            this.y_cord = y;
+            this.markerName = name;
+            this.allTags = [];
+            this.markerSpecific = {};
+        }
+
+        displayAll() {
+            console.warn(this.allTags);
+        }
+
+
+    }
+
+
+
+
 
 </script>
