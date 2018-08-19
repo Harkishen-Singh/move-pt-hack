@@ -76,8 +76,7 @@ app.controller('signUpcontroller', function($scope, $location, $http,$rootScope)
         let data = 'email='+$scope.signup.email+'&username='+$scope.signup.username+'&password='
             +$scope.signup.password+'&mobile='+$scope.signup.mobile+'&port='+$scope.signup.port;
         console.warn(data);
-    }
-    $http({
+        $http({
             url:global.url+'/adminSignUp',
             method: 'POST',
             headers: {
@@ -85,9 +84,11 @@ app.controller('signUpcontroller', function($scope, $location, $http,$rootScope)
                 },
             data: data
     })
-    .then(res => {
-        let res = res.data;
+    .then(response => {
+        let res = response.data;
 
     })
+    }
+    
     
 })

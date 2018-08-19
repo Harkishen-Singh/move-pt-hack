@@ -7,5 +7,8 @@
     "test": "http-server"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "http-server": "^0.11.1"
+  }
 }
