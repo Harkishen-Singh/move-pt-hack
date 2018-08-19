@@ -1,11 +1,53 @@
 <!-- <h2>this is general map</h2> --><br/>
-<button class="btn btn-success" id="markerAdder" >Add Markers</button><br/><br/>
+<button class="btn btn-success" id="markerAdder" >Add Markers</button>
+
+<button class="btn btn-danger" id="cancel">Cancel</button>
+<button class="btn btn-primary" id="addDock" >Dock</button>
+<button class="btn btn-primary" id="addWare" >Warehouse</button>
+<button class="btn btn-primary" id="addRail" >Rail Line</button>
+<button class="btn btn-primary" id="addTrans" >Truck Transport</button>
+<p id="showTag" style="color: black;" > Tag : </p>
+
 <img src="../cropped/pradeep.png" alt="" style="" >
 
 <script>
 
     $(document).ready(() => {
-        
+        $('#cancel').hide();
+        $('#addDock').hide();
+        $('#showTag').hide();
+        $('#addWare').hide();
+        $('#addRail').hide();
+        $('#addTrans').hide();
+        $('#markerAdder').click(() => {
+            $('#cancel').show(100);
+            $('#markerAdder').hide(50);
+            $('#addDock').show(100);
+            $('#addWare').show(100);
+            $('#addRail').show(100);
+            $('#addTrans').show(100);
+        })
+        $('#cancel').click(() => {
+            $('#markerAdder').show(100);
+            $('#cancel').hide(50);
+            $('#addDock').hide(50);
+            $('#addWare').hide(50);
+            $('#addRail').hide(50);
+            $('#addTrans').hide(50);
+            $('#showTag').hide();
+        })
+        $('#addDock').click(() => {
+            $('#showTag').show();
+        });
+        $('#addWare').click(() => {
+            $('#showTag').show();
+        });
+        $('#addRail').click(() => {
+            $('#showTag').show();
+        });
+        $('#addTrans').click(() => {
+            $('#showTag').show();
+        });
     })
 
 </script>
