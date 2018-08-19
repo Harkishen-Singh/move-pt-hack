@@ -2,23 +2,23 @@
 >
     
     <form action="" style="border:2px solid pink;padding: 20px;margin-left: 20%;margin-right: 20%;
-    border-radius: 20px;" data-ng-submit="checkLogin()" >
+    border-radius: 20px;" data-ng-submit="submitSignUP()" >
         <h3>Administrator Port SignUp </h3><hr>
 
         Username : <input type="text" style="background-color: #F6FFFF;border-radius: 10px;text-align: center;margin-top: 20px;"
-            ng-model="username" 
+            ng-model="signup.username" 
         /><br/><br/>
         Password : <input type="password" style="background-color: #F6FFFF;border-radius: 10px;text-align: center;" 
-        data-ng-model="password"
+        data-ng-model="signup.password"
         /><br/><br/>
         Email : <input type="email" style="background-color: #F6FFFF;border-radius: 10px;text-align: center;" 
-        data-ng-model="email"
+        data-ng-model="signup.email"
         /><br/><br/>
         Mobile : <input type="number" style="background-color: #F6FFFF;border-radius: 10px;text-align: center;" 
-        data-ng-model="mobile"
+        data-ng-model="signup.mobile"
         /><br/><br/>
         
-        <select class="form-control" id="port" data-ng-model="port" style="width: 300px;margin-left: 30%;" >
+        <select class="form-control" id="port" data-ng-model="signup.port" style="width: 300px;margin-left: 30%;" >
             <option value="Chenni port" >Chenni port</option>
             <option value="Jawaharlal Nehru Port,Mumbai">Jawaharlal Nehru Port,Mumbai</option>
             <option value="Kandla Port,Gujurat">Kandla Port,Gujurat</option>

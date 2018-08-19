@@ -1,5 +1,9 @@
 var app = angular.module('pt_management', ['ngRoute']);
 
+var global = {
+    url:'0.0.0.0:5000'
+}
+
 app.config(function($routeProvider,$locationProvider) {
     $routeProvider
     .when('/',{
@@ -65,7 +69,25 @@ app.controller('mapGenController', function($scope,$rootScope){
     console.warn('mapGenController called')
     $rootScope.showSidebar = true;
 })
-app.controller('signUpcontroller', function($scope, $location) {
+app.controller('signUpcontroller', function($scope, $location, $http,$rootScope) {
     console.warn('signUp controller called')
     $rootScope.showSidebar = false;
+    $scope.submitSignUP = () => {
+        let data = 'email='+$scope.signup.email+'&username='+$scope.signup.username+'&password='
+            +$scope.signup.password+'&mobile='+$scope.signup.mobile+'&port='+$scope.signup.port;
+        console.warn(data);
+    }
+    $http({
+            url:global.url+'/adminSignUp',
+            method: 'POST',
+            headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+            data: data
+    })
+    .then(res => {
+        let res = res.data;
+
+    })
+    
 })
