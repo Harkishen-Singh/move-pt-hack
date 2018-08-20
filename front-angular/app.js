@@ -86,6 +86,12 @@ app.controller('signUpcontroller', function($scope, $location, $http,$rootScope)
         })
         .then(response => {
             let res = response.data;
+            console.warn(res)
+            if(res['Success']=='Y'){
+                $scope.resultShow = 'Successfully signed up';
+            }
+            else
+                $scope.resultShow = 'Sorry, some error occured';
 
         })
     }
