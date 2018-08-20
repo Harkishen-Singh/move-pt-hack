@@ -6,13 +6,13 @@
 <button class="btn btn-primary" id="addWare" onclick="onWare();" >Warehouse</button>
 <button class="btn btn-primary" id="addRail" onclick="onRail();">Rail Line</button>
 <button class="btn btn-primary" id="addTrans" onclick="onTruck();">Truck Transport</button>
-<p id="showTag" style="color: black;" > Tag : 
-    <div id="elementCreator" >
-        
-    </div>    
+<p id="showTag" style="color: black;" > Tag :   
 </p>
+<div id="elementCreator" >
+        
+</div>  
 
-<img src="../cropped/pradeep.png" alt="" style="position: absolute;" >
+<img src="../cropped/pradeep.png" alt="" style="" >
 
 <script>
 
@@ -64,6 +64,7 @@
         // tag.style.backgroundColor = 'red';
         tag.style.borderRadius = '10px';
         tag.style.fontSize='10px'
+        tag.style.overflow = 'visible'
         tag.innerHTML = 'Dock '+dock_count;
         tag.className = 'element_dock_'+dock_count;
         tag.draggable = true;
@@ -71,6 +72,9 @@
             tag.style.marginTop = event.clientY + 'px';
             tag.style.marginLeft = event.clientX + 'px';
         }
+        var formDec =  document.createElement('form');
+        formDec.style.backgroundColor='black';
+
         document.getElementById('elementCreator').appendChild(tag); 
         interact('.'+ tag.className.toString())
         .draggable({
@@ -165,8 +169,8 @@
             },
             onend: e => {
                 console.warn('Move ended at X: '+parseFloat(e.target.getAttribute('data-x') || 0) +
-                '  Y: '+parseFloat(e.target.getAttribute('data-y') || 0) 
-            )
+                '  Y: '+parseFloat(e.target.getAttribute('data-y') || 0)
+                )
             },
         })
     }
@@ -230,3 +234,4 @@
 
 
 </script>
+
