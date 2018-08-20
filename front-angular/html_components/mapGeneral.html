@@ -12,7 +12,7 @@
     </div>    
 </p>
 
-<img src="../cropped/pradeep.png" alt="" style="" >
+<img src="../cropped/pradeep.png" alt="" style="position: absolute;" >
 
 <script>
 
@@ -72,7 +72,7 @@
             tag.style.marginLeft = event.clientX + 'px';
         }
         document.getElementById('elementCreator').appendChild(tag); 
-        interact(tag.className)
+        interact('.'+ tag.className.toString())
         .draggable({
             inertia:true,
             autoScroll:true,
@@ -107,7 +107,31 @@
         tag.style.borderRadius = '10px';
         tag.style.fontSize='10px'
         tag.innerHTML = 'Warehouse '+warehouse_count;
+        tag.className = 'element_ware_'+warehouse_count;
         document.getElementById('elementCreator').appendChild(tag); 
+        interact('.'+ tag.className.toString())
+        .draggable({
+            inertia:true,
+            autoScroll:true,
+            onstart: ()=>{
+                console.warn('starting draging using interact')
+            },
+            onmove: eve => {
+                let target = eve.target;
+                console.warn('X : '+parseFloat(target.getAttribute('data-x') || 0) + eve.dx ) 
+                console.warn('Y: '+ parseFloat(target.getAttribute('data-y') || 0) + eve.dy)
+                let x = parseFloat(target.getAttribute('data-x') || 0) + eve.dx,
+                    y = parseFloat(target.getAttribute('data-y') || 0) + eve.dy; 
+                target.style.webkitTransform = target.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+                target.setAttribute('data-x', x)
+                target.setAttribute('data-y', y)
+            },
+            onend: e => {
+                console.warn('Move ended at X: '+parseFloat(e.target.getAttribute('data-x') || 0) +
+                '  Y: '+parseFloat(e.target.getAttribute('data-y') || 0) 
+            )
+            },
+        })
     }
     function onRail() {
         ++railline_count;
@@ -120,7 +144,31 @@
         tag.style.borderRadius = '10px';
         tag.style.fontSize='10px'
         tag.innerHTML = 'Rail Line '+railline_count;
+        tag.className = 'element_rail_'+railline_count;
         document.getElementById('elementCreator').appendChild(tag); 
+        interact('.'+ tag.className.toString())
+        .draggable({
+            inertia:true,
+            autoScroll:true,
+            onstart: ()=>{
+                console.warn('starting draging using interact')
+            },
+            onmove: eve => {
+                let target = eve.target;
+                console.warn('X : '+parseFloat(target.getAttribute('data-x') || 0) + eve.dx ) 
+                console.warn('Y: '+ parseFloat(target.getAttribute('data-y') || 0) + eve.dy)
+                let x = parseFloat(target.getAttribute('data-x') || 0) + eve.dx,
+                    y = parseFloat(target.getAttribute('data-y') || 0) + eve.dy; 
+                target.style.webkitTransform = target.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+                target.setAttribute('data-x', x)
+                target.setAttribute('data-y', y)
+            },
+            onend: e => {
+                console.warn('Move ended at X: '+parseFloat(e.target.getAttribute('data-x') || 0) +
+                '  Y: '+parseFloat(e.target.getAttribute('data-y') || 0) 
+            )
+            },
+        })
     }
     function onTruck() {
         ++truck_count;
@@ -133,7 +181,31 @@
         tag.style.borderRadius = '10px';
         tag.style.fontSize='10px'
         tag.innerHTML = 'Roads '+truck_count;
+        tag.className = 'element_truck_'+truck_count;
         document.getElementById('elementCreator').appendChild(tag); 
+        interact('.'+ tag.className.toString())
+        .draggable({
+            inertia:true,
+            autoScroll:true,
+            onstart: ()=>{
+                console.warn('starting draging using interact')
+            },
+            onmove: eve => {
+                let target = eve.target;
+                console.warn('X : '+parseFloat(target.getAttribute('data-x') || 0) + eve.dx ) 
+                console.warn('Y: '+ parseFloat(target.getAttribute('data-y') || 0) + eve.dy)
+                let x = parseFloat(target.getAttribute('data-x') || 0) + eve.dx,
+                    y = parseFloat(target.getAttribute('data-y') || 0) + eve.dy; 
+                target.style.webkitTransform = target.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+                target.setAttribute('data-x', x)
+                target.setAttribute('data-y', y)
+            },
+            onend: e => {
+                console.warn('Move ended at X: '+parseFloat(e.target.getAttribute('data-x') || 0) +
+                '  Y: '+parseFloat(e.target.getAttribute('data-y') || 0) 
+            )
+            },
+        })
     }
 
     // class Markers2 {

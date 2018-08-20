@@ -1,7 +1,7 @@
 var app = angular.module('pt_management', ['ngRoute']);
 
 var global = {
-    url:'0.0.0.0:5000'
+    url:'http://127.0.0.1:5000'
 }
 
 app.config(function($routeProvider,$locationProvider) {
@@ -83,11 +83,11 @@ app.controller('signUpcontroller', function($scope, $location, $http,$rootScope)
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
             data: data
-    })
-    .then(response => {
-        let res = response.data;
+        })
+        .then(response => {
+            let res = response.data;
 
-    })
+        })
     }
     
     
