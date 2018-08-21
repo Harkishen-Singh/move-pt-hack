@@ -25,7 +25,10 @@ const app = require('express')(),
     })
     app.get('/addTags2', (req, res)=>{
         console.log('works')
-        console.log(req.query)
+        console.log(req.query.object)
+        var a = req.query.object;
+        var ainJson = JSON.parse(a);
+        console.debug(ainJson) // save this to mongo
     })
 
 const server = app.listen(port, url, e => {

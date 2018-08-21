@@ -65,7 +65,7 @@
                 $('#done').click(()=>{
                     $.ajax({
                         url:'http://0.0.0.0:5000/addTags2',
-                        data: JSON.stringify(obj.throwObject())  ,
+                        data: 'object=' +JSON.stringify(obj.throwObject())  ,
                         success: function(r,status){
                             console.warn('ajax request with result: '+r+' status: '+status);
                         },
