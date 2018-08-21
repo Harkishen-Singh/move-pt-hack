@@ -1,7 +1,8 @@
 var app = angular.module('pt_management', ['ngRoute']);
 
 var global = {
-    url:'http://127.0.0.1:5000'
+    url:'http://127.0.0.1:5000',
+    username:'test',
 }
 
 app.config(function($routeProvider,$locationProvider) {
@@ -68,6 +69,85 @@ app.controller('scheduleController', function($scope,$rootScope){
 app.controller('mapGenController', function($scope,$rootScope){
     console.warn('mapGenController called')
     $rootScope.showSidebar = true;
+    $scope.tagDockSubmit = function(){
+        let data = 'username='+global.username +'&type='+'dock'+'&name='+$scope.name+'&capacity='+$scope.capacityDock+'&type='+$scope.type;
+        $http({
+            url:global.url+'/addDock',
+            method:'POST',
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            data: data
+        })
+        .then(response=>{
+            res = response.data;
+            if(res['Success']=='Y')
+                console.warn('Successfully added for Dock tag');
+            else
+                console.warn('err occured for adding in dock tag');
+                
+        })
+    }
+    $scope.tagWareSubmit = function(){
+        let data = 'username='+global.username +'&type='+'ware'+'&name='+$scope.name+'&capacity='+$scope.capacity;
+        $http({
+            url:global.url+'/addWare',
+            method:'POST',
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            data: data
+        })
+        .then(response=>{
+            res = response.data;
+            if(res['Success']=='Y')
+                console.warn('Successfully added for Ware tag');
+            else
+                console.warn('err occured for adding in Ware tag');
+                
+        })
+    }
+    $scope.tagRailSubmit = function(){
+        let data = 'username='+global.username +'&type='+'rail'+'&name='+$scope.name+'&capacity='+$scope.capacity;
+        $http({
+            url:global.url+'/addRail',
+            method:'POST',
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            data: data
+        })
+        .then(response=>{
+            res = response.data;
+            if(res['Success']=='Y')
+                console.warn('Successfully added for rail tag');
+            else
+                console.warn('err occured for adding in rail tag');
+                
+        })
+    }
+    $scope.tagRoadSubmit = function(){
+        let data = 'username='+global.username +'&type='+'truck'+'&name='+$scope.name;
+        $http({
+            url:global.url+'/addRoad',
+            method:'POST',
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            data: data
+        })
+        .then(response=>{
+            res = response.data;
+            if(res['Success']=='Y')
+                console.warn('Successfully added for truck tag');
+            else
+                console.warn('err occured for adding in truck tag');
+                
+        })
+    }
+
+
+
 })
 app.controller('signUpcontroller', function($scope, $location, $http,$rootScope) {
     console.warn('signUp controller called')
