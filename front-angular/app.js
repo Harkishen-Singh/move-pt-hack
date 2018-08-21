@@ -69,7 +69,11 @@ app.controller('scheduleController', function($scope,$rootScope){
 app.controller('mapGenController', function($scope,$rootScope){
     console.warn('mapGenController called')
     $rootScope.showSidebar = true;
+    $scope.initialise = function(){
+        console.warn('init called');
+    }
     $scope.tagDockSubmit = function(){
+        console.warn('reached dock submit')
         let data = 'username='+global.username +'&type='+'dock'+'&name='+$scope.name+'&capacity='+$scope.capacityDock+'&type='+$scope.type;
         $http({
             url:global.url+'/addDock',
