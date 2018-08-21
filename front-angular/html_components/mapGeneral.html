@@ -103,7 +103,7 @@
                 )
                 var formDyn = document.createElement('form');
                 formDyn.setAttribute('method','POST');
-                formDyn.setAttribute('data-ng-submit','tagSubmit()');
+                formDyn.setAttribute('data-ng-submit','tagDockSubmit()');
                 formDyn.style.marginTop = parseFloat(e.target.getAttribute('data-y'))+'px';
                 formDyn.style.marginLeft = parseFloat(e.target.getAttribute('data-x'))+'px';
                 formDyn.style.marginBottom = parseFloat(e.target.getAttribute('data-y'))+'500px';
@@ -118,6 +118,7 @@
                 dockName.type = 'text';
                 dockName.name = 'dockName';
                 dockName.placeholder = 'Dock Name';
+                dockName.setAttribute('data-ng-model','name');
                 formDyn.appendChild(dockName);
                 document.getElementById('main').appendChild(formDyn);
                 let capacity = document.createElement('input');
@@ -128,7 +129,7 @@
                 formDyn.appendChild(capacity);
                 // select 
                 let selectElement = document.createElement('select');
-                
+                selectElement.setAttribute('data-ng-model','type');
                 let optionArr = ['--Select Type--','Cargo','Passenger','Others'];
                 for(let i=0; i< optionArr.length; i++) {
                     let ele = document.createElement('option');
@@ -149,6 +150,7 @@
                     document.getElementById('main').removeChild(formDyn);
                     
                 }
+                submitButton.value = 'Submit';
                 formDyn.appendChild(submitButton)
                 
             },
@@ -186,8 +188,49 @@
             },
             onend: e => {
                 console.warn('Move ended at X: '+parseFloat(e.target.getAttribute('data-x') || 0) +
-                '  Y: '+parseFloat(e.target.getAttribute('data-y') || 0) 
-            )
+                '  Y: '+parseFloat(e.target.getAttribute('data-y') || 0) )
+                var formDyn = document.createElement('form');
+                formDyn.setAttribute('method','POST');
+                formDyn.setAttribute('data-ng-submit','tagWareSubmit()');
+                formDyn.style.marginTop = parseFloat(e.target.getAttribute('data-y'))+'px';
+                formDyn.style.marginLeft = parseFloat(e.target.getAttribute('data-x'))+'px';
+                formDyn.style.marginBottom = parseFloat(e.target.getAttribute('data-y'))+'500px';
+                formDyn.style.marginRight = parseFloat(e.target.getAttribute('data-x'))+'500px';
+                // let x = document.createElement('p');
+                //     x.innerText = 'Dock Name : '
+                //     x.style.color='red';
+                //     x.style.backgroundColor='white';
+                formDyn.style.backgroundColor='#fff'
+                // formDyn.appendChild(x)
+                let dockName = document.createElement('input');
+                dockName.type = 'text';
+                dockName.name = 'wareName';
+                dockName.placeholder = 'Ware House Name';
+                
+                dockName.setAttribute('data-ng-model','name');
+                formDyn.appendChild(dockName);
+                document.getElementById('main').appendChild(formDyn);
+                let capacity = document.createElement('input');
+                capacity.type='number';
+                capacity.name = 'capacity'
+                capacity.placeholder = 'Capacity';
+                capacity.setAttribute('data-ng-model','capacity')
+                formDyn.appendChild(capacity);
+                // select 
+                
+
+                let submitButton = document.createElement('input');
+                submitButton.type = 'button';
+                submitButton.style.margin='0px';
+                submitButton.innerText = 'Submit';
+                submitButton.className='btn btn-successs';
+                submitButton.onclick=() => {
+                    console.warn('submitting records');
+                    document.getElementById('main').removeChild(formDyn);
+                    
+                }
+                submitButton.value = 'Submit';
+                formDyn.appendChild(submitButton)
             },
         })
     }
@@ -225,6 +268,48 @@
                 console.warn('Move ended at X: '+parseFloat(e.target.getAttribute('data-x') || 0) +
                 '  Y: '+parseFloat(e.target.getAttribute('data-y') || 0)
                 )
+                var formDyn = document.createElement('form');
+                formDyn.setAttribute('method','POST');
+                formDyn.setAttribute('data-ng-submit','tagRailSubmit()');
+                formDyn.style.marginTop = parseFloat(e.target.getAttribute('data-y'))+'px';
+                formDyn.style.marginLeft = parseFloat(e.target.getAttribute('data-x'))+'px';
+                formDyn.style.marginBottom = parseFloat(e.target.getAttribute('data-y'))+'500px';
+                formDyn.style.marginRight = parseFloat(e.target.getAttribute('data-x'))+'500px';
+                // let x = document.createElement('p');
+                //     x.innerText = 'Dock Name : '
+                //     x.style.color='red';
+                //     x.style.backgroundColor='white';
+                formDyn.style.backgroundColor='#fff'
+                // formDyn.appendChild(x)
+                let dockName = document.createElement('input');
+                dockName.type = 'text';
+                dockName.name = 'wareName';
+                dockName.placeholder = 'Rail Name';
+                
+                dockName.setAttribute('data-ng-model','name');
+                formDyn.appendChild(dockName);
+                document.getElementById('main').appendChild(formDyn);
+                let capacity = document.createElement('input');
+                capacity.type='number';
+                capacity.name = 'capacity'
+                capacity.placeholder = 'Capacity ( if any )';
+                capacity.setAttribute('data-ng-model','capacity')
+                formDyn.appendChild(capacity);
+                // select 
+                
+
+                let submitButton = document.createElement('input');
+                submitButton.type = 'button';
+                submitButton.style.margin='0px';
+                submitButton.innerText = 'Submit';
+                submitButton.className='btn btn-successs';
+                submitButton.onclick=() => {
+                    console.warn('submitting records');
+                    document.getElementById('main').removeChild(formDyn);
+                    
+                }
+                submitButton.value = 'Submit';
+                formDyn.appendChild(submitButton)
             },
         })
     }
@@ -262,6 +347,48 @@
                 console.warn('Move ended at X: '+parseFloat(e.target.getAttribute('data-x') || 0) +
                 '  Y: '+parseFloat(e.target.getAttribute('data-y') || 0) 
             )
+            var formDyn = document.createElement('form');
+                formDyn.setAttribute('method','POST');
+                formDyn.setAttribute('data-ng-submit','tagTruckSubmit()');
+                formDyn.style.marginTop = parseFloat(e.target.getAttribute('data-y'))+'px';
+                formDyn.style.marginLeft = parseFloat(e.target.getAttribute('data-x'))+'px';
+                formDyn.style.marginBottom = parseFloat(e.target.getAttribute('data-y'))+'500px';
+                formDyn.style.marginRight = parseFloat(e.target.getAttribute('data-x'))+'500px';
+                // let x = document.createElement('p');
+                //     x.innerText = 'Dock Name : '
+                //     x.style.color='red';
+                //     x.style.backgroundColor='white';
+                formDyn.style.backgroundColor='#fff'
+                // formDyn.appendChild(x)
+                let dockName = document.createElement('input');
+                dockName.type = 'text';
+                dockName.name = 'wareName';
+                dockName.placeholder = 'Road Mark : ';
+                
+                dockName.setAttribute('data-ng-model','name');
+                formDyn.appendChild(dockName);
+                document.getElementById('main').appendChild(formDyn);
+                // let capacity = document.createElement('input');
+                // capacity.type='number';
+                // capacity.name = 'capacity'
+                // capacity.placeholder = 'Capacity';
+                // capacity.setAttribute('data-ng-model','capacity')
+                // formDyn.appendChild(capacity);
+                // select 
+                
+
+                let submitButton = document.createElement('input');
+                submitButton.type = 'button';
+                submitButton.style.margin='0px';
+                submitButton.innerText = 'Submit';
+                submitButton.className='btn btn-successs';
+                submitButton.onclick=() => {
+                    console.warn('submitting records');
+                    document.getElementById('main').removeChild(formDyn);
+                    
+                }
+                submitButton.value = 'Submit';
+                formDyn.appendChild(submitButton)
             },
         })
     }
