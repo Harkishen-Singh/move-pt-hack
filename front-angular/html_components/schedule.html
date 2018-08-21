@@ -1,1 +1,35 @@
 <h2>this is schedule</h2>
+
+<table>
+    <thead>
+        <th>CONSIGNMENT ID</th>
+        <th>INDENT COMMODITY</th>
+        <th>INDENT TYPE OF TRAIN</th>
+        <th>INDENT NO OF WAGONS</th>
+        <th>LOADING START TIME</th>
+        <th>LOADING END TIME</th>
+        <th>DEPARTURE TIME</th>
+        <th>DISTANCE TRAVELLED</th>
+        <th>DESTINATION STATION CODE</th>
+        <th>DESTINATION STATION CODE</th>
+    </thead>
+    <tbody>
+
+    </tbody>
+
+</table>
+
+
+
+<script>
+    d3.csv('../info.csv', (e, data) => {
+        if(e) throw e;
+        console.warn('d3 working');
+        // while(1){
+
+        // }
+        console.debug(data[0][1]);
+        tableRow = document.createElement('td')
+
+    });
+</script>

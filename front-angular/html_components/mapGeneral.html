@@ -1,5 +1,6 @@
 <!-- <h2>this is general map</h2> --><br/>
-<button class="btn btn-success" id="markerAdder" >Add Markers</button>
+<div style="background-image: url('../cropped/pradeep.png');height: 700px;width: 100%;" id="main" >
+    <button class="btn btn-success" id="markerAdder" >Add Markers</button>
 
 <button class="btn btn-danger" id="cancel">Cancel</button>
 <button class="btn btn-primary" id="addDock" onclick="onDock();" >Dock</button>
@@ -12,7 +13,9 @@
         
 </div>  
 
-<img src="../cropped/pradeep.png" alt="" style="" >
+</div>
+
+<!-- <img src="../cropped/pradeep.png" alt="" style="" > -->
 
 <script>
 
@@ -67,6 +70,7 @@
         tag.style.overflow = 'visible'
         tag.innerHTML = 'Dock '+dock_count;
         tag.className = 'element_dock_'+dock_count;
+        let classNameElement = tag.className;
         tag.draggable = true;
         tag.ondragend = function(event) {
             tag.style.marginTop = event.clientY + 'px';
@@ -96,7 +100,57 @@
             onend: e => {
                 console.warn('Move ended at X: '+parseFloat(e.target.getAttribute('data-x') || 0) +
                 '  Y: '+parseFloat(e.target.getAttribute('data-y') || 0) 
-            )
+                )
+                var formDyn = document.createElement('form');
+                formDyn.setAttribute('method','POST');
+                formDyn.setAttribute('data-ng-submit','tagSubmit()');
+                formDyn.style.marginTop = parseFloat(e.target.getAttribute('data-y'))+'px';
+                formDyn.style.marginLeft = parseFloat(e.target.getAttribute('data-x'))+'px';
+                formDyn.style.marginBottom = parseFloat(e.target.getAttribute('data-y'))+'500px';
+                formDyn.style.marginRight = parseFloat(e.target.getAttribute('data-x'))+'500px';
+                // let x = document.createElement('p');
+                //     x.innerText = 'Dock Name : '
+                //     x.style.color='red';
+                //     x.style.backgroundColor='white';
+                formDyn.style.backgroundColor='#fff'
+                // formDyn.appendChild(x)
+                let dockName = document.createElement('input');
+                dockName.type = 'text';
+                dockName.name = 'dockName';
+                dockName.placeholder = 'Dock Name';
+                formDyn.appendChild(dockName);
+                document.getElementById('main').appendChild(formDyn);
+                let capacity = document.createElement('input');
+                capacity.type='number';
+                capacity.name = 'capacity'
+                capacity.placeholder = 'Capacity of Holding Ships';
+                capacity.setAttribute('data-ng-model','capacityDock')
+                formDyn.appendChild(capacity);
+                // select 
+                let selectElement = document.createElement('select');
+                
+                let optionArr = ['--Select Type--','Cargo','Passenger','Others'];
+                for(let i=0; i< optionArr.length; i++) {
+                    let ele = document.createElement('option');
+                    ele.text = optionArr[i];
+                    ele.value = optionArr[i];
+                    ele.className = optionArr[i] + '_className';
+                    selectElement.appendChild(ele);
+                }
+                formDyn.appendChild(selectElement);
+
+                let submitButton = document.createElement('input');
+                submitButton.type = 'button';
+                submitButton.style.margin='0px';
+                submitButton.innerText = 'Submit';
+                submitButton.className='btn btn-successs';
+                submitButton.onclick=() => {
+                    console.warn('submitting records');
+                    document.getElementById('main').removeChild(formDyn);
+                    
+                }
+                formDyn.appendChild(submitButton)
+                
             },
         })
     }
