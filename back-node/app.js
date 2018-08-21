@@ -23,6 +23,10 @@ const app = require('express')(),
     app.post('/adminSignUp', (req, res) => {
         signUp.portAdmin(req, res);
     })
+    app.get('/addTags2', (req, res)=>{
+        console.log('works')
+        console.log(req.query)
+    })
 
 const server = app.listen(port, url, e => {
     if(e) throw e;

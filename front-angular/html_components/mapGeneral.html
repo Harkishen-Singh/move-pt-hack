@@ -7,7 +7,7 @@
         <button class="btn btn-primary" id="addWare" onclick="onWare();" >Warehouse</button>
         <button class="btn btn-primary" id="addRail" onclick="onRail();">Rail Line</button>
         <button class="btn btn-primary" id="addTrans" onclick="onTruck();">Truck Transport</button>
-        
+        <button class="btn btn-success" onclick='' id='done' >Done</button>
         
         <p id="showTag" style="color: black;" > Tag :   
         </p>
@@ -21,7 +21,69 @@
         <!-- <img src="../cropped/pradeep.png" alt="" style="" > -->
         
         <script>
-            class Tagshandler {
+
+        
+            $(document).ready(() => {
+                $('#cancel').hide();
+                $('#addDock').hide();
+                $('#showTag').hide();
+                $('#addWare').hide();
+                $('#addRail').hide();
+                $('#addTrans').hide();
+                $('#markerAdder').click(() => {
+                    $('#cancel').show(100);
+                    $('#markerAdder').hide(50);
+                    $('#addDock').show(100);
+                    $('#addWare').show(100);
+                    $('#addRail').show(100);
+                    $('#addTrans').show(100);
+                    $('#done').show(100);
+                })
+                $('#cancel').click(() => {
+                    $('#markerAdder').show(100);
+                    $('#cancel').hide(50);
+                    $('#addDock').hide(50);
+                    $('#addWare').hide(50);
+                    $('#addRail').hide(50);
+                    $('#addTrans').hide(50);
+                    $('#showTag').hide();
+                    $('#done').hide();
+                })
+                $('#addDock').click(() => {
+                    $('#showTag').show();
+                });
+                $('#addWare').click(() => {
+                    $('#showTag').show();
+                });
+                $('#addRail').click(() => {
+                    $('#showTag').show();
+                });
+                $('#addTrans').click(() => {
+                    $('#showTag').show();
+                });
+                $('#done').hide();
+                $('#done').click(()=>{
+                    $.ajax({
+                        url:'http://0.0.0.0:5000/addTags2',
+                        data: JSON.stringify(obj.throwObject())  ,
+                        success: function(r,status){
+                            console.warn('ajax request with result: '+r+' status: '+status);
+                        },
+                        error: function(xhr,status,error){
+                            throw error;
+                        }
+                    })
+                    $('#markerAdder').show(100);
+                    $('#cancel').hide(50);
+                    $('#addDock').hide(50);
+                    $('#addWare').hide(50);
+                    $('#addRail').hide(50);
+                    $('#addTrans').hide(50);
+                    $('#showTag').hide();
+                    $('#done').hide();
+                })
+            });
+class Tagshandler {
     constructor(){
         this.Tags = [];
         this.tag = {
@@ -54,47 +116,22 @@
     displayAll(){
         console.warn(this.Tags);
     }
+    throwObject(){
+        return this.Tags;
+    }
+}
+var testObj = {
+    name:'singh',
+}
+function boo(){
+    console.warn('from boo')
+    console.warn(obj.throwObject())
+    return obj.throwObject();
 }
 
+
+
 var obj = new Tagshandler();
-        
-            $(document).ready(() => {
-                $('#cancel').hide();
-                $('#addDock').hide();
-                $('#showTag').hide();
-                $('#addWare').hide();
-                $('#addRail').hide();
-                $('#addTrans').hide();
-                $('#markerAdder').click(() => {
-                    $('#cancel').show(100);
-                    $('#markerAdder').hide(50);
-                    $('#addDock').show(100);
-                    $('#addWare').show(100);
-                    $('#addRail').show(100);
-                    $('#addTrans').show(100);
-                })
-                $('#cancel').click(() => {
-                    $('#markerAdder').show(100);
-                    $('#cancel').hide(50);
-                    $('#addDock').hide(50);
-                    $('#addWare').hide(50);
-                    $('#addRail').hide(50);
-                    $('#addTrans').hide(50);
-                    $('#showTag').hide();
-                })
-                $('#addDock').click(() => {
-                    $('#showTag').show();
-                });
-                $('#addWare').click(() => {
-                    $('#showTag').show();
-                });
-                $('#addRail').click(() => {
-                    $('#showTag').show();
-                });
-                $('#addTrans').click(() => {
-                    $('#showTag').show();
-                });
-            });
             var dock_count = 0,warehouse_count=0,railline_count=0,truck_count=0;
             function onDock() {
                 ++dock_count;
@@ -197,8 +234,8 @@ var obj = new Tagshandler();
                             obj.pushTag(
                                 global.username,
                                 document.querySelector('#id_dockName').value,
-                                document.querySelector('#id_capacity').value,
-                                document.querySelector('#id_selectElement').value,
+                                
+                                document.querySelector('#id_selectElement').value,document.querySelector('#id_capacity').value,
                                 parseFloat(e.target.getAttribute('data-x'))+'px',
                                 parseFloat(e.target.getAttribute('data-y'))+'px'
                             )
@@ -264,6 +301,7 @@ var obj = new Tagshandler();
                         dockName.type = 'text';
                         dockName.name = 'wareName';
                         dockName.placeholder = 'Ware House Name';
+                        dockName.id='warename'
                         
                         dockName.setAttribute('data-ng-model','name');
                         formDyn.appendChild(dockName);
@@ -272,6 +310,7 @@ var obj = new Tagshandler();
                         capacity.type='number';
                         capacity.name = 'capacity'
                         capacity.placeholder = 'Capacity';
+                        capacity.id='capa'
                         capacity.setAttribute('data-ng-model','capacity')
                         formDyn.appendChild(capacity);
                         // select 
@@ -284,6 +323,14 @@ var obj = new Tagshandler();
                         submitButton.className='btn btn-successs';
                         submitButton.onclick=() => {
                             console.warn('submitting records');
+                            obj.pushTag(
+                                global.username,
+                                document.querySelector('#warename').value,
+                                
+                                'warehouse',document.querySelector('#capa').value,
+                                parseFloat(e.target.getAttribute('data-x'))+'px',
+                                parseFloat(e.target.getAttribute('data-y'))+'px'
+                            )
                             document.getElementById('main').removeChild(formDyn);
                             
                         }
@@ -346,6 +393,7 @@ var obj = new Tagshandler();
                         dockName.type = 'text';
                         dockName.name = 'wareName';
                         dockName.placeholder = 'Rail Name';
+                        dockName.id='railname'
                         
                         dockName.setAttribute('data-ng-model','name');
                         formDyn.appendChild(dockName);
@@ -353,6 +401,7 @@ var obj = new Tagshandler();
                         let capacity = document.createElement('input');
                         capacity.type='number';
                         capacity.name = 'capacity'
+                        capacity.id='idcapa'
                         capacity.placeholder = 'Capacity ( if any )';
                         capacity.setAttribute('data-ng-model','capacity')
                         formDyn.appendChild(capacity);
@@ -366,6 +415,14 @@ var obj = new Tagshandler();
                         submitButton.className='btn btn-successs';
                         submitButton.onclick=() => {
                             console.warn('submitting records');
+                            obj.pushTag(
+                                global.username,
+                                document.querySelector('#railname').value,
+                                
+                                'railline',document.querySelector('#idcapa').value,
+                                parseFloat(e.target.getAttribute('data-x'))+'px',
+                                parseFloat(e.target.getAttribute('data-y'))+'px'
+                            )
                             document.getElementById('main').removeChild(formDyn);
                             
                         }
@@ -428,7 +485,7 @@ var obj = new Tagshandler();
                         dockName.type = 'text';
                         dockName.name = 'wareName';
                         dockName.placeholder = 'Road Mark : ';
-                        
+                        dockName.id='roadsname'
                         dockName.setAttribute('data-ng-model','name');
                         formDyn.appendChild(dockName);
                         document.getElementById('main').appendChild(formDyn);
@@ -448,6 +505,14 @@ var obj = new Tagshandler();
                         submitButton.className='btn btn-successs';
                         submitButton.onclick=() => {
                             console.warn('submitting records');
+                            obj.pushTag(
+                                global.username,
+                                document.querySelector('#roadsname').value,
+                                
+                                'roads','',
+                                parseFloat(e.target.getAttribute('data-x'))+'px',
+                                parseFloat(e.target.getAttribute('data-y'))+'px'
+                            )
                             document.getElementById('main').removeChild(formDyn);
                             
                         }

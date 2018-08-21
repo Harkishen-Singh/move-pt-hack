@@ -149,6 +149,10 @@ app.controller('mapGenController', function($scope,$rootScope){
                 
         })
     }
+    $scope.checks = function(obj){
+        console.warn('this is the object from controller')
+        console.warn(obj)
+    }
 
 
 
