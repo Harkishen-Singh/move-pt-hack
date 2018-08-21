@@ -74,7 +74,7 @@ app.controller('mapGenController', function($scope,$rootScope){
     }
     $scope.tagDockSubmit = function(){
         console.warn('reached dock submit')
-        let data = 'username='+global.username +'&type='+'dock'+'&name='+$scope.name+'&capacity='+$scope.capacityDock+'&type='+$scope.type;
+        let data = 'username='+global.username +'&type='+'dock'+'&name='+$scope.name+'&capacity='+$scope.capacity+'&type='+$scope.type;
         $http({
             url:global.url+'/addDock',
             method:'POST',

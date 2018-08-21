@@ -21,6 +21,42 @@
         <!-- <img src="../cropped/pradeep.png" alt="" style="" > -->
         
         <script>
+            class Tagshandler {
+    constructor(){
+        this.Tags = [];
+        this.tag = {
+            'username':'',
+            'name':'',
+            'type':'',
+            'capacity':'',
+            'marginLeft':'',
+            'marginTop':'',
+        };
+    }
+    pushTag(username,name,type,capacity,marginLeft,marginTop){
+        this.tag = {
+            'username':'',
+            'name':'',
+            'type':'',
+            'capacity':'',
+            'marginLeft':'',
+            'marginTop':'',
+        };
+        this.tag.username = username
+        this.tag.name = name
+        this.tag.type = type
+        this.tag.capacity = capacity
+        this.tag.marginLeft=marginLeft
+        this.tag.marginTop=marginTop
+        this.Tags.push(this.tag);
+        this.displayAll();
+    }
+    displayAll(){
+        console.warn(this.Tags);
+    }
+}
+
+var obj = new Tagshandler();
         
             $(document).ready(() => {
                 $('#cancel').hide();
@@ -123,6 +159,7 @@
                         let dockName = document.createElement('input');
                         dockName.type = 'text';
                         dockName.name = 'dockName';
+                        dockName.id = 'id_dockName';
                         dockName.placeholder = 'Dock Name';
                         dockName.setAttribute('data-ng-model','name');
                         formDyn.appendChild(dockName);
@@ -130,8 +167,9 @@
                         let capacity = document.createElement('input');
                         capacity.type='number';
                         capacity.name = 'capacity'
+                        capacity.id = 'id_capacity'
                         capacity.placeholder = 'Capacity of Holding Ships';
-                        capacity.setAttribute('data-ng-model','capacityDock')
+                        capacity.setAttribute('data-ng-model','capacity')
                         formDyn.appendChild(capacity);
                         // select 
                         let selectElement = document.createElement('select');
@@ -144,6 +182,7 @@
                             ele.className = optionArr[i] + '_className';
                             selectElement.appendChild(ele);
                         }
+                        selectElement.id = 'id_selectElement'
                         formDyn.appendChild(selectElement);
         
                         let submitButton = document.createElement('input');
@@ -154,6 +193,15 @@
                         submitButton.setAttribute('data-ng-click','tagDockSubmit();')
                         submitButton.onclick=() => {
                             console.warn('submitting records');
+                            console.error(document.querySelector('#id_dockName').value)
+                            obj.pushTag(
+                                global.username,
+                                document.querySelector('#id_dockName').value,
+                                document.querySelector('#id_capacity').value,
+                                document.querySelector('#id_selectElement').value,
+                                parseFloat(e.target.getAttribute('data-x'))+'px',
+                                parseFloat(e.target.getAttribute('data-y'))+'px'
+                            )
                             document.getElementById('main').removeChild(formDyn);
                             
                         }
@@ -409,22 +457,7 @@
                 })
             }
         
-            // class Markers2 {
-            //     constructor(type, x, y, name) {
-            //         this.markerType = type;
-            //         this.x_cord = x;
-            //         this.y_cord = y;
-            //         this.markerName = name;
-            //         this.allTags = [];
-            //         this.markerSpecific = {};
-            //     }
-        
-            //     displayAll() {
-            //         console.warn(this.allTags);
-            //     }
-        
-        
-            // }
+
         
         
         
