@@ -104,6 +104,7 @@ app.controller('scheduleController', function($scope,$rootScope,$http,$location)
              'DICD', 'ICDS', 'CMLK', 'CRTK', 'HZL', 'LNN', 'CGDM', 'NTSJ', 'DGFJ', 'BTBR'];
     }
     $scope.fetchSchedules = function() {
+        $scope.showLoading = true;
         $http({
             url:global.url+'/schedules',
             method:'POST',
@@ -116,6 +117,7 @@ app.controller('scheduleController', function($scope,$rootScope,$http,$location)
             res = resp.data;
             if(res['Success']=='Y') {
                 $scope.sched = res['result'];
+                $scope.showLoading=false;
             }
         })
     }

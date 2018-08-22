@@ -13,7 +13,36 @@
         <p id="showTag" style="color: black;" > Tag :   
         </p>
         <div style="background-image: url('../images_of_ports/nhavasheva.png');width: 100%;min-height: 800px;background-repeat: no-repeat;" id="main" >
-            <h1 data-ng-if="showLoading" style="margin-left:30%;margin-top:200px;position: absolute;" >Just a moment...</h1>
+            <!-- <h3 data-ng-if="showLoading" style="margin-left:30%;margin-top:100px;position: absolute;background-color: white;padding: 20px; -->
+                <div data-ng-if="showLoading">
+                        <div class="loader"></div>
+                        <style>
+                            .loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-bottom: 16px solid blue;
+    border-radius: 50%;
+    margin-left: 45%;
+    width: 80px;
+    margin-top: 100px;
+    height: 80px;position: absolute;
+    -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+                        </style>
+                </div>
+      <!-- border-radius: 10px;
+    " >Just a moment, fetching files...</h3> -->
             <div id="elementCreator" >
             <div data-ng-if=" tags.length>0 " >
                 <div data-ng-repeat="t in tags" >
