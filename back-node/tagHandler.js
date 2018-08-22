@@ -1,6 +1,6 @@
 const mongo = require('mongodb').MongoClient,
-    // url='mongodb+srv://muskan:movehack@cluster0-ldloc.mongodb.net/pt_move?retryWrites=true'
-    url='mongodb://127.0.0.1:27017'
+    url='mongodb+srv://muskan:movehack@cluster0-ldloc.mongodb.net/pt_move?retryWrites=true'
+    // url='mongodb://127.0.0.1:27017'
 ;
 var output = {
     'Success':'N',
@@ -24,6 +24,26 @@ function resSend(res) {
     output.result=[];
 }
 
+function retriveTags(req, res) {
+    let username = req.body.username;
+    console.warn('requested username : '+username)
+    mongo.connect(url, (e, dbo) => {
+        if(e) throw e;
+        let db = dbo.db('pt_move');
+        db.collection('tags').find({"username" : username}).toArray((e, result2) => {
+            if(e) throw e;
+            console.warn('from db below')
+            console.warn(result2)
+            isErr=false;
+            output.result = result2;
+            resSend(res);
+            dbo.close();
+        })
+    })
+}
+
+
+
 function saveTags(req, res) {
     console.log(req.query.object)
     var a = req.query.object;
@@ -46,4 +66,5 @@ function saveTags(req, res) {
 
 module.exports = {
     save : saveTags,
+    retrive: retriveTags,
 }

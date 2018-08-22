@@ -27,6 +27,11 @@ const app = require('express')(),
         console.log('works')
         tags.save(req,res);
     })
+    app.post('/retriveTags', (req, res) => {
+        console.warn('request for retrive all tags ');
+        
+        tags.retrive(req, res);
+    })
 
 const server = app.listen(port, url, e => {
     if(e) throw e;

@@ -67,11 +67,26 @@ app.controller('scheduleController', function($scope,$rootScope){
     $rootScope.showSidebar = true;
 })
 
-app.controller('mapGenController', function($scope,$rootScope){
+app.controller('mapGenController', function($scope,$rootScope,$http){
     console.warn('mapGenController called')
     $rootScope.showSidebar = true;
     $scope.initialise = function(){
         console.warn('init called');
+        $http({
+            url:global.url+'/retriveTags',
+            method:'POST',
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            data:'username='+global.username
+        })
+        .then(resp=>{
+            let res = resp.data;
+            if(res['Success']=='Y'){
+                console.warn(res['result']);
+                $scope.tags = res['result'];
+            }
+        })
     }
     $scope.tagDockSubmit = function(){
         console.warn('reached dock submit')
