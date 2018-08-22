@@ -70,6 +70,7 @@ app.controller('scheduleController', function($scope,$rootScope){
 app.controller('mapGenController', function($scope,$rootScope,$http){
     console.warn('mapGenController called')
     $rootScope.showSidebar = true;
+    $scope.showLoading = true;
     $scope.initialise = function(){
         console.warn('init called');
         $http({
@@ -84,6 +85,7 @@ app.controller('mapGenController', function($scope,$rootScope,$http){
             let res = resp.data;
             if(res['Success']=='Y'){
                 console.warn(res['result']);
+                $scope.showLoading = false;
                 $scope.tags = res['result'];
             }
         })

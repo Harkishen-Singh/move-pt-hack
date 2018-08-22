@@ -8,18 +8,23 @@
         <button class="btn btn-primary" id="addRail" onclick="onRail();">Rail Line</button>
         <button class="btn btn-primary" id="addTrans" onclick="onTruck();">Truck Transport</button>
         <button class="btn btn-success" onclick='' id='done' >Done</button>
+    
         
         <p id="showTag" style="color: black;" > Tag :   
         </p>
         <div style="background-image: url('../images_of_ports/nhavasheva.png');width: 100%;min-height: 800px;background-repeat: no-repeat;" id="main" >
-        <div id="elementCreator" >
+            <h1 data-ng-if="showLoading" style="margin-left:30%;margin-top:200px;position: absolute;" >Just a moment...</h1>
+            <div id="elementCreator" >
             <div data-ng-if=" tags.length>0 " >
                 <div data-ng-repeat="t in tags" >
                     <button style="margin-left:{{t.marginLeft}};margin-top:{{t.marginTop}};position: absolute;
-                        color:#fff;background-color:red;font-size:10px;padding:1px;font-weight:bold;
+                        color:#fff;background-color:red;font-size:10px;padding:1px;font-weight:bold;border-radius:4px;
                         " > 
                         {{t.name+', '+t.type}}
-                    </button>
+                    </button><br/>
+                    <p data-ng-if="t.capacity!=null" style="margin-left:{{t.marginLeft}};margin-top:{{t.marginTop}};position: absolute;
+                    font-size:10px;
+                    " >capacity : {{t.capacity}} </p>
                 </div>
             </div>
                 
