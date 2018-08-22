@@ -1,6 +1,6 @@
 const mongo = require('mongodb').MongoClient,
-    // url='mongodb+srv://muskan:movehack@cluster0-ldloc.mongodb.net/pt_move?retryWrites=true'
-    url='mongodb://127.0.0.1:27017'
+    url='mongodb+srv://muskan:movehack@cluster0-ldloc.mongodb.net/pt_move?retryWrites=true'
+    // url='mongodb://127.0.0.1:27017'
 ;
 var output = {
     'Success':'N',
