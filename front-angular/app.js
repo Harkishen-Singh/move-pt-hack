@@ -39,7 +39,7 @@ app.config(function($routeProvider,$locationProvider) {
     })
 })
 
-app.controller('loginController', function($scope,$location,$rootScope) {
+app.controller('loginController', function($scope,$location,$rootScope,$http) {
     console.warn('login page called')
     $scope.showHeader = false;
     $rootScope.settingsOption = false;
@@ -47,17 +47,42 @@ app.controller('loginController', function($scope,$location,$rootScope) {
     $scope.wrongpass = '';
     $rootScope.showSidebar = false;
     $scope.checkLogin =  function() {
-        if($scope.password=='1' && $scope.username=='test') {
-            console.warn('logged in')
-            $scope.wrongpass = 'Success';
-            $rootScope.showSidebar = true;
-            global.username = 'test';
-            $location.path('/dashboard');
+
+        $http(
+            {url:global.url+'/login',
+            method:'POST',
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            data:'username='+$scope.username+'&password='+$scope.password}
+        )
+        .then(resp=>{
+            res=resp.data;
+            if(res['Success']=='Y'){
+                console.warn('logged in')
+                global.username = $scope.username;
+                $scope.wrongpass = 'Success';
+                $rootScope.showSidebar = true;
+                global.username = 'test';
+                $location.path('/dashboard');
+            }
+            else{
+                $scope.wrongpass = 'Wrong Password or Username entered'
+            }
+        })
+
+
+        // if($scope.password=='1' && $scope.username=='test') {
+        //     console.warn('logged in')
+        //     $scope.wrongpass = 'Success';
+        //     $rootScope.showSidebar = true;
+        //     global.username = 'test';
+        //     $location.path('/dashboard');
             
-        }
-        else {
-            $scope.wrongpass = 'Wrong Password or Username entered'
-        }
+        // }
+        // else {
+        //     $scope.wrongpass = 'Wrong Password or Username entered'
+        // }
     }
 })
 
@@ -77,6 +102,22 @@ app.controller('scheduleController', function($scope,$rootScope,$http,$location)
              'CGPT', 'MATP', 'DCCS', 'CRNM', 'HTPP', 'CMCT', 'CKYR', 'ICMB', 'GDGH', 'ICDY', 'ICBD', 'ICDG', 'MLSW', 'CWCN', 'MRWN', 'DLIB',
               'ICDK', 'RICD', 'CRCC', 'MILK', 'HTSD', 'IBBM', 'DRTA', 'KIFH',
              'DICD', 'ICDS', 'CMLK', 'CRTK', 'HZL', 'LNN', 'CGDM', 'NTSJ', 'DGFJ', 'BTBR'];
+    }
+    $scope.fetchSchedules = function() {
+        $http({
+            url:global.url+'/schedules',
+            method:'POST',
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            data:'username='+global.username
+        })
+        .then(resp => {
+            res = resp.data;
+            if(res['Success']=='Y') {
+                $scope.sched = res['result'];
+            }
+        })
     }
     $scope.addScheduleCont = function(){
         let data = '&consignmentid='+$scope.schedule_form.consignmentid+'&userregtime='+$scope.schedule_form.userregtime+'&indentcomm='+$scope.schedule_form.indentcomm

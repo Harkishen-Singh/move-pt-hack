@@ -4,6 +4,7 @@ const app = require('express')(),
     signUp = require('./signUp'),
     tags = require('./tagHandler'),
     schedules=require('./schedules'),
+    login=require('./login'),
     url = '0.0.0.0';
 
 
@@ -35,6 +36,13 @@ const app = require('express')(),
     })
     app.post('/addSchedules', (req ,res) => {
         schedules.add(req, res);
+    })
+    app.post('/schedules', (req, res) => {
+        console.warn('request for retrive all schedules ');
+        schedules.retriveAll(req,res);
+    })
+    app.post('/login', (req, res) => {
+        login.login(req, res);
     })
 
 const server = app.listen(port, url, e => {

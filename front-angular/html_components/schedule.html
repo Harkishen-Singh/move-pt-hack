@@ -1,15 +1,32 @@
-<title>JNPT Details</title>
+<!-- 
   <script src="../js/jquery-3.2.1.min.js"></script>
   <link rel="stylesheet" href="../css/bootstrap.css" />
-  <script src="../js/bootstrap.min.js"></script>
- </head>
- <body>
-  <a href="/?#!/addSchedule"> <button class="btn btn-info" > Add Schedule </button></a>
+  <script src="../js/bootstrap.min.js"></script> -->
+<div data-ng-init='fetchSchedules()' >
+    <a href="/?#!/addSchedule"> <button class="btn btn-info" > Add Schedule </button></a>
+    <div style="border:2px solid #352c2c;border-radius: 10px;padding: 10px;margin-right: 30%;" data-ng-repeat="sc in sched" >
+        <p>consignmentid : {{sc.consignmentid}}</p>
+        <p>userregtime : {{sc.userregtime}}</p>
+        <p>indentcomm : {{sc.indentcomm}}</p>
+        <p>indenttrain : {{sc.indenttrain}}</p>
+        <p>indentwagon : {{sc.indentwagon}}</p>
+        <p>username : {{sc.username}}</p>
+        <p>srcstncode : {{sc.srcstncode}}</p> 
+        <p>srcdeptime : {{sc.srcdeptime}}</p> 
+        <p>disttravel : {{sc.disttravel}}</p> 
+        <p>destarrivaltime : {{sc.destarrivaltime}}</p> 
+        <p>deststncode : {{sc.deststncode}}</p> 
+        <p>unload_strt_time : {{sc.unload_strt_time}}</p> 
+        <p>unload_end_time : {{sc.unload_end_time}}</p><br>
+    </div>
+
+<div>
+  
   <div class="container">
    <div class="table-responsive">
     <h1 align="center">JNPT Schedule Details</h1>
     <table >
-      <thead>
+    <thead>
     <tr>
       <th>CONSIGNMENT ID</th>
       <th>USER REG TIME</th>
@@ -75,3 +92,14 @@ $(document).ready(function(){
  
 });
 </script>
+</div>
+</div>
+ 
+<style>
+p{
+  padding: 0px;
+  margin: 0px;
+  color: black;
+  font-weight: 300;
+}
+</style>

@@ -1,6 +1,6 @@
 const mongo = require('mongodb').MongoClient,
-    url='mongodb+srv://muskan:movehack@cluster0-ldloc.mongodb.net/pt_move?retryWrites=true'
-    // url='mongodb://127.0.0.1:27017'
+    // url='mongodb+srv://muskan:movehack@cluster0-ldloc.mongodb.net/pt_move?retryWrites=true'
+    url='mongodb://127.0.0.1:27017'
 ;
 var output = {
     'Success':'N',
@@ -25,7 +25,7 @@ function resSend(res) {
 }
 
 function checkLogin(req,res){
-    let email = req.body.email,
+    let email = req.body.username,
         password = req.body.password
         console.warn("User Details Input:"+ email)
 
@@ -34,17 +34,22 @@ function checkLogin(req,res){
         console.warn('[SUCCESS] connected to the database');
         let db = dbo.db('pt_move');
         let obj = {
-            'email':email,
+            'username':email,
             'password':password,
         }
 
-         db.collection('administrator_details').findOne(obj, (e,res) =>{
+         db.collection('administrator_details').findOne(obj, (e,res2) =>{
             if(e) throw e;
             else
-                console.warn('[SUCCESS] user searched with email:'+email);
+                console.warn('[SUCCESS] user searched with username:'+email);
+            console.warn(res2)
             isErr=false;
             dbo.close();
             resSend(res);
         })
      })
     }
+
+module.exports = {
+    login:checkLogin,
+}

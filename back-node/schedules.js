@@ -1,6 +1,6 @@
 const mongo = require('mongodb').MongoClient,
-    url='mongodb+srv://muskan:movehack@cluster0-ldloc.mongodb.net/pt_move?retryWrites=true'
-    // url='mongodb://127.0.0.1:27017'
+    // url='mongodb+srv://muskan:movehack@cluster0-ldloc.mongodb.net/pt_move?retryWrites=true'
+    url='mongodb://127.0.0.1:27017'
 ;
 var output = {
     'Success':'N',
@@ -73,7 +73,28 @@ function add(req,res) {
 
 }
 
+function retriveAll(req, res) {
+    let username = req.body.username;
+    mongo.connect(url, (e, dbo) => {
+        if(e) throw e;
+        console.warn('[SUCCESS] connected to the database');
+        let db = dbo.db('pt_move');
+        
+        db.collection('schedules').find({'username':username}).toArray((e, result) => {
+            if(e) throw e;
+            console.warn('Successfully retrived schedules for username : '+username);
+            isErr = false;
+            console.warn(result)
+            output.result = result;
+            dbo.close()
+            resSend(res);
+        })
+        
+    } )
+}
+
 
 module.exports = {
     add:add,
+    retriveAll:retriveAll,
 }
