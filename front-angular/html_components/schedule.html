@@ -7,25 +7,6 @@
   <link rel="stylesheet" href="../css/schedulestyle.css" />
 <div data-ng-init='fetchSchedules()' >
     <a href="/?#!/addSchedule"> <button class="btn btn-info" > Add Schedule </button></a>
-    <div id="display" style="border:2px solid #352c2c;border-radius: 10px;margin-right: 40%;" data-ng-repeat="sc in sched" >
-        <p><b >Consignment Id: </b> {{sc.consignmentid}}</p>
-        <p><b >User Registration Time:</b>  {{sc.userregtime}}</p>
-        <p><b >Indent Commodity: </b> {{sc.indentcomm}}</p>
-        <p><b >Indent Type Of Train: </b>  {{sc.indenttrain}}</p>
-        <p><b >Indent Number of Wagons: </b> {{sc.indentwagon}}</p>
-        <p><b>Username: </b> {{sc.username}}</p>
-        <p><b >Source Station Code: </b> {{sc.srcstncode}}</p> 
-        <p><b >Source Departure Time: </b> {{sc.srcdeptime}}</p> 
-        <p><b >Distance Travelled: </b>  {{sc.disttravel}}</p> 
-        <p><b >Destination Arrival Time :</b> {{sc.destarrivaltime}}</p> 
-        <p><b >Destination Station Code :</b> {{sc.deststncode}}</p> 
-        <p><b >Unload Start Time : </b> {{sc.unload_strt_time}}</p> 
-        <p><b >Unload End Time :</b> {{sc.unload_end_time}}</p><br>
-
-
-    <!-- <h3 data-ng-if="showLoading" style="margin-left:30%;margin-top:100px;position: absolute;background-color: white;padding: 20px;
-      border-radius: 10px;
-    " >Just a moment, fetching files...</h3> -->
     <div data-ng-if="showLoading">
         <div class="loader"></div>
         <style>
@@ -53,6 +34,26 @@ height: 80px;
 }
         </style>
 </div>
+    <div id="display" style="border:2px solid #352c2c;border-radius: 10px;margin-right: 40%;" data-ng-repeat="sc in sched" >
+        <p><b >Consignment Id: </b> {{sc.consignmentid}}</p>
+        <p><b >User Registration Time:</b>  {{sc.userregtime}}</p>
+        <p><b >Indent Commodity: </b> {{sc.indentcomm}}</p>
+        <p><b >Indent Type Of Train: </b>  {{sc.indenttrain}}</p>
+        <p><b >Indent Number of Wagons: </b> {{sc.indentwagon}}</p>
+        <p><b>Username: </b> {{sc.username}}</p>
+        <p><b >Source Station Code: </b> {{sc.srcstncode}}</p> 
+        <p><b >Source Departure Time: </b> {{sc.srcdeptime}}</p> 
+        <p><b >Distance Travelled: </b>  {{sc.disttravel}}</p> 
+        <p><b >Destination Arrival Time :</b> {{sc.destarrivaltime}}</p> 
+        <p><b >Destination Station Code :</b> {{sc.deststncode}}</p> 
+        <p><b >Unload Start Time : </b> {{sc.unload_strt_time}}</p> 
+        <p><b >Unload End Time :</b> {{sc.unload_end_time}}</p><br>
+
+
+    <!-- <h3 data-ng-if="showLoading" style="margin-left:30%;margin-top:100px;position: absolute;background-color: white;padding: 20px;
+      border-radius: 10px;
+    " >Just a moment, fetching files...</h3> -->
+    
 
 <!-- <div>
   
@@ -136,4 +137,4 @@ p{
   color: black;
   font-weight: 300;
 }
-</style> --> -->
+</style> --> 
