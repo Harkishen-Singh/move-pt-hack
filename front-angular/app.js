@@ -32,6 +32,11 @@ app.config(function($routeProvider,$locationProvider) {
         controller:'signUpcontroller',
         title:'Dashboard',
     })
+    .when('/addSchedule', {
+        templateUrl:'./html_components/scheduleform.html',
+        controller:'scheduleController',
+        title:'Dashboard',
+    })
 })
 
 app.controller('loginController', function($scope,$location,$rootScope) {
@@ -65,6 +70,9 @@ app.controller('dashController', function($scope,$rootScope){
 app.controller('scheduleController', function($scope,$rootScope){
     console.warn('scheduleController called')
     $rootScope.showSidebar = true;
+    $scope.addScheduleCont = function(){
+        
+    }
 })
 
 app.controller('mapGenController', function($scope,$rootScope,$http){
