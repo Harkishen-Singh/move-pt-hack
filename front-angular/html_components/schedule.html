@@ -1,5 +1,5 @@
 
-  <link rel="stylesheet" href="../css/schedulestyle.css" />
+ 
 <div data-ng-init='fetchSchedules()' >
     <a href="/?#!/addSchedule"> <button class="btn btn-info" > Add Schedule </button></a>
     <div data-ng-if="showLoading">
@@ -44,6 +44,25 @@ height: 80px;
         <p><b >Destination Station Code :</b> {{sc.deststncode}}</p> 
         <p><b >Unload Start Time : </b> {{sc.unload_strt_time}}</p> 
         <p><b >Unload End Time :</b> {{sc.unload_end_time}}</p><br>
+      </div>  
+    </div>
+<style>
+    p{
+  padding-bottom: 0px;
+  margin: 0px;
+}
+
+#display{
+  padding-left:10px;
+}
+
+b{
+  color:DodgerBlue;
+}
+</style>
+
+
+
 
 
     <!-- <h3 data-ng-if="showLoading" style="margin-left:30%;margin-top:100px;position: absolute;background-color: white;padding: 20px;
