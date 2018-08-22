@@ -42,15 +42,16 @@ app.controller('loginController', function($scope,$location,$rootScope) {
     $scope.wrongpass = '';
     $rootScope.showSidebar = false;
     $scope.checkLogin =  function() {
-        if($scope.password=='1') {
+        if($scope.password=='1' && $scope.username=='test') {
             console.warn('logged in')
             $scope.wrongpass = 'Success';
             $rootScope.showSidebar = true;
+            global.username = 'test';
             $location.path('/dashboard');
             
         }
         else {
-            $scope.wrongpass = 'Wrong Password entered'
+            $scope.wrongpass = 'Wrong Password or Username entered'
         }
     }
 })

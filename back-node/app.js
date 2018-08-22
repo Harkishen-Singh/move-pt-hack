@@ -2,6 +2,7 @@ const app = require('express')(),
     bodyParser = require('body-parser'),
     port = process.env.PORT || 5000,
     signUp = require('./signUp'),
+    tags = require('./tagHandler'),
     url = '0.0.0.0';
 
 
@@ -24,10 +25,7 @@ const app = require('express')(),
     })
     app.get('/addTags2', (req, res)=>{
         console.log('works')
-        console.log(req.query.object)
-        var a = req.query.object;
-        var ainJson = JSON.parse(a);
-        console.debug(ainJson) // save this to mongo
+        tags.save(req,res);
     })
 
 const server = app.listen(port, url, e => {

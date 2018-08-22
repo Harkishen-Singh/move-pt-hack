@@ -22,6 +22,44 @@
         
         <script>
 
+class Tagshandler {
+    constructor(){
+        this.Tags = [];
+        this.tag = {
+            'username':'',
+            'name':'',
+            'type':'',
+            'capacity':'',
+            'marginLeft':'',
+            'marginTop':'',
+        };
+    }
+    pushTag(username,name,type,capacity,marginLeft,marginTop){
+        this.tag = {
+            'username':'',
+            'name':'',
+            'type':'',
+            'capacity':'',
+            'marginLeft':'',
+            'marginTop':'',
+        };
+        this.tag.username = username
+        this.tag.name = name
+        this.tag.type = type
+        this.tag.capacity = capacity
+        this.tag.marginLeft=marginLeft
+        this.tag.marginTop=marginTop
+        this.Tags.push(this.tag);
+        this.displayAll();
+    }
+    displayAll(){
+        console.warn(this.Tags);
+    }
+    throwObject(){
+        return this.Tags;
+    }
+}
+var obj = new Tagshandler();
         
             $(document).ready(() => {
                 $('#cancel').hide();
@@ -83,43 +121,7 @@
                     $('#done').hide();
                 })
             });
-class Tagshandler {
-    constructor(){
-        this.Tags = [];
-        this.tag = {
-            'username':'',
-            'name':'',
-            'type':'',
-            'capacity':'',
-            'marginLeft':'',
-            'marginTop':'',
-        };
-    }
-    pushTag(username,name,type,capacity,marginLeft,marginTop){
-        this.tag = {
-            'username':'',
-            'name':'',
-            'type':'',
-            'capacity':'',
-            'marginLeft':'',
-            'marginTop':'',
-        };
-        this.tag.username = username
-        this.tag.name = name
-        this.tag.type = type
-        this.tag.capacity = capacity
-        this.tag.marginLeft=marginLeft
-        this.tag.marginTop=marginTop
-        this.Tags.push(this.tag);
-        this.displayAll();
-    }
-    displayAll(){
-        console.warn(this.Tags);
-    }
-    throwObject(){
-        return this.Tags;
-    }
-}
+
 var testObj = {
     name:'singh',
 }
@@ -131,7 +133,7 @@ function boo(){
 
 
 
-var obj = new Tagshandler();
+
             var dock_count = 0,warehouse_count=0,railline_count=0,truck_count=0;
             function onDock() {
                 ++dock_count;
