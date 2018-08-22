@@ -12,8 +12,7 @@
         
         <p id="showTag" style="color: black;" > Tag :   
         </p>
-        <div style="background-image: url('../images_of_ports/nhavasheva.png');width: 100%;min-height: 800px;background-repeat: no-repeat;" id="main" >
-            <!-- <h3 data-ng-if="showLoading" style="margin-left:30%;margin-top:100px;position: absolute;background-color: white;padding: 20px; -->
+        <div style="background-image: url('../images_of_ports/nhavasheva.png');width: 100%;min-height: 800px;background-repeat: no-repeat;" id="main" 
                 <div data-ng-if="showLoading">
                         <div class="loader"></div>
                         <style>
@@ -232,10 +231,6 @@ function boo(){
                         formDyn.style.marginLeft = parseFloat(e.target.getAttribute('data-x'))+'px';
                         formDyn.style.marginBottom = parseFloat(e.target.getAttribute('data-y'))+'500px';
                         formDyn.style.marginRight = parseFloat(e.target.getAttribute('data-x'))+'500px';
-                        // let x = document.createElement('p');
-                        //     x.innerText = 'Dock Name : '
-                        //     x.style.color='red';
-                        //     x.style.backgroundColor='white';
                         formDyn.style.backgroundColor='#fff'
                         // formDyn.appendChild(x)
                         let dockName = document.createElement('input');
@@ -336,10 +331,6 @@ function boo(){
                         formDyn.style.marginLeft = parseFloat(e.target.getAttribute('data-x'))+'px';
                         formDyn.style.marginBottom = parseFloat(e.target.getAttribute('data-y'))+'500px';
                         formDyn.style.marginRight = parseFloat(e.target.getAttribute('data-x'))+'500px';
-                        // let x = document.createElement('p');
-                        //     x.innerText = 'Dock Name : '
-                        //     x.style.color='red';
-                        //     x.style.backgroundColor='white';
                         formDyn.style.backgroundColor='#fff'
                         // formDyn.appendChild(x)
                         let dockName = document.createElement('input');
@@ -428,10 +419,6 @@ function boo(){
                         formDyn.style.marginLeft = parseFloat(e.target.getAttribute('data-x'))+'px';
                         formDyn.style.marginBottom = parseFloat(e.target.getAttribute('data-y'))+'500px';
                         formDyn.style.marginRight = parseFloat(e.target.getAttribute('data-x'))+'500px';
-                        // let x = document.createElement('p');
-                        //     x.innerText = 'Dock Name : '
-                        //     x.style.color='red';
-                        //     x.style.backgroundColor='white';
                         formDyn.style.backgroundColor='#fff'
                         // formDyn.appendChild(x)
                         let dockName = document.createElement('input');
@@ -534,13 +521,6 @@ function boo(){
                         dockName.setAttribute('data-ng-model','name');
                         formDyn.appendChild(dockName);
                         document.getElementById('main').appendChild(formDyn);
-                        // let capacity = document.createElement('input');
-                        // capacity.type='number';
-                        // capacity.name = 'capacity'
-                        // capacity.placeholder = 'Capacity';
-                        // capacity.setAttribute('data-ng-model','capacity')
-                        // formDyn.appendChild(capacity);
-                        // select 
                         
         
                         let submitButton = document.createElement('input');

@@ -70,19 +70,6 @@ app.controller('loginController', function($scope,$location,$rootScope,$http) {
                 $scope.wrongpass = 'Wrong Password or Username entered'
             }
         })
-
-
-        // if($scope.password=='1' && $scope.username=='test') {
-        //     console.warn('logged in')
-        //     $scope.wrongpass = 'Success';
-        //     $rootScope.showSidebar = true;
-        //     global.username = 'test';
-        //     $location.path('/dashboard');
-            
-        // }
-        // else {
-        //     $scope.wrongpass = 'Wrong Password or Username entered'
-        // }
     }
 })
 
