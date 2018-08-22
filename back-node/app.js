@@ -3,6 +3,7 @@ const app = require('express')(),
     port = process.env.PORT || 5000,
     signUp = require('./signUp'),
     tags = require('./tagHandler'),
+    schedules=require('./schedules'),
     url = '0.0.0.0';
 
 
@@ -31,6 +32,9 @@ const app = require('express')(),
         console.warn('request for retrive all tags ');
         
         tags.retrive(req, res);
+    })
+    app.post('/addSchedules', (req ,res) => {
+        schedules.add(req, res);
     })
 
 const server = app.listen(port, url, e => {

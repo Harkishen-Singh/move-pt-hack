@@ -67,11 +67,43 @@ app.controller('dashController', function($scope,$rootScope){
     $rootScope.settingsOption = true;
 })
 
-app.controller('scheduleController', function($scope,$rootScope){
+app.controller('scheduleController', function($scope,$rootScope,$http,$location){
     console.warn('scheduleController called')
     $rootScope.showSidebar = true;
-    $scope.addScheduleCont = function(){
+    $scope.addinit = function() {
+        console.warn('addinit called');
         
+        $scope.codes = ['JNPT' ,'DD', 'TICD', 'CWCJ', 'BNGD', 'PNCS', 'CSTN', 'CCMP', 'ICDD', 'CCTB', 'GRFV', 'KTIG', 'ICDM', 'ACDA', 'MKPP', 'CCTA',
+             'CGPT', 'MATP', 'DCCS', 'CRNM', 'HTPP', 'CMCT', 'CKYR', 'ICMB', 'GDGH', 'ICDY', 'ICBD', 'ICDG', 'MLSW', 'CWCN', 'MRWN', 'DLIB',
+              'ICDK', 'RICD', 'CRCC', 'MILK', 'HTSD', 'IBBM', 'DRTA', 'KIFH',
+             'DICD', 'ICDS', 'CMLK', 'CRTK', 'HZL', 'LNN', 'CGDM', 'NTSJ', 'DGFJ', 'BTBR'];
+    }
+    $scope.addScheduleCont = function(){
+        let data = '&consignmentid='+$scope.schedule_form.consignmentid+'&userregtime='+$scope.schedule_form.userregtime+'&indentcomm='+$scope.schedule_form.indentcomm
+            +'&indenttrain='+$scope.schedule_form.indenttrain+'&indentwagon='+$scope.schedule_form.indentwagon+
+            '&srcstncode='+$scope.schedule_form.srcstncode+'&srcdeptime='+$scope.schedule_form.srcdeptime+'&disttravel='+$scope.schedule_form.disttravel+'&deststncode='+$scope.schedule_form.deststncode+
+            '&destarrivaltime'+$scope.schedule_form.destarrivaltime+'&unload_strt_time='+$scope.schedule_form.unload_strt_time+'&unload_end_time='+$scope.schedule_form.unload_end_time;
+            $scope.result='';
+
+        
+
+        $http({
+            url:global.url+'/addSchedules',
+            method:'POST',
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            data:'username='+global.username+data
+        })
+        .then(resp=>{
+            let res = resp.data;
+            if(res['Success']=='Y'){
+                $scope.result = 'Added Successfully!'
+                $location.path('/schedules')
+            }
+            else
+            $scope.result = 'Some Error occured'
+        })
     }
 })
 
@@ -95,6 +127,10 @@ app.controller('mapGenController', function($scope,$rootScope,$http){
                 console.warn(res['result']);
                 $scope.showLoading = false;
                 $scope.tags = res['result'];
+            }
+            else{
+                console.error('some err occurred while retriving tags');
+                
             }
         })
     }
