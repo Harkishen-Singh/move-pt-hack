@@ -74,7 +74,82 @@ app.controller('loginController', function($scope,$location,$rootScope,$http) {
     }
 })
 
+
 app.controller('dashController', function($scope,$rootScope,$http){
+    let finalLenghtsArr = [];
+    $scope.defaultDistances = function() {
+        var allTags = [];
+        console.warn('defaultDistances called');
+        $http({
+            url:global.url+'/retriveTags',
+            method:'POST',
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            data:'username='+global.username
+        })
+        .then(resp=>{
+            let res = resp.data;
+            if(res['Success']=='Y'){
+                // console.warn(res['result']);
+                // $scope.showLoading = false;
+                // $scope.tags = res['result'];
+                allTags = res['result'];
+                let donePorts=[];
+        let lengths = [];
+        
+        for(i=0;i<allTags.length;i++){
+
+            for(j=i+1;j<allTags.length-1;j++) {
+                let xP1 = allTags[i]['marginLeft'],yP1=allTags[i]['marginTop'],
+                    xP2 = allTags[j]['marginLeft'],yP2=allTags[j]['marginTop'];
+                let lenObj = {
+                        'station1':'',
+                        'station2':'',
+                        'station1Type':'',
+                        'station2Type':'',
+                        'xpixels':'',
+                        'ypixels':'',
+                        'distance':'',
+                    }
+                xDiff = Math.abs(parseFloat(xP1.substr(0,xP1.length-2)) - parseFloat(xP2.substr(0,xP2.length-2))) ; 
+                yDiff = Math.abs(parseFloat(yP1.substr(0,yP1.length-2)) - parseFloat(yP2.substr(0,yP2.length-2))) ; 
+                sqsX = xDiff*xDiff;
+                sqsY = yDiff*yDiff;
+                distPx = Math.sqrt(sqsX+sqsY);
+                dist = distPx * 5;
+                lenObj.station1Type = allTags[i]['type'];
+                lenObj.station2Type = allTags[j]['type'];
+                lenObj.station1 = allTags[i]['name'];
+                lenObj.station2 = allTags[j]['name'];
+                lenObj.xpixels = xDiff;
+                lenObj.ypixels = yDiff;
+                lenObj.distance = dist; 
+                lengths.push(lenObj);
+            }
+        }
+        for(o=0;o<lengths.length;o++) {
+            if(!((lengths[o]['station1Type'] == 'Passenger' || lengths[o]['station1Type'] == 'Cargo' || lengths[o]['station1Type'] == 'Others') 
+            &&
+            (lengths[o]['station2Type'] == 'Passenger' || lengths[o]['station2Type'] == 'Cargo' || lengths[o]['station2Type'] == 'Others'))
+            ){
+                finalLenghtsArr.push(lengths[o]);
+            }
+        }
+        $scope.distances = finalLenghtsArr;
+        console.log(finalLenghtsArr)
+            }
+            else{
+                console.error('some err occurred while retriving tags');
+                
+            }
+        })
+        
+    }
+    // defaultDistances();
+    
+    
+
     console.warn('dashboard controller called')
     $rootScope.showSidebar = true;
     $rootScope.settingsOption = true;
@@ -96,6 +171,10 @@ app.controller('dashController', function($scope,$rootScope,$http){
                 $scope.showLoading1=false;
             }
         })
+    }
+    $scope.assigneInit = function (id) {
+        console.warn('assigne called')
+
     }
     $scope.fetchSchDetails = function(id) {
         console.warn('fetchSchDetails called id:'+id)

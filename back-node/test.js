@@ -1,9 +1,6 @@
 var csv = require('csvtojson');
 var fs = require('fs');
-csv().fromFile('./info.csv')
-    .then(jsonObj => {
-        console.warn(jsonObj[0])
-        
-    })
+a = '240px';
+console.log(parseInt(a.substr(0,a.length-2)))
 
 
