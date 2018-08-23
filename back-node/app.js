@@ -44,6 +44,9 @@ const app = require('express')(),
     app.post('/login', (req, res) => {
         login.login(req, res);
     })
+    app.post('/scheduleDetails', (req, res) => {
+        schedules.details(req,res);
+    })
 
 const server = app.listen(port, url, e => {
     if(e) throw e;

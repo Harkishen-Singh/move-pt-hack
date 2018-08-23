@@ -96,6 +96,26 @@ app.controller('dashController', function($scope,$rootScope,$http){
             }
         })
     }
+    $scope.fetchSchDetails = function(id) {
+        console.warn('fetchSchDetails called id:'+id)
+        $scope.showLoading2 = true;
+        $http({
+            url:global.url+'/scheduleDetails',
+            method:'POST',
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            data:'consignmentid='+id
+        })
+        .then(resp => {
+            res = resp.data;
+            if(res['Success']=='Y') {
+                $scope.sched2 = res['result'];
+                $scope.showLoading2=false;
+            }
+        })
+    }
+
 })
 
 app.controller('scheduleController', function($scope,$rootScope,$http,$location){

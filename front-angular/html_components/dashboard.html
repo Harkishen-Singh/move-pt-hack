@@ -29,7 +29,7 @@
                 </style>
         </div>
             <div id="display" style="border:2px solid #352c2c;border-radius: 10px;margin-right: 5%;margin-bottom: 20px;padding-top: 10px;padding-bottom: 20px;" 
-            data-ng-repeat="sc in sched" >
+            data-ng-repeat="sc in sched" data-ng-click="fetchSchDetails(sc.consignmentid)" >
                 <h4 style="text-align:center">Schedule {{$index + 1}}</h4><hr/>
                 <p><b >Consignment Id: </b> {{sc.consignmentid}}
                 <b style="margin-left:40px;">Indent Commodity: </b> {{sc.indentcomm}}</p>
@@ -42,7 +42,34 @@
         </div>
         <div class="col-md-6">
             <div style="height:50%;border-bottom:4px solid #f5f5f5" >
-                specific schedule details and recommendations will appear here
+                
+                <div data-ng-if="showLoading2">
+                    <div class="loader"></div>
+                    <style>
+                        .loader {
+            border: 16px solid #f3f3f3; /* Light grey */
+            border-top: 16px solid #3498db; /* Blue */
+            border-radius: 50%;
+            border-bottom: 16px solid blue;
+            margin-left: 45%;
+            width: 60px;
+            margin-top: 100px;
+            height: 60px;
+            -webkit-animation: spin 2s linear infinite;
+              animation: spin 2s linear infinite;
+            }
+            
+            @-webkit-keyframes spin {
+              0% { -webkit-transform: rotate(0deg); }
+              100% { -webkit-transform: rotate(360deg); }
+            }
+            
+            @keyframes spin {
+              0% { transform: rotate(0deg); }
+              100% { transform: rotate(360deg); }
+            }
+                    </style>
+            </div>
             </div>
             <div>
                 your graphs will appear here

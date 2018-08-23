@@ -93,8 +93,28 @@ function retriveAll(req, res) {
     } )
 }
 
+function details(req, res) {
+    let consignmentid = req.body.consignmentid;
+    mongo.connect(url, (e, dbo) => {
+        if(e) throw e;
+        console.warn('[SUCCESS] connected to the database');
+        let db = dbo.db('pt_move');
+        
+        db.collection('schedules').findOne({'consignmentid':consignmentid},(e, result) => {
+            if(e) throw e;
+            console.warn('Successfully retrived schedules for consignmentid : '+consignmentid);
+            isErr = false;
+            console.warn(result)
+            output.result = result;
+            dbo.close()
+            resSend(res);
+        })
+        
+    } )
+}
 
 module.exports = {
     add:add,
     retriveAll:retriveAll,
+    details:details,
 }
