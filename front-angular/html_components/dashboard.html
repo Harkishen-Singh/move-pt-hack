@@ -28,8 +28,10 @@
         }
                 </style>
         </div>
+            <!-- <h3>Details Of the Upcoming Ship</h3> -->
             <div id="display" style="border:2px solid #352c2c;border-radius: 10px;margin-right: 5%;margin-bottom: 20px;padding-top: 10px;padding-bottom: 20px;" 
             data-ng-repeat="sc in sched" data-ng-click="fetchSchDetails(sc.consignmentid)" >
+
                 <h4 style="text-align:center">Schedule {{$index + 1}}</h4><hr/>
                 <p><b >Consignment Id: </b> {{sc.consignmentid}}
                 <b style="margin-left:40px;">Indent Commodity: </b> {{sc.indentcomm}}</p>
@@ -40,6 +42,8 @@
               </div>
 
         </div>
+
+
         <div class="col-md-6">
             <div style="height:33%;border-bottom:4px solid #f5f5f5"  >
                     <div data-ng-if="showLoading1">
@@ -70,8 +74,10 @@
                             </style>
                     </div>
                 
-                <div data-ng-repeat="d in distances" >
-                    {{d.station1}} <sup>( {{d.station1Type}} )</sup> to {{d.station2}} <sup>( {{d.station2Type}} ) </sup> distance : {{d.distance}}
+                <div id= "display" data-ng-repeat="d in distances" style="overflow-y:auto" >
+                    <b style="color: black">{{d.station1}}</b> <sup>( {{d.station1Type}} )</sup><b style="color: black"> m </b>
+                    <b style="color: black">to {{d.station2}}</b> <sup>( {{d.station2Type}} ) </sup><b style="color: black"> m </b>
+                    <b style="color: black"> distance : {{d.distance}} </b><b style="color: black">m</b>
                 </div>
             </div>
             <div style="height:33%;border-bottom:4px solid #f5f5f5" >
@@ -130,4 +136,5 @@
     sup{
         color: blue;
     }
+    
 </style>
