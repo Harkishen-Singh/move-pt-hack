@@ -74,10 +74,28 @@ app.controller('loginController', function($scope,$location,$rootScope,$http) {
     }
 })
 
-app.controller('dashController', function($scope,$rootScope){
+app.controller('dashController', function($scope,$rootScope,$http){
     console.warn('dashboard controller called')
     $rootScope.showSidebar = true;
     $rootScope.settingsOption = true;
+    $scope.fetchSchedules = function() {
+        $scope.showLoading = true;
+        $http({
+            url:global.url+'/schedules',
+            method:'POST',
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            data:'username='+global.username
+        })
+        .then(resp => {
+            res = resp.data;
+            if(res['Success']=='Y') {
+                $scope.sched = res['result'];
+                $scope.showLoading=false;
+            }
+        })
+    }
 })
 
 app.controller('scheduleController', function($scope,$rootScope,$http,$location){

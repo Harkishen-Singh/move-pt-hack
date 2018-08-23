@@ -1,7 +1,18 @@
-<div class="container">
-    <div class="row">
-        <div class="col-md-6" style="border-right:4px solid #f5f5f5;min-height:600px">
-            your schedules of ship timings will appear here
+<div class="container" data-ng-init="fetchSchedules();">
+    <div class="row" >
+        <div class="col-md-6" style="border-right:4px solid #f5f5f5;min-height:600px"  >
+            
+            <div id="display" style="border:2px solid #352c2c;border-radius: 10px;margin-right: 5%;margin-bottom: 20px;padding-top: 10px;padding-bottom: 20px;" 
+            data-ng-repeat="sc in sched" >
+                <h4 style="text-align:center">Schedule {{$index + 1}}</h4><hr/>
+                <p><b >Consignment Id: </b> {{sc.consignmentid}}
+                <b style="margin-left:40px;">Indent Commodity: </b> {{sc.indentcomm}}</p>
+                <p><b >Indent Type Of Train: </b>  {{sc.indenttrain}}
+                <b style="margin-left:40px;">Indent Number of Wagons: </b> {{sc.indentwagon}}</p>
+                <p><b >Source Station Code: </b> {{sc.srcstncode}}
+                <b style="margin-left:40px;">Destination Station Code :</b> {{sc.deststncode}}</p> 
+              </div>
+
         </div>
         <div class="col-md-6">
             <div style="height:50%;border-bottom:4px solid #f5f5f5" >
@@ -13,3 +24,9 @@
         </div>
     </div>
 </div>
+<style>
+    p{
+        padding-left: 20px;
+        margin: 0px;
+    }
+</style>
