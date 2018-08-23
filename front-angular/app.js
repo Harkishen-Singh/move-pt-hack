@@ -154,7 +154,7 @@ app.controller('scheduleController', function($scope,$rootScope,$http,$location)
         let data = '&consignmentid='+$scope.schedule_form.consignmentid+'&userregtime='+$scope.schedule_form.userregtime+'&indentcomm='+$scope.schedule_form.indentcomm
             +'&indenttrain='+$scope.schedule_form.indenttrain+'&indentwagon='+$scope.schedule_form.indentwagon+
             '&srcstncode='+$scope.schedule_form.srcstncode+'&srcdeptime='+$scope.schedule_form.srcdeptime+'&disttravel='+$scope.schedule_form.disttravel+'&deststncode='+$scope.schedule_form.deststncode+
-            '&destarrivaltime'+$scope.schedule_form.destarrivaltime+'&unload_strt_time='+$scope.schedule_form.unload_strt_time+'&unload_end_time='+$scope.schedule_form.unload_end_time;
+            '&destarrivaltime='+$scope.schedule_form.destarrivaltime+'&unload_strt_time='+$scope.schedule_form.unload_strt_time+'&unload_end_time='+$scope.schedule_form.unload_end_time;
             $scope.result='';
 
         
