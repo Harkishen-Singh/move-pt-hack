@@ -79,7 +79,7 @@ app.controller('dashController', function($scope,$rootScope,$http){
     $rootScope.showSidebar = true;
     $rootScope.settingsOption = true;
     $scope.fetchSchedules = function() {
-        $scope.showLoading = true;
+        $scope.showLoading1 = true;
         $http({
             url:global.url+'/schedules',
             method:'POST',
@@ -92,7 +92,7 @@ app.controller('dashController', function($scope,$rootScope,$http){
             res = resp.data;
             if(res['Success']=='Y') {
                 $scope.sched = res['result'];
-                $scope.showLoading=false;
+                $scope.showLoading1=false;
             }
         })
     }
