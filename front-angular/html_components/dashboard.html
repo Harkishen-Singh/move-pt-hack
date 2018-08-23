@@ -42,7 +42,7 @@
         </div>
         <div class="col-md-6">
             <div style="height:50%;border-bottom:4px solid #f5f5f5" >
-                
+
                 <div data-ng-if="showLoading2">
                     <div class="loader"></div>
                     <style>
@@ -70,7 +70,19 @@
             }
                     </style>
             </div>
+
+            <div data-ng-if="!showNone" ><p><b style="color: blue;">User Registration Time:</b>  {{sc.userregtime.substr(0,25)}} </p>
+               <p><b style="color: blue;">Username: </b> {{sc.username}}</p>
+                <p><b style="color: blue;">Source Station Code: </b> {{sc.srcstncode}}</p>
+                <p><b style="color: blue;">Source Departure Time: </b> {{sc.srcdeptime.substr(0,25)}}</p> 
+                <p><b style="color: blue;">Distance Travelled: </b>  {{sc.disttravel}}</p>
+                <p><b style="color: blue;">Destination Arrival Time :</b> {{sc.destarrivaltime.substr(0,25)}}</p> 
+                <p><b style="color: blue;">Unload Start Time : </b> {{sc.unload_strt_time.substr(0,25)}}</p>
+                <p><b style="color: blue;">Unload End Time :</b> {{sc.unload_end_time.substr(0,25)}}</p><br></div>
+            
+
             </div>
+
             <div>
                 your graphs will appear here
             </div>

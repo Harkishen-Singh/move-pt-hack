@@ -78,6 +78,7 @@ app.controller('dashController', function($scope,$rootScope,$http){
     console.warn('dashboard controller called')
     $rootScope.showSidebar = true;
     $rootScope.settingsOption = true;
+    $scope.showNone = true;
     $scope.fetchSchedules = function() {
         $scope.showLoading1 = true;
         $http({
@@ -99,6 +100,7 @@ app.controller('dashController', function($scope,$rootScope,$http){
     $scope.fetchSchDetails = function(id) {
         console.warn('fetchSchDetails called id:'+id)
         $scope.showLoading2 = true;
+
         $http({
             url:global.url+'/scheduleDetails',
             method:'POST',
@@ -110,7 +112,8 @@ app.controller('dashController', function($scope,$rootScope,$http){
         .then(resp => {
             res = resp.data;
             if(res['Success']=='Y') {
-                $scope.sched2 = res['result'];
+                $scope.sc = res['result'];
+                $scope.showNone=false;
                 $scope.showLoading2=false;
             }
         })
