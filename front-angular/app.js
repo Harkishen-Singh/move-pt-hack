@@ -64,7 +64,6 @@ app.controller('loginController', function($scope,$location,$rootScope,$http) {
                 global.username = $scope.username;
                 $scope.wrongpass = 'Success';
                 $rootScope.showSidebar = true;
-                global.username = 'test';
 
                 $location.path('/dashboard');
             }

@@ -48,12 +48,21 @@ animation: spin 2s linear infinite;
             <div data-ng-repeat="t in tags" >
                 <button style="margin-left:{{t.marginLeft}};margin-top:{{t.marginTop}};position: absolute;
                     color:#fff;background-color:red;font-size:10px;padding:1px;font-weight:bold;border-radius:4px;
-                    " > 
+                    "  > 
                     {{t.name+', '+t.type}}
-                </button><br/>
+                </button>
+                <!-- <button style="margin-left:{{t.marginLeft}};margin-top:{{t.marginTop}};position: absolute;
+                    color:#fff;background-color:black;font-size:10px;padding:1px;font-weight:bold;border-radius:4px;
+                    " data-ng-if="{{t.capacity}}<{{t.occupied}}" > 
+                    {{t.name+', '+t.type}}
+                </button> -->
+                <br/>
                 <p data-ng-if="t.capacity!=null" style="margin-left:{{t.marginLeft}};margin-top:{{t.marginTop}};position: absolute;
                 font-size:10px;color:red;
-                " >capacity : {{t.capacity}} </p>
+                " >capacity : {{t.capacity}} </p><br/>
+                <p data-ng-if="t.capacity!=null" style="margin-left:{{t.marginLeft}};margin-top:{{t.marginTop}};position: absolute;
+                font-size:10px;color:red;
+                " >occupied : {{t.occupied}}</p>
             </div>
         </div>
             
@@ -72,7 +81,7 @@ constructor(){
         'username':'',
         'name':'',
         'type':'',
-        'capacity':'',
+        'capacity':0,
         'marginLeft':'',
         'marginTop':'',
     };
@@ -82,7 +91,8 @@ pushTag(username,name,type,capacity,marginLeft,marginTop){
         'username':'',
         'name':'',
         'type':'',
-        'capacity':'',
+        'capacity':0,
+        'occupied':0,
         'marginLeft':'',
         'marginTop':'',
     };
@@ -372,7 +382,7 @@ return obj.throwObject();
                             global.username,
                             document.querySelector('#warename').value,
                             
-                            'warehouse',document.querySelector('#capa').value,
+                            'warehouse',parseInt(document.querySelector('#capa').value) ,
                             parseFloat(e.target.getAttribute('data-x'))+'px',
                             parseFloat(e.target.getAttribute('data-y'))+'px'
                         )
@@ -464,7 +474,7 @@ return obj.throwObject();
                             global.username,
                             document.querySelector('#railname').value,
                             
-                            'railline',document.querySelector('#idcapa').value,
+                            'railline',parseInt(document.querySelector('#idcapa').value) ,
                             parseFloat(e.target.getAttribute('data-x'))+'px',
                             parseFloat(e.target.getAttribute('data-y'))+'px'
                         )
