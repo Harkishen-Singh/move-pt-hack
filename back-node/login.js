@@ -19,6 +19,7 @@ function resSend(res) {
         output.err='none';
     }
     res.send(output);
+    isErr=false;
     output.Success='N';
     output.err='none';
     output.result=[];
@@ -42,8 +43,19 @@ function checkLogin(req,res){
             if(e) throw e;
             else
                 console.warn('[SUCCESS] user searched with username:'+email);
-            console.warn(res2)
-            isErr=false;
+            console.warn(res2==null)
+            console.warn(res2=='null')
+            console.warn(typeof res2)
+            if(res2==null){
+                output.Success='N';
+                isErr=true;
+            }
+                
+            else{
+                output.Success = 'Y';
+                isErr=false;
+                output.result = res2;
+            }
             dbo.close();
             resSend(res);
         })

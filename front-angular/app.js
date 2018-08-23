@@ -3,6 +3,7 @@ var app = angular.module('pt_management', ['ngRoute']);
 var global = {
     url:'http://127.0.0.1:5000',
     username:'test',
+    map:'',
 }
 
 app.config(function($routeProvider,$locationProvider) {
@@ -64,6 +65,7 @@ app.controller('loginController', function($scope,$location,$rootScope,$http) {
                 $scope.wrongpass = 'Success';
                 $rootScope.showSidebar = true;
                 global.username = 'test';
+
                 $location.path('/dashboard');
             }
             else{

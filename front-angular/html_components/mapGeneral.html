@@ -1,560 +1,579 @@
 <!-- <h2>this is general map</h2> --><br/>
 <div data-ng-init="initialise();" >
-        <button class="btn btn-success" id="markerAdder" >Add Markers</button>
+    <button class="btn btn-success" id="markerAdder" >Add Markers</button>
 
-        <button class="btn btn-danger" id="cancel">Cancel</button>
-        <button class="btn btn-primary" id="addDock" onclick="onDock();" >Dock</button>
-        <button class="btn btn-primary" id="addWare" onclick="onWare();" >Warehouse</button>
-        <button class="btn btn-primary" id="addRail" onclick="onRail();">Rail Line</button>
-        <button class="btn btn-primary" id="addTrans" onclick="onTruck();">Truck Transport</button>
-        <button class="btn btn-success" onclick='' id='done' >Done</button>
+    <button class="btn btn-danger" id="cancel">Cancel</button>
+    <button class="btn btn-primary" id="addDock" onclick="onDock();" >Dock</button>
+    <button class="btn btn-primary" id="addWare" onclick="onWare();" >Warehouse</button>
+    <button class="btn btn-primary" id="addRail" onclick="onRail();">Rail Line</button>
+    <button class="btn btn-primary" id="addTrans" onclick="onTruck();">Truck Transport</button>
+    <button class="btn btn-success" onclick='' id='done' >Done</button>
+
     
-        
-        <p id="showTag" style="color: black;" > Tag :   
-        </p>
-        <div style="background-image: url('../images_of_ports/nhavasheva.png');width: 100%;min-height: 800px;background-repeat: no-repeat;" id="main" 
-                <div data-ng-if="showLoading">
-                        <div class="loader"></div>
-                        <style>
-                            .loader {
-    border: 16px solid #f3f3f3; /* Light grey */
-    border-top: 16px solid #3498db; /* Blue */
-    border-bottom: 16px solid blue;
-    border-radius: 50%;
-    margin-left: 45%;
-    width: 80px;
-    margin-top: 100px;
-    height: 80px;position: absolute;
-    -webkit-animation: spin 2s linear infinite;
-  animation: spin 2s linear infinite;
+    <p id="showTag" style="color: black;" > Tag :   
+    </p>
+    <div style="background-image: url('../images_of_ports/nhavasheva.png');width: 100%;min-height: 800px;background-repeat: no-repeat;" id="main" >
+        <!-- <h3 data-ng-if="showLoading" style="margin-left:30%;margin-top:100px;position: absolute;background-color: white;padding: 20px; -->
+            <div data-ng-if="showLoading">
+                    <div class="loader"></div>
+                    <style>
+                        .loader {
+border: 16px solid #f3f3f3; /* Light grey */
+border-top: 16px solid #3498db; /* Blue */
+border-bottom: 16px solid blue;
+border-radius: 50%;
+margin-left: 45%;
+width: 80px;
+margin-top: 100px;
+height: 80px;position: absolute;
+-webkit-animation: spin 2s linear infinite;
+animation: spin 2s linear infinite;
 }
 
 @-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
+0% { -webkit-transform: rotate(0deg); }
+100% { -webkit-transform: rotate(360deg); }
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
 }
-                        </style>
-                </div>
-      <!-- border-radius: 10px;
-    " >Just a moment, fetching files...</h3> -->
-            <div id="elementCreator" >
-            <div data-ng-if=" tags.length>0 " >
-                <div data-ng-repeat="t in tags" >
-                    <button style="margin-left:{{t.marginLeft}};margin-top:{{t.marginTop}};position: absolute;
-                        color:#fff;background-color:red;font-size:10px;padding:1px;font-weight:bold;border-radius:4px;
-                        " > 
-                        {{t.name+', '+t.type}}
-                    </button><br/>
-                    <p data-ng-if="t.capacity!=null" style="margin-left:{{t.marginLeft}};margin-top:{{t.marginTop}};position: absolute;
-                    font-size:10px;color:red;
-                    " >capacity : {{t.capacity}} </p>
-                </div>
+                    </style>
             </div>
-                
-        </div>  
-        
+  <!-- border-radius: 10px;
+" >Just a moment, fetching files...</h3> -->
+        <div id="elementCreator" >
+        <div data-ng-if=" tags.length>0 " >
+            <div data-ng-repeat="t in tags" >
+                <button style="margin-left:{{t.marginLeft}};margin-top:{{t.marginTop}};position: absolute;
+                    color:#fff;background-color:red;font-size:10px;padding:1px;font-weight:bold;border-radius:4px;
+                    " > 
+                    {{t.name+', '+t.type}}
+                </button><br/>
+                <p data-ng-if="t.capacity!=null" style="margin-left:{{t.marginLeft}};margin-top:{{t.marginTop}};position: absolute;
+                font-size:10px;color:red;
+                " >capacity : {{t.capacity}} </p>
+            </div>
         </div>
-        
-        <!-- <img src="../cropped/pradeep.png" alt="" style="" > -->
-        
-        <script>
+            
+    </div>  
+    
+    </div>
+    
+    <!-- <img src="../cropped/pradeep.png" alt="" style="" > -->
+    
+    <script>
 
 class Tagshandler {
-    constructor(){
-        this.Tags = [];
-        this.tag = {
-            'username':'',
-            'name':'',
-            'type':'',
-            'capacity':'',
-            'marginLeft':'',
-            'marginTop':'',
-        };
-    }
-    pushTag(username,name,type,capacity,marginLeft,marginTop){
-        this.tag = {
-            'username':'',
-            'name':'',
-            'type':'',
-            'capacity':'',
-            'marginLeft':'',
-            'marginTop':'',
-        };
-        this.tag.username = username
-        this.tag.name = name
-        this.tag.type = type
-        this.tag.capacity = capacity
-        this.tag.marginLeft=marginLeft
-        this.tag.marginTop=marginTop
-        this.Tags.push(this.tag);
-        this.displayAll();
-    }
-    displayAll(){
-        console.warn(this.Tags);
-    }
-    throwObject(){
-        return this.Tags;
-    }
+constructor(){
+    this.Tags = [];
+    this.tag = {
+        'username':'',
+        'name':'',
+        'type':'',
+        'capacity':'',
+        'marginLeft':'',
+        'marginTop':'',
+    };
+}
+pushTag(username,name,type,capacity,marginLeft,marginTop){
+    this.tag = {
+        'username':'',
+        'name':'',
+        'type':'',
+        'capacity':'',
+        'marginLeft':'',
+        'marginTop':'',
+    };
+    this.tag.username = username
+    this.tag.name = name
+    this.tag.type = type
+    this.tag.capacity = capacity
+    this.tag.marginLeft=marginLeft
+    this.tag.marginTop=marginTop
+    this.Tags.push(this.tag);
+    this.displayAll();
+}
+displayAll(){
+    console.warn(this.Tags);
+}
+throwObject(){
+    return this.Tags;
+}
 }
 var obj = new Tagshandler();
-        
-            $(document).ready(() => {
-                $('#cancel').hide();
-                $('#addDock').hide();
+    
+        $(document).ready(() => {
+            $('#cancel').hide();
+            $('#addDock').hide();
+            $('#showTag').hide();
+            $('#addWare').hide();
+            $('#addRail').hide();
+            $('#addTrans').hide();
+            $('#markerAdder').click(() => {
+                $('#cancel').show(100);
+                $('#markerAdder').hide(50);
+                $('#addDock').show(100);
+                $('#addWare').show(100);
+                $('#addRail').show(100);
+                $('#addTrans').show(100);
+                $('#done').show(100);
+            })
+            $('#cancel').click(() => {
+                $('#markerAdder').show(100);
+                $('#cancel').hide(50);
+                $('#addDock').hide(50);
+                $('#addWare').hide(50);
+                $('#addRail').hide(50);
+                $('#addTrans').hide(50);
                 $('#showTag').hide();
-                $('#addWare').hide();
-                $('#addRail').hide();
-                $('#addTrans').hide();
-                $('#markerAdder').click(() => {
-                    $('#cancel').show(100);
-                    $('#markerAdder').hide(50);
-                    $('#addDock').show(100);
-                    $('#addWare').show(100);
-                    $('#addRail').show(100);
-                    $('#addTrans').show(100);
-                    $('#done').show(100);
-                })
-                $('#cancel').click(() => {
-                    $('#markerAdder').show(100);
-                    $('#cancel').hide(50);
-                    $('#addDock').hide(50);
-                    $('#addWare').hide(50);
-                    $('#addRail').hide(50);
-                    $('#addTrans').hide(50);
-                    $('#showTag').hide();
-                    $('#done').hide();
-                })
-                $('#addDock').click(() => {
-                    $('#showTag').show();
-                });
-                $('#addWare').click(() => {
-                    $('#showTag').show();
-                });
-                $('#addRail').click(() => {
-                    $('#showTag').show();
-                });
-                $('#addTrans').click(() => {
-                    $('#showTag').show();
-                });
                 $('#done').hide();
-                $('#done').click(()=>{
-                    $.ajax({
-                        url:'http://0.0.0.0:5000/addTags2',
-                        data: 'object=' +JSON.stringify(obj.throwObject())  ,
-                        success: function(r,status){
-                            console.warn('ajax request with result: '+r+' status: '+status);
-                        },
-                        error: function(xhr,status,error){
-                            throw error;
-                        }
-                    })
-                    $('#markerAdder').show(100);
-                    $('#cancel').hide(50);
-                    $('#addDock').hide(50);
-                    $('#addWare').hide(50);
-                    $('#addRail').hide(50);
-                    $('#addTrans').hide(50);
-                    $('#showTag').hide();
-                    $('#done').hide();
-                })
+            })
+            $('#addDock').click(() => {
+                $('#showTag').show();
             });
+            $('#addWare').click(() => {
+                $('#showTag').show();
+            });
+            $('#addRail').click(() => {
+                $('#showTag').show();
+            });
+            $('#addTrans').click(() => {
+                $('#showTag').show();
+            });
+            $('#done').hide();
+            $('#done').click(()=>{
+                $.ajax({
+                    url:'http://0.0.0.0:5000/addTags2',
+                    data: 'object=' +JSON.stringify(obj.throwObject())  ,
+                    success: function(r,status){
+                        console.warn('ajax request with result: '+r+' status: '+status);
+                    },
+                    error: function(xhr,status,error){
+                        throw error;
+                    }
+                })
+                $('#markerAdder').show(100);
+                $('#cancel').hide(50);
+                $('#addDock').hide(50);
+                $('#addWare').hide(50);
+                $('#addRail').hide(50);
+                $('#addTrans').hide(50);
+                $('#showTag').hide();
+                $('#done').hide();
+            })
+        });
 
 var testObj = {
-    name:'singh',
+name:'singh',
 }
 function boo(){
-    console.warn('from boo')
-    console.warn(obj.throwObject())
-    return obj.throwObject();
+console.warn('from boo')
+console.warn(obj.throwObject())
+return obj.throwObject();
 }
 
 
 
 
-            var dock_count = 0,warehouse_count=0,railline_count=0,truck_count=0;
-            function onDock() {
-                ++dock_count;
-                console.warn('created dock element tag with counter : '+dock_count);
-                
-                var tag = document.createElement('button');
-                tag.style.backgroundColor = 'red';
-                tag.style.color='#fff'
-                tag.style.padding = '1px';
-                tag.style.fontWeight='bold'
+        var dock_count = 0,warehouse_count=0,railline_count=0,truck_count=0;
+        function onDock() {
+            ++dock_count;
+            console.warn('created dock element tag with counter : '+dock_count);
+            
+            var tag = document.createElement('button');
+            tag.style.backgroundColor = 'red';
+            tag.style.color='#fff'
+            tag.style.padding = '1px';
+            tag.style.fontWeight='bold'
 
-                // tag.style.backgroundColor = 'red';
-                tag.style.borderRadius = '4px';
-                tag.style.fontSize='10px'
-                tag.style.overflow = 'visible'
-                tag.innerHTML = 'Dock '+dock_count;
-                tag.className = 'element_dock_'+dock_count;
-                let classNameElement = tag.className;
-                tag.draggable = true;
-                tag.ondragend = function(event) {
-                    tag.style.marginTop = event.clientY + 'px';
-                    tag.style.marginLeft = event.clientX + 'px';
-                }
-                var formDec =  document.createElement('form');
-                formDec.style.backgroundColor='black';
-        
-                document.getElementById('elementCreator').appendChild(tag); 
-                interact('.'+ tag.className.toString())
-                .draggable({
-                    inertia:true,
-                    autoScroll:true,
-                    onstart: ()=>{
-                        console.warn('starting draging using interact')
-                    },
-                    onmove: eve => {
-                        let target = eve.target;
-                        console.warn('X : '+parseFloat(target.getAttribute('data-x') || 0) + eve.dx ) 
-                        console.warn('Y: '+ parseFloat(target.getAttribute('data-y') || 0) + eve.dy)
-                        let x = parseFloat(target.getAttribute('data-x') || 0) + eve.dx,
-                            y = parseFloat(target.getAttribute('data-y') || 0) + eve.dy; 
-                        target.style.webkitTransform = target.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
-                        target.setAttribute('data-x', x)
-                        target.setAttribute('data-y', y)
-                    },
-                    onend: e => {
-                        console.warn('Move ended at X: '+parseFloat(e.target.getAttribute('data-x') || 0) +
-                        '  Y: '+parseFloat(e.target.getAttribute('data-y') || 0) 
-                        )
-                        var formDyn = document.createElement('form');
-                        formDyn.setAttribute('method','POST');
-                        formDyn.setAttribute('data-ng-submit','tagDockSubmit()');
-                        formDyn.style.marginTop = parseFloat(e.target.getAttribute('data-y'))+'px';
-                        formDyn.style.marginLeft = parseFloat(e.target.getAttribute('data-x'))+'px';
-                        formDyn.style.marginBottom = parseFloat(e.target.getAttribute('data-y'))+'500px';
-                        formDyn.style.marginRight = parseFloat(e.target.getAttribute('data-x'))+'500px';
-                        formDyn.style.backgroundColor='#fff'
-                        // formDyn.appendChild(x)
-                        let dockName = document.createElement('input');
-                        dockName.type = 'text';
-                        dockName.name = 'dockName';
-                        dockName.id = 'id_dockName';
-                        dockName.placeholder = 'Dock Name';
-                        dockName.setAttribute('data-ng-model','name');
-                        formDyn.appendChild(dockName);
-                        document.getElementById('main').appendChild(formDyn);
-                        let capacity = document.createElement('input');
-                        capacity.type='number';
-                        capacity.name = 'capacity'
-                        capacity.id = 'id_capacity'
-                        capacity.placeholder = 'Capacity of Holding Ships';
-                        capacity.setAttribute('data-ng-model','capacity')
-                        formDyn.appendChild(capacity);
-                        // select 
-                        let selectElement = document.createElement('select');
-                        selectElement.setAttribute('data-ng-model','type');
-                        let optionArr = ['--Select Type--','Cargo','Passenger','Others'];
-                        for(let i=0; i< optionArr.length; i++) {
-                            let ele = document.createElement('option');
-                            ele.text = optionArr[i];
-                            ele.value = optionArr[i];
-                            ele.className = optionArr[i] + '_className';
-                            selectElement.appendChild(ele);
-                        }
-                        selectElement.id = 'id_selectElement'
-                        formDyn.appendChild(selectElement);
-        
-                        let submitButton = document.createElement('input');
-                        submitButton.type = 'button';
-                        submitButton.style.margin='0px';
-                        submitButton.innerText = 'Submit';
-                        submitButton.className='btn btn-successs';
-                        submitButton.setAttribute('data-ng-click','tagDockSubmit();')
-                        submitButton.onclick=() => {
-                            console.warn('submitting records');
-                            console.error(document.querySelector('#id_dockName').value)
-                            obj.pushTag(
-                                global.username,
-                                document.querySelector('#id_dockName').value,
-                                
-                                document.querySelector('#id_selectElement').value,document.querySelector('#id_capacity').value,
-                                parseFloat(e.target.getAttribute('data-x'))+'px',
-                                parseFloat(e.target.getAttribute('data-y'))+'px'
-                            )
-                            document.getElementById('main').removeChild(formDyn);
-                            
-                        }
-                        submitButton.value = 'Submit';
-                        formDyn.appendChild(submitButton)
-                        
-                    },
-                })
+            // tag.style.backgroundColor = 'red';
+            tag.style.borderRadius = '4px';
+            tag.style.fontSize='10px'
+            tag.style.overflow = 'visible'
+            tag.innerHTML = 'Dock '+dock_count;
+            tag.className = 'element_dock_'+dock_count;
+            let classNameElement = tag.className;
+            tag.draggable = true;
+            tag.ondragend = function(event) {
+                tag.style.marginTop = event.clientY + 'px';
+                tag.style.marginLeft = event.clientX + 'px';
             }
-            function onWare() {
-                ++warehouse_count;
-                console.warn('created dock element tag with counter : '+dock_count);
-                
-                var tag = document.createElement('button');
-                tag.style.backgroundColor = 'red';
-                tag.style.color='#fff'
-                tag.style.padding = '1px';
-                tag.style.fontWeight='bold'
-
-                // tag.style.backgroundColor = 'red';
-                tag.style.borderRadius = '4px';
-                tag.style.fontSize='10px'
-                tag.innerHTML = 'Warehouse '+warehouse_count;
-                tag.className = 'element_ware_'+warehouse_count;
-                document.getElementById('elementCreator').appendChild(tag); 
-                interact('.'+ tag.className.toString())
-                .draggable({
-                    inertia:true,
-                    autoScroll:true,
-                    onstart: ()=>{
-                        console.warn('starting draging using interact')
-                    },
-                    onmove: eve => {
-                        let target = eve.target;
-                        console.warn('X : '+parseFloat(target.getAttribute('data-x') || 0) + eve.dx ) 
-                        console.warn('Y: '+ parseFloat(target.getAttribute('data-y') || 0) + eve.dy)
-                        let x = parseFloat(target.getAttribute('data-x') || 0) + eve.dx,
-                            y = parseFloat(target.getAttribute('data-y') || 0) + eve.dy; 
-                        target.style.webkitTransform = target.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
-                        target.setAttribute('data-x', x)
-                        target.setAttribute('data-y', y)
-                    },
-                    onend: e => {
-                        console.warn('Move ended at X: '+parseFloat(e.target.getAttribute('data-x') || 0) +
-                        '  Y: '+parseFloat(e.target.getAttribute('data-y') || 0) )
-                        var formDyn = document.createElement('form');
-                        formDyn.setAttribute('method','POST');
-                        formDyn.setAttribute('data-ng-submit','tagWareSubmit()');
-                        formDyn.style.marginTop = parseFloat(e.target.getAttribute('data-y'))+'px';
-                        formDyn.style.marginLeft = parseFloat(e.target.getAttribute('data-x'))+'px';
-                        formDyn.style.marginBottom = parseFloat(e.target.getAttribute('data-y'))+'500px';
-                        formDyn.style.marginRight = parseFloat(e.target.getAttribute('data-x'))+'500px';
-                        formDyn.style.backgroundColor='#fff'
-                        // formDyn.appendChild(x)
-                        let dockName = document.createElement('input');
-                        dockName.type = 'text';
-                        dockName.name = 'wareName';
-                        dockName.placeholder = 'Ware House Name';
-                        dockName.id='warename'
-                        
-                        dockName.setAttribute('data-ng-model','name');
-                        formDyn.appendChild(dockName);
-                        document.getElementById('main').appendChild(formDyn);
-                        let capacity = document.createElement('input');
-                        capacity.type='number';
-                        capacity.name = 'capacity'
-                        capacity.placeholder = 'Capacity';
-                        capacity.id='capa'
-                        capacity.setAttribute('data-ng-model','capacity')
-                        formDyn.appendChild(capacity);
-                        // select 
-                        
-        
-                        let submitButton = document.createElement('input');
-                        submitButton.type = 'button';
-                        submitButton.style.margin='0px';
-                        submitButton.innerText = 'Submit';
-                        submitButton.className='btn btn-successs';
-                        submitButton.onclick=() => {
-                            console.warn('submitting records');
-                            obj.pushTag(
-                                global.username,
-                                document.querySelector('#warename').value,
-                                
-                                'warehouse',document.querySelector('#capa').value,
-                                parseFloat(e.target.getAttribute('data-x'))+'px',
-                                parseFloat(e.target.getAttribute('data-y'))+'px'
-                            )
-                            document.getElementById('main').removeChild(formDyn);
-                            
-                        }
-                        submitButton.value = 'Submit';
-                        formDyn.appendChild(submitButton)
-                    },
-                })
-            }
-            function onRail() {
-                ++railline_count;
-                console.warn('created dock element tag with counter : '+dock_count);
-                
-                var tag = document.createElement('button');
-                tag.style.backgroundColor = 'red';
-                tag.style.color='#fff'
-                tag.style.padding = '1px';
-                tag.style.fontWeight='bold'
-
-                // tag.style.backgroundColor = 'red';
-                tag.style.borderRadius = '4px';
-                tag.style.fontSize='10px'
-                tag.innerHTML = 'Rail Line '+railline_count;
-                tag.className = 'element_rail_'+railline_count;
-                document.getElementById('elementCreator').appendChild(tag); 
-                interact('.'+ tag.className.toString())
-                .draggable({
-                    inertia:true,
-                    autoScroll:true,
-                    onstart: ()=>{
-                        console.warn('starting draging using interact')
-                    },
-                    onmove: eve => {
-                        let target = eve.target;
-                        console.warn('X : '+parseFloat(target.getAttribute('data-x') || 0) + eve.dx ) 
-                        console.warn('Y: '+ parseFloat(target.getAttribute('data-y') || 0) + eve.dy)
-                        let x = parseFloat(target.getAttribute('data-x') || 0) + eve.dx,
-                            y = parseFloat(target.getAttribute('data-y') || 0) + eve.dy; 
-                        target.style.webkitTransform = target.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
-                        target.setAttribute('data-x', x)
-                        target.setAttribute('data-y', y)
-                    },
-                    onend: e => {
-                        console.warn('Move ended at X: '+parseFloat(e.target.getAttribute('data-x') || 0) +
-                        '  Y: '+parseFloat(e.target.getAttribute('data-y') || 0)
-                        )
-                        var formDyn = document.createElement('form');
-                        formDyn.setAttribute('method','POST');
-                        formDyn.setAttribute('data-ng-submit','tagRailSubmit()');
-                        formDyn.style.marginTop = parseFloat(e.target.getAttribute('data-y'))+'px';
-                        formDyn.style.marginLeft = parseFloat(e.target.getAttribute('data-x'))+'px';
-                        formDyn.style.marginBottom = parseFloat(e.target.getAttribute('data-y'))+'500px';
-                        formDyn.style.marginRight = parseFloat(e.target.getAttribute('data-x'))+'500px';
-                        formDyn.style.backgroundColor='#fff'
-                        // formDyn.appendChild(x)
-                        let dockName = document.createElement('input');
-                        dockName.type = 'text';
-                        dockName.name = 'wareName';
-                        dockName.placeholder = 'Rail Name';
-                        dockName.id='railname'
-                        
-                        dockName.setAttribute('data-ng-model','name');
-                        formDyn.appendChild(dockName);
-                        document.getElementById('main').appendChild(formDyn);
-                        let capacity = document.createElement('input');
-                        capacity.type='number';
-                        capacity.name = 'capacity'
-                        capacity.id='idcapa'
-                        capacity.placeholder = 'Capacity ( if any )';
-                        capacity.setAttribute('data-ng-model','capacity')
-                        formDyn.appendChild(capacity);
-                        // select 
-                        
-        
-                        let submitButton = document.createElement('input');
-                        submitButton.type = 'button';
-                        submitButton.style.margin='0px';
-                        submitButton.innerText = 'Submit';
-                        submitButton.className='btn btn-successs';
-                        submitButton.onclick=() => {
-                            console.warn('submitting records');
-                            obj.pushTag(
-                                global.username,
-                                document.querySelector('#railname').value,
-                                
-                                'railline',document.querySelector('#idcapa').value,
-                                parseFloat(e.target.getAttribute('data-x'))+'px',
-                                parseFloat(e.target.getAttribute('data-y'))+'px'
-                            )
-                            document.getElementById('main').removeChild(formDyn);
-                            
-                        }
-                        submitButton.value = 'Submit';
-                        formDyn.appendChild(submitButton)
-                    },
-                })
-            }
-            function onTruck() {
-                ++truck_count;
-                console.warn('created dock element tag with counter : '+dock_count);
-                
-                var tag = document.createElement('button');
-                tag.style.backgroundColor = 'red';
-                tag.style.color='#fff'
-                tag.style.padding = '1px';
-                tag.style.fontWeight='bold'
-
-                // tag.style.backgroundColor = 'red';
-                tag.style.borderRadius = '4px';
-                tag.style.fontSize='10px'
-                tag.innerHTML = 'Roads '+truck_count;
-                tag.className = 'element_truck_'+truck_count;
-                document.getElementById('elementCreator').appendChild(tag); 
-                interact('.'+ tag.className.toString())
-                .draggable({
-                    inertia:true,
-                    autoScroll:true,
-                    onstart: ()=>{
-                        console.warn('starting draging using interact')
-                    },
-                    onmove: eve => {
-                        let target = eve.target;
-                        console.warn('X : '+parseFloat(target.getAttribute('data-x') || 0) + eve.dx ) 
-                        console.warn('Y: '+ parseFloat(target.getAttribute('data-y') || 0) + eve.dy)
-                        let x = parseFloat(target.getAttribute('data-x') || 0) + eve.dx,
-                            y = parseFloat(target.getAttribute('data-y') || 0) + eve.dy; 
-                        target.style.webkitTransform = target.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
-                        target.setAttribute('data-x', x)
-                        target.setAttribute('data-y', y)
-                    },
-                    onend: e => {
-                        console.warn('Move ended at X: '+parseFloat(e.target.getAttribute('data-x') || 0) +
-                        '  Y: '+parseFloat(e.target.getAttribute('data-y') || 0) 
+            var formDec =  document.createElement('form');
+            formDec.style.backgroundColor='black';
+    
+            document.getElementById('elementCreator').appendChild(tag); 
+            interact('.'+ tag.className.toString())
+            .draggable({
+                inertia:true,
+                autoScroll:true,
+                onstart: ()=>{
+                    console.warn('starting draging using interact')
+                },
+                onmove: eve => {
+                    let target = eve.target;
+                    console.warn('X : '+parseFloat(target.getAttribute('data-x') || 0) + eve.dx ) 
+                    console.warn('Y: '+ parseFloat(target.getAttribute('data-y') || 0) + eve.dy)
+                    let x = parseFloat(target.getAttribute('data-x') || 0) + eve.dx,
+                        y = parseFloat(target.getAttribute('data-y') || 0) + eve.dy; 
+                    target.style.webkitTransform = target.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+                    target.setAttribute('data-x', x)
+                    target.setAttribute('data-y', y)
+                },
+                onend: e => {
+                    console.warn('Move ended at X: '+parseFloat(e.target.getAttribute('data-x') || 0) +
+                    '  Y: '+parseFloat(e.target.getAttribute('data-y') || 0) 
                     )
                     var formDyn = document.createElement('form');
-                        formDyn.setAttribute('method','POST');
-                        formDyn.setAttribute('data-ng-submit','tagRoadSubmit()');
-                        formDyn.style.marginTop = parseFloat(e.target.getAttribute('data-y'))+'px';
-                        formDyn.style.marginLeft = parseFloat(e.target.getAttribute('data-x'))+'px';
-                        formDyn.style.marginBottom = parseFloat(e.target.getAttribute('data-y'))+'500px';
-                        formDyn.style.marginRight = parseFloat(e.target.getAttribute('data-x'))+'500px';
-                        // let x = document.createElement('p');
-                        //     x.innerText = 'Dock Name : '
-                        //     x.style.color='red';
-                        //     x.style.backgroundColor='white';
-                        formDyn.style.backgroundColor='#fff'
-                        // formDyn.appendChild(x)
-                        let dockName = document.createElement('input');
-                        dockName.type = 'text';
-                        dockName.name = 'wareName';
-                        dockName.placeholder = 'Road Mark : ';
-                        dockName.id='roadsname'
-                        dockName.setAttribute('data-ng-model','name');
-                        formDyn.appendChild(dockName);
-                        document.getElementById('main').appendChild(formDyn);
-                        
-        
-                        let submitButton = document.createElement('input');
-                        submitButton.type = 'button';
-                        submitButton.style.margin='0px';
-                        submitButton.innerText = 'Submit';
-                        submitButton.className='btn btn-successs';
-                        submitButton.onclick=() => {
-                            console.warn('submitting records');
-                            obj.pushTag(
-                                global.username,
-                                document.querySelector('#roadsname').value,
-                                
-                                'roads','',
-                                parseFloat(e.target.getAttribute('data-x'))+'px',
-                                parseFloat(e.target.getAttribute('data-y'))+'px'
-                            )
-                            document.getElementById('main').removeChild(formDyn);
-                            
-                        }
-                        submitButton.value = 'Submit';
-                        formDyn.appendChild(submitButton)
-                    },
-                })
-            }
-        
-
-        
-        
-        
-        
-        
-        </script>
-        
-        
-</div>
+                    formDyn.setAttribute('method','POST');
+                    formDyn.setAttribute('data-ng-submit','tagDockSubmit()');
+                    formDyn.style.marginTop = parseFloat(e.target.getAttribute('data-y'))+'px';
+                    formDyn.style.marginLeft = parseFloat(e.target.getAttribute('data-x'))+'px';
+                    formDyn.style.marginBottom = parseFloat(e.target.getAttribute('data-y'))+'500px';
+                    formDyn.style.marginRight = parseFloat(e.target.getAttribute('data-x'))+'500px';
+                    // let x = document.createElement('p');
+                    //     x.innerText = 'Dock Name : '
+                    //     x.style.color='red';
+                    //     x.style.backgroundColor='white';
+                    formDyn.style.backgroundColor='#fff'
+                    // formDyn.appendChild(x)
+                    let dockName = document.createElement('input');
+                    dockName.type = 'text';
+                    dockName.name = 'dockName';
+                    dockName.id = 'id_dockName';
+                    dockName.placeholder = 'Dock Name';
+                    dockName.setAttribute('data-ng-model','name');
+                    formDyn.appendChild(dockName);
+                    document.getElementById('main').appendChild(formDyn);
+                    let capacity = document.createElement('input');
+                    capacity.type='number';
+                    capacity.name = 'capacity'
+                    capacity.id = 'id_capacity'
+                    capacity.placeholder = 'Capacity of Holding Ships';
+                    capacity.setAttribute('data-ng-model','capacity')
+                    formDyn.appendChild(capacity);
+                    // select 
+                    let selectElement = document.createElement('select');
+                    selectElement.setAttribute('data-ng-model','type');
+                    let optionArr = ['--Select Type--','Cargo','Passenger','Others'];
+                    for(let i=0; i< optionArr.length; i++) {
+                        let ele = document.createElement('option');
+                        ele.text = optionArr[i];
+                        ele.value = optionArr[i];
+                        ele.className = optionArr[i] + '_className';
+                        selectElement.appendChild(ele);
+                    }
+                    selectElement.id = 'id_selectElement'
+                    formDyn.appendChild(selectElement);
     
+                    let submitButton = document.createElement('input');
+                    submitButton.type = 'button';
+                    submitButton.style.margin='0px';
+                    submitButton.innerText = 'Submit';
+                    submitButton.className='btn btn-successs';
+                    submitButton.setAttribute('data-ng-click','tagDockSubmit();')
+                    submitButton.onclick=() => {
+                        console.warn('submitting records');
+                        console.error(document.querySelector('#id_dockName').value)
+                        obj.pushTag(
+                            global.username,
+                            document.querySelector('#id_dockName').value,
+                            
+                            document.querySelector('#id_selectElement').value,document.querySelector('#id_capacity').value,
+                            parseFloat(e.target.getAttribute('data-x'))+'px',
+                            parseFloat(e.target.getAttribute('data-y'))+'px'
+                        )
+                        document.getElementById('main').removeChild(formDyn);
+                        
+                    }
+                    submitButton.value = 'Submit';
+                    formDyn.appendChild(submitButton)
+                    
+                },
+            })
+        }
+        function onWare() {
+            ++warehouse_count;
+            console.warn('created dock element tag with counter : '+dock_count);
+            
+            var tag = document.createElement('button');
+            tag.style.backgroundColor = 'red';
+            tag.style.color='#fff'
+            tag.style.padding = '1px';
+            tag.style.fontWeight='bold'
+
+            // tag.style.backgroundColor = 'red';
+            tag.style.borderRadius = '4px';
+            tag.style.fontSize='10px'
+            tag.innerHTML = 'Warehouse '+warehouse_count;
+            tag.className = 'element_ware_'+warehouse_count;
+            document.getElementById('elementCreator').appendChild(tag); 
+            interact('.'+ tag.className.toString())
+            .draggable({
+                inertia:true,
+                autoScroll:true,
+                onstart: ()=>{
+                    console.warn('starting draging using interact')
+                },
+                onmove: eve => {
+                    let target = eve.target;
+                    console.warn('X : '+parseFloat(target.getAttribute('data-x') || 0) + eve.dx ) 
+                    console.warn('Y: '+ parseFloat(target.getAttribute('data-y') || 0) + eve.dy)
+                    let x = parseFloat(target.getAttribute('data-x') || 0) + eve.dx,
+                        y = parseFloat(target.getAttribute('data-y') || 0) + eve.dy; 
+                    target.style.webkitTransform = target.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+                    target.setAttribute('data-x', x)
+                    target.setAttribute('data-y', y)
+                },
+                onend: e => {
+                    console.warn('Move ended at X: '+parseFloat(e.target.getAttribute('data-x') || 0) +
+                    '  Y: '+parseFloat(e.target.getAttribute('data-y') || 0) )
+                    var formDyn = document.createElement('form');
+                    formDyn.setAttribute('method','POST');
+                    formDyn.setAttribute('data-ng-submit','tagWareSubmit()');
+                    formDyn.style.marginTop = parseFloat(e.target.getAttribute('data-y'))+'px';
+                    formDyn.style.marginLeft = parseFloat(e.target.getAttribute('data-x'))+'px';
+                    formDyn.style.marginBottom = parseFloat(e.target.getAttribute('data-y'))+'500px';
+                    formDyn.style.marginRight = parseFloat(e.target.getAttribute('data-x'))+'500px';
+                    // let x = document.createElement('p');
+                    //     x.innerText = 'Dock Name : '
+                    //     x.style.color='red';
+                    //     x.style.backgroundColor='white';
+                    formDyn.style.backgroundColor='#fff'
+                    // formDyn.appendChild(x)
+                    let dockName = document.createElement('input');
+                    dockName.type = 'text';
+                    dockName.name = 'wareName';
+                    dockName.placeholder = 'Ware House Name';
+                    dockName.id='warename'
+                    
+                    dockName.setAttribute('data-ng-model','name');
+                    formDyn.appendChild(dockName);
+                    document.getElementById('main').appendChild(formDyn);
+                    let capacity = document.createElement('input');
+                    capacity.type='number';
+                    capacity.name = 'capacity'
+                    capacity.placeholder = 'Capacity';
+                    capacity.id='capa'
+                    capacity.setAttribute('data-ng-model','capacity')
+                    formDyn.appendChild(capacity);
+                    // select 
+                    
+    
+                    let submitButton = document.createElement('input');
+                    submitButton.type = 'button';
+                    submitButton.style.margin='0px';
+                    submitButton.innerText = 'Submit';
+                    submitButton.className='btn btn-successs';
+                    submitButton.onclick=() => {
+                        console.warn('submitting records');
+                        obj.pushTag(
+                            global.username,
+                            document.querySelector('#warename').value,
+                            
+                            'warehouse',document.querySelector('#capa').value,
+                            parseFloat(e.target.getAttribute('data-x'))+'px',
+                            parseFloat(e.target.getAttribute('data-y'))+'px'
+                        )
+                        document.getElementById('main').removeChild(formDyn);
+                        
+                    }
+                    submitButton.value = 'Submit';
+                    formDyn.appendChild(submitButton)
+                },
+            })
+        }
+        function onRail() {
+            ++railline_count;
+            console.warn('created dock element tag with counter : '+dock_count);
+            
+            var tag = document.createElement('button');
+            tag.style.backgroundColor = 'red';
+            tag.style.color='#fff'
+            tag.style.padding = '1px';
+            tag.style.fontWeight='bold'
+
+            // tag.style.backgroundColor = 'red';
+            tag.style.borderRadius = '4px';
+            tag.style.fontSize='10px'
+            tag.innerHTML = 'Rail Line '+railline_count;
+            tag.className = 'element_rail_'+railline_count;
+            document.getElementById('elementCreator').appendChild(tag); 
+            interact('.'+ tag.className.toString())
+            .draggable({
+                inertia:true,
+                autoScroll:true,
+                onstart: ()=>{
+                    console.warn('starting draging using interact')
+                },
+                onmove: eve => {
+                    let target = eve.target;
+                    console.warn('X : '+parseFloat(target.getAttribute('data-x') || 0) + eve.dx ) 
+                    console.warn('Y: '+ parseFloat(target.getAttribute('data-y') || 0) + eve.dy)
+                    let x = parseFloat(target.getAttribute('data-x') || 0) + eve.dx,
+                        y = parseFloat(target.getAttribute('data-y') || 0) + eve.dy; 
+                    target.style.webkitTransform = target.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+                    target.setAttribute('data-x', x)
+                    target.setAttribute('data-y', y)
+                },
+                onend: e => {
+                    console.warn('Move ended at X: '+parseFloat(e.target.getAttribute('data-x') || 0) +
+                    '  Y: '+parseFloat(e.target.getAttribute('data-y') || 0)
+                    )
+                    var formDyn = document.createElement('form');
+                    formDyn.setAttribute('method','POST');
+                    formDyn.setAttribute('data-ng-submit','tagRailSubmit()');
+                    formDyn.style.marginTop = parseFloat(e.target.getAttribute('data-y'))+'px';
+                    formDyn.style.marginLeft = parseFloat(e.target.getAttribute('data-x'))+'px';
+                    formDyn.style.marginBottom = parseFloat(e.target.getAttribute('data-y'))+'500px';
+                    formDyn.style.marginRight = parseFloat(e.target.getAttribute('data-x'))+'500px';
+                    // let x = document.createElement('p');
+                    //     x.innerText = 'Dock Name : '
+                    //     x.style.color='red';
+                    //     x.style.backgroundColor='white';
+                    formDyn.style.backgroundColor='#fff'
+                    // formDyn.appendChild(x)
+                    let dockName = document.createElement('input');
+                    dockName.type = 'text';
+                    dockName.name = 'wareName';
+                    dockName.placeholder = 'Rail Name';
+                    dockName.id='railname'
+                    
+                    dockName.setAttribute('data-ng-model','name');
+                    formDyn.appendChild(dockName);
+                    document.getElementById('main').appendChild(formDyn);
+                    let capacity = document.createElement('input');
+                    capacity.type='number';
+                    capacity.name = 'capacity'
+                    capacity.id='idcapa'
+                    capacity.placeholder = 'Capacity ( if any )';
+                    capacity.setAttribute('data-ng-model','capacity')
+                    formDyn.appendChild(capacity);
+                    // select 
+                    
+    
+                    let submitButton = document.createElement('input');
+                    submitButton.type = 'button';
+                    submitButton.style.margin='0px';
+                    submitButton.innerText = 'Submit';
+                    submitButton.className='btn btn-successs';
+                    submitButton.onclick=() => {
+                        console.warn('submitting records');
+                        obj.pushTag(
+                            global.username,
+                            document.querySelector('#railname').value,
+                            
+                            'railline',document.querySelector('#idcapa').value,
+                            parseFloat(e.target.getAttribute('data-x'))+'px',
+                            parseFloat(e.target.getAttribute('data-y'))+'px'
+                        )
+                        document.getElementById('main').removeChild(formDyn);
+                        
+                    }
+                    submitButton.value = 'Submit';
+                    formDyn.appendChild(submitButton)
+                },
+            })
+        }
+        function onTruck() {
+            ++truck_count;
+            console.warn('created dock element tag with counter : '+dock_count);
+            
+            var tag = document.createElement('button');
+            tag.style.backgroundColor = 'red';
+            tag.style.color='#fff'
+            tag.style.padding = '1px';
+            tag.style.fontWeight='bold'
+
+            // tag.style.backgroundColor = 'red';
+            tag.style.borderRadius = '4px';
+            tag.style.fontSize='10px'
+            tag.innerHTML = 'Roads '+truck_count;
+            tag.className = 'element_truck_'+truck_count;
+            document.getElementById('elementCreator').appendChild(tag); 
+            interact('.'+ tag.className.toString())
+            .draggable({
+                inertia:true,
+                autoScroll:true,
+                onstart: ()=>{
+                    console.warn('starting draging using interact')
+                },
+                onmove: eve => {
+                    let target = eve.target;
+                    console.warn('X : '+parseFloat(target.getAttribute('data-x') || 0) + eve.dx ) 
+                    console.warn('Y: '+ parseFloat(target.getAttribute('data-y') || 0) + eve.dy)
+                    let x = parseFloat(target.getAttribute('data-x') || 0) + eve.dx,
+                        y = parseFloat(target.getAttribute('data-y') || 0) + eve.dy; 
+                    target.style.webkitTransform = target.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+                    target.setAttribute('data-x', x)
+                    target.setAttribute('data-y', y)
+                },
+                onend: e => {
+                    console.warn('Move ended at X: '+parseFloat(e.target.getAttribute('data-x') || 0) +
+                    '  Y: '+parseFloat(e.target.getAttribute('data-y') || 0) 
+                )
+                var formDyn = document.createElement('form');
+                    formDyn.setAttribute('method','POST');
+                    formDyn.setAttribute('data-ng-submit','tagRoadSubmit()');
+                    formDyn.style.marginTop = parseFloat(e.target.getAttribute('data-y'))+'px';
+                    formDyn.style.marginLeft = parseFloat(e.target.getAttribute('data-x'))+'px';
+                    formDyn.style.marginBottom = parseFloat(e.target.getAttribute('data-y'))+'500px';
+                    formDyn.style.marginRight = parseFloat(e.target.getAttribute('data-x'))+'500px';
+                    // let x = document.createElement('p');
+                    //     x.innerText = 'Dock Name : '
+                    //     x.style.color='red';
+                    //     x.style.backgroundColor='white';
+                    formDyn.style.backgroundColor='#fff'
+                    // formDyn.appendChild(x)
+                    let dockName = document.createElement('input');
+                    dockName.type = 'text';
+                    dockName.name = 'wareName';
+                    dockName.placeholder = 'Road Mark : ';
+                    dockName.id='roadsname'
+                    dockName.setAttribute('data-ng-model','name');
+                    formDyn.appendChild(dockName);
+                    document.getElementById('main').appendChild(formDyn);
+                    // let capacity = document.createElement('input');
+                    // capacity.type='number';
+                    // capacity.name = 'capacity'
+                    // capacity.placeholder = 'Capacity';
+                    // capacity.setAttribute('data-ng-model','capacity')
+                    // formDyn.appendChild(capacity);
+                    // select 
+                    
+    
+                    let submitButton = document.createElement('input');
+                    submitButton.type = 'button';
+                    submitButton.style.margin='0px';
+                    submitButton.innerText = 'Submit';
+                    submitButton.className='btn btn-successs';
+                    submitButton.onclick=() => {
+                        console.warn('submitting records');
+                        obj.pushTag(
+                            global.username,
+                            document.querySelector('#roadsname').value,
+                            
+                            'roads','',
+                            parseFloat(e.target.getAttribute('data-x'))+'px',
+                            parseFloat(e.target.getAttribute('data-y'))+'px'
+                        )
+                        document.getElementById('main').removeChild(formDyn);
+                        
+                    }
+                    submitButton.value = 'Submit';
+                    formDyn.appendChild(submitButton)
+                },
+            })
+        }
+    
+
+    
+    
+    
+    
+    
+    </script>
+    
+    
+</div>
