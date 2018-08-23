@@ -43,7 +43,7 @@
         <div class="col-md-6">
             <div style="height:33%;border-bottom:4px solid #f5f5f5"  >
                 <div data-ng-repeat="d in distances" >
-                    {{d.station1}} <sup>{{d.station1Type}}</sup> to {{d.station2}} <sup>{{d.station2Type}} </sup> distance : {{d.distance}}
+                    {{d.station1}} <sup>( {{d.station1Type}} )</sup> to {{d.station2}} <sup>( {{d.station2Type}} ) </sup> distance : {{d.distance}}
                 </div>
             </div>
             <div style="height:33%;border-bottom:4px solid #f5f5f5" >
@@ -98,5 +98,8 @@
     p{
         padding-left: 20px;
         margin: 0px;
+    }
+    sup{
+        color: blue;
     }
 </style>
