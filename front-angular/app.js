@@ -38,6 +38,25 @@ app.config(function($routeProvider,$locationProvider) {
         controller:'scheduleController',
         title:'Dashboard',
     })
+    .when('/assignees', {
+        templateUrl:'./html_components/assignee.html',
+        controller:'asssigneeController',
+        title:'Assignees'
+    })
+    .when('/addAssignee', {
+        templateUrl:'./html_components/assigneeForm.html',
+        controller:'asssigneeController',
+        title:'Assignees'
+    })
+})
+
+app.controller('asssigneeController', function($scope,$location,$rootScope,$http) {
+    console.warn('assignee controller called')
+    $rootScope.showSidebar = true;
+    $rootScope.settingsOption = true;
+    $scope.addAssignee = function() {
+
+    }
 })
 
 app.controller('loginController', function($scope,$location,$rootScope,$http) {
