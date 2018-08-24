@@ -124,7 +124,7 @@ app.controller('dashController', function($scope,$rootScope,$http){
                 lenObj.station2 = allTags[j]['name'];
                 lenObj.xpixels = xDiff;
                 lenObj.ypixels = yDiff;
-                lenObj.distance = dist; 
+                lenObj.distance = dist.toFixed(1); 
                 lengths.push(lenObj);
             }
         }
