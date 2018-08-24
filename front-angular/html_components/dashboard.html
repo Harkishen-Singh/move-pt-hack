@@ -1,3 +1,7 @@
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.6.7/c3.css"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.6.7/c3.js"></script>
+
 <div class="container" data-ng-init="fetchSchedules();defaultDistances();">
     <div class="row" >
         <div class="col-md-6" style="border-right:4px solid #f5f5f5;height:1000px;overflow-y: auto;"  >
@@ -74,10 +78,10 @@
                             </style>
                     </div>
                 
-                <div id= "display" data-ng-repeat="d in distances" style="overflow-y:auto" >
-                    <b style="color: black">{{d.station1}}</b> <sup>( {{d.station1Type}} )</sup><b style="color: black"> m </b>
-                    <b style="color: black">to {{d.station2}}</b> <sup>( {{d.station2Type}} ) </sup><b style="color: black"> m </b>
-                    <b style="color: black"> distance : {{d.distance}} </b><b style="color: black">m</b>
+                <div id= "display" data-ng-repeat="d in distances" style="overflow-y:auto; font-size: 12px;" >
+                    {{d.station1}} <sup>( {{d.station1Type}} )</sup> m 
+                    to {{d.station2}} <sup>( {{d.station2Type}} ) </sup> m 
+                     distance : {{d.distance}} m
                 </div>
             </div>
             <div style="height:33%;border-bottom:4px solid #f5f5f5" >
@@ -122,8 +126,10 @@
 
             </div>
 
-            <div>
-                your graphs will appear here
+            <div id="chart">
+                <canvas id="LineChart">
+                    
+                </canvas>
             </div>
         </div>
     </div>
@@ -138,3 +144,56 @@
     }
     
 </style>
+
+<!-- <script>
+        var chart = c3.generate({
+            bindto: '#chart',
+            data: {
+              columns: [
+                ['data1', 30, 200, 100, 400, 150, 250],
+                ['data2', 50, 20, 10, 40, 15, 25]
+              ]
+            }
+        });
+    
+</script> -->
+
+<script>
+var ctx = document.getElementById("LineChart").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
