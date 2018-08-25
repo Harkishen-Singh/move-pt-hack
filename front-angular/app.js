@@ -82,6 +82,7 @@ app.controller('asssigneeController', function($scope,$location,$rootScope,$http
 
     }
     $scope.retriveAssignees = function(){
+        $scope.showLoading = true;
         $http(
             {url:global.url+'/assignee',
             method:'POST',
@@ -94,10 +95,12 @@ app.controller('asssigneeController', function($scope,$location,$rootScope,$http
         .then(resp=>{
             res=resp.data;
             if(res['Success']=='Y'){
+                $scope.showLoading = false;
                 $scope.ass = res['result'];
             }
             else{
                 console.error('error occurred while requesting for asignee list')
+                $scope.showLoading = false;
             }
         })
     }
