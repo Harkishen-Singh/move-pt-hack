@@ -82,9 +82,26 @@ function removeAss(req ,res) {
         })
     })
 }
+function login(req, res) {
+    let username=req.body.username,
+        password = req.body.password;
+    mongo.connect(url, (e, dbo) => {
+        if(e) throw e;
+        let db = dbo.db('pt_move');
+        db.collection('assignee').findOne({"username" : username,"password":password},(e, result2) => {
+            if(e) throw e;
+            console.warn('login check below')
+            console.warn(result2)
+            isErr=false;
+            resSend(res);
+            dbo.close();
+        })
+    })
+}
 
 module.exports = {
     add:addAss,
     show:showAll,
     remove:removeAss,
+    login:login,
 }

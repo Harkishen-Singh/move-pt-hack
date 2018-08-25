@@ -6,7 +6,7 @@ const app = require('express')(),
     schedules=require('./schedules'),
     login=require('./login'),
     assignee = require('./assignee'),
-    url = '0.0.0.0';
+    url = 'localhost';
 
 
     app.use(bodyParser.json());
@@ -66,9 +66,11 @@ const app = require('express')(),
     app.post('/delAssignee', (req, res) => {
         assignee.remove(req,res);
     })
-    app.post('/assigneeParticular', (req, res) => {
-        schedules.assigneeParticular(req,res);
+    app.post('/assigneeLogin', (req, res) => {
+        console.warn('request for login')
+        assignee.login(req,res);
     })
+
 
 const server = app.listen(port, url, e => {
     if(e) throw e;
