@@ -53,6 +53,9 @@ const app = require('express')(),
     app.post('/dockDetails', (req, res) => {
         tags.dockDetails(req,res);
     })
+    app.post('/assignDock', (req, res) => {
+        tags.assign(req,res);
+    })
 
 const server = app.listen(port, url, e => {
     if(e) throw e;

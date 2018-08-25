@@ -126,10 +126,22 @@
                 <p><b style="color: blue;">Completed :</b> {{sc.completed}}</p>
                 <div data-ng-if="sc.dockassigned=='' || sc.dockassigned==null" >
                    <p> <b style="color: blue;">Assign a Dock to this schedule :</b>  </p>
-                <input list="codes2"  data-ng-model="dockAss">
+                <!-- <input list="codes2"  data-ng-model="dockAss">
                 <datalist id="codes2" >
-                    <option  data-ng-repeat="c in docks" value="{{c.name}}">Name : {{c.name}} Type : {{c.type}}</option>
-                </datalist><br><br></div>
+                    <option  data-ng-repeat="c in docks" value="{{c.name}}">Name : {{c.name}} Type : {{c.type}}
+
+                        <button class="btn btn-success" data-ng-click="assignDock(c.name,sc.consignmentid)" >Assign</button>
+                    </option>
+                </datalist>   -->
+                <div data-ng-repeat="c in docks" value="{{c.name}}" >
+                        Name : {{c.name}} Type : {{c.type}}
+                        <button class="btn btn-success" data-ng-click="assignDock(c.name,sc.consignmentid)" 
+                            style="padding-top:0px;padding-bottom:0px"
+                        >Assign</button> <br><br>
+                    
+                </div>
+                
+                <br><br></div>
                 </div>
 
                 

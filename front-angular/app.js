@@ -167,7 +167,25 @@ app.controller('dashController', function($scope,$rootScope,$http){
     }
     // defaultDistances();
     
-    
+    $scope.assignDock = function(name,id) {
+        $http({
+            url:global.url+'/assignDock',
+            method:'POST',
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            data:'username='+global.username+'&id='+id+'&name='+name
+        })
+        .then(resp => {
+            res = resp.data;
+            if(res['Success']=='Y') {
+                alert('Schedule with consignment ID : '+id+' has been assigned Dock : '+name)
+            }
+            else{
+                alert('Failed to Assign Dock')
+            }
+        })
+    }
 
     console.warn('dashboard controller called')
     $rootScope.showSidebar = true;
@@ -228,6 +246,8 @@ app.controller('dashController', function($scope,$rootScope,$http){
         .then(resp => {
             res = resp.data;
             if(res['Success']=='Y') {
+                console.warn('schedule details below')
+                console.warn(res['result'])
                 $scope.sc = res['result'];
                 $scope.showNone=false;
                 $scope.showLoading2=false;

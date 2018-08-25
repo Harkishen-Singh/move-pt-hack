@@ -42,6 +42,34 @@ function retriveTags(req, res) {
     })
 }
 
+function dockAssign(req,res) {
+    let username = req.body.username, name=req.body.name,id=req.body.id;
+    mongo.connect(url, (e, dbo) => {
+        if(e) throw e;
+        let db = dbo.db('pt_move');
+        db.collection('tags').updateOne({"username" : username, "name":name},{$set: { 'occupied': 1 }},(e) => {
+            if(e) throw e;
+            console.warn('updated')
+            isErr=false;
+            dbo.close();
+        })
+
+    })
+
+    mongo.connect(url, (e, dbo) => {
+        if(e) throw e;
+        let db = dbo.db('pt_move');
+        db.collection('schedules').updateOne({"username" : username, "consignmentid":id},{$set: { 'dockassigned': name }},(e) => {
+            if(e) throw e;
+            console.warn('updated')
+            isErr=false;
+            resSend(res);
+            dbo.close();
+        })
+
+    })
+}
+
 function dockDetails(req, res) {
     let username = req.body.username;
     mongo.connect(url, (e, dbo) => {
@@ -94,4 +122,5 @@ module.exports = {
     save : saveTags,
     retrive: retriveTags,
     dockDetails:dockDetails,
+    assign:dockAssign,
 }
