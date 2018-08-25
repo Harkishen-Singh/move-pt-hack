@@ -48,7 +48,7 @@ def date_average():
                 dep_datep.append(dep_date[j])
                 wagonp.append(int(wagon[j]))
 
-        for k in range(len()):
+        for k in range(len(arr_date)):
             date1 = datetime.strptime(arr_datep[k], '%m/%d/%Y %H:%M')
             date2 = datetime.strptime(dep_datep[k], '%m/%d/%Y %H:%M')
             diff = date1 - date2
