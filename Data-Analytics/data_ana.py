@@ -48,15 +48,15 @@ def date_average():
                 dep_datep.append(dep_date[j])
                 wagonp.append(int(wagon[j]))
 
-        for m in range(len(dep_datep)):
-            date1 = datetime.strptime(arr_datep[m], '%m/%d/%Y %H:%M')
-            date2 = datetime.strptime(dep_datep[m], '%m/%d/%Y %H:%M')
+        for k in range(len()):
+            date1 = datetime.strptime(arr_datep[k], '%m/%d/%Y %H:%M')
+            date2 = datetime.strptime(dep_datep[k], '%m/%d/%Y %H:%M')
             diff = date1 - date2
             # print(diff)
             days = diff.days
             days_to_hours = days* 24
             # print(diff.seconds)
-            total_hours[m] = float(days_to_hours) + float(diff.seconds/3600)
+            total_hours[k] = float(days_to_hours) + float(diff.seconds/3600)
         avg_time = sum(total_hours)/len(total_hours)
         avg_wagon = sum(wagonp)/len(wagonp)
         avg = (["JNPT" , arrDiff[i] , avg_time , avg_wagon])
