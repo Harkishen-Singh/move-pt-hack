@@ -1,33 +1,24 @@
 import csv
 from datetime import datetime
+
 def date_average():
+    arr = []
     arr_date = []
     dep_date = []
+    wagon =[]
+    avg = []
 
     fi = open('info.csv', 'r')
     f = csv.reader(fi)
 
+    file = open('info.csv','r')
+    r = csv.reader(file) 
 
-    # for i in f:
-    #     if i[10]=='DD':
-    #         print(i)
-
-    file = open('info.csv', 'r')
-    r = csv.reader(file)   #reads the file
-    arr = []
-    # for i in r:
-    #     arr_date.append(i[11])
-
-    # for i in r:
-    #     dep_date.append(i[8])
-
-    for i in r :
-        # print(i[10])
-        arr.append(i[10])  #appends the name of different ports
-        arr_date.append(i[11]) #appends the arrival time of the port
-        dep_date.append(i[8])  #appends the departure time of the port
-
-    # print(arr)
+    for i in r:
+        arr.append(i[10])
+        arr_date.append(i[11])
+        dep_date.append(i[8])
+        wagon.append(i[4])
 
     arrDiff = [1]
     arrDiff[0] = arr[0]
@@ -43,56 +34,83 @@ def date_average():
             arrDiff.append(ele)
     print(arrDiff)
 
-
     for i in range(len(arrDiff)):  #loop 
-        count_t = 0
-        sum =0
         arr_datep = []
         dep_datep = []
+        wagonp =[]
+        diff = []
+        total_hours = []
+        ele = arrDiff[i]
         for j in range(len(arr)):
-            if j == i :
-                count_t += 1 
+            ele1 = arr[j]
+            if ele1 == ele :
                 arr_datep.append(arr_date[j])
                 dep_datep.append(dep_date[j])
+                wagonp.append(int(wagon[j]))
 
-        for k in range(len(arr_datep)):
-            date1 = datetime.strptime(arr_datep[k], '%d/%b/%Y %H:%M')
-            date2 = datetime.strptime(dep_datep[k], '%d/%b/%Y %H:%M')
+        for k in range(len(arr_date)):
+            date1 = datetime.strptime(arr_datep[k], '%m/%d/%Y %H:%M')
+            date2 = datetime.strptime(dep_datep[k], '%m/%d/%Y %H:%M')
             diff = date1 - date2
-            sum = sum + diff
-        avg = sum / count_t
+            # print(diff)
+            days = diff.days
+            days_to_hours = days* 24
+            # print(diff.seconds)
+            total_hours[k] = float(days_to_hours) + float(diff.seconds/3600)
+        avg_time = sum(total_hours)/len(total_hours)
+        avg_wagon = sum(wagonp)/len(wagonp)
+        avg = (["JNPT" , arrDiff[i] , avg_time , avg_wagon])
+        print(avg)
 
-        date_avg.append(["JNPT" , arrDiff[i] , avg])
-
-
-    myFile = open('date_details.csv', 'w')
-    with myFile:
-        writer = csv.writer(myFile)
-        writer.writerows(data_avg)
-    csvFile.close()
+    # myFile = open('date_details.csv', 'w')
+    # with myFile:
+    #     writer = csv.writer(myFile)
+    #     writer.writerows(avg)
+    # csvFile.close()
 
 date_average()
 
 
-        
-        # for i in r:
-            
-
-        
-        # for d in dates:
-        # date = datetime.strptime(d, '%b %d %Y %I:%M%p')
-        # print type(date)
-        # print date
 
 
 
 
-        # now = int(time.time()) # epoch seconds
-        # then = now - 90000 # some time in the past
 
-        # d = divmod(now-then,86400)  # days
-        # h = divmod(d[1],3600)  # hours
-        # m = divmod(h[1],60)  # minutes
-        # s = m[1]  # seconds
 
-        # print '%d days, %d hours, %d minutes, %d seconds' % (d[0],h[0],m[0],s)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
