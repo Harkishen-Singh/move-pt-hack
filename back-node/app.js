@@ -6,7 +6,7 @@ const app = require('express')(),
     schedules=require('./schedules'),
     login=require('./login'),
     assignee = require('./assignee'),
-    url = 'localhost';
+    url = '0.0.0.0';
 
 
     app.use(bodyParser.json());

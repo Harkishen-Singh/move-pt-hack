@@ -58,7 +58,7 @@ export default class LoginScreen extends Component {
 
     checkLogin = () => {
         console.warn('reached checklogin' + this.state.username+this.state.password)
-        fetch('http://127.0.0.1:5000/assigneeLogin' , {
+        fetch('http://192.168.43.51:5000/assigneeLogin' , {
             method:'POST',
             headers: {
                 'Accept':'application/json',
