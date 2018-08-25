@@ -3,12 +3,13 @@ import {createStackNavigator, createBottomTabNavigator} from 'react-navigation';
 import LoginScreen from './screens/login';
 
 
-export var Navigator = createStackNavigator({
+export const Navigator = createStackNavigator({
     LoginScreen : {
         screen:LoginScreen,
-        navigationOptions:{
-            tabBarLabel:'Login | Screen',
-        }
+        navigationOptions: {
+            title: 'Login Screen',
+            header: null
+          },
     }
 },
 {
