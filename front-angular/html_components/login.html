@@ -3,16 +3,44 @@
 >
     
     <form action="" style="border:2px solid pink;padding: 20px;margin-left: 20%;margin-right: 20%;
-    border-radius: 20px;" data-ng-submit="checkLogin()" >
+    border-radius: 20px;" name="loginForm" data-ng-submit="checkLogin(loginForm.$valid)" >
         Username : <input type="text" style="background-color: #F6FFFF;border-radius: 10px;text-align: center;"
             ng-model="username"
         /><br/><br/>
         Password : <input type="password" style="background-color: #F6FFFF;border-radius: 10px;text-align: center;" 
         data-ng-model="password"
         /><br/><br/>
-        <input type="submit" class="btn btn-primary" /> &nbsp; <a href="/?#!/signUp"><button class="btn btn-primary" >Sign Up</button></a> 
+        <button type="submit" class="btn btn-primary" data-ng-click="" >Submit</button> &nbsp; 
+        <a href="/?#!/signUp"><button class="btn btn-primary" >Sign Up</button></a> 
         
         <br/><br/>
+        <div data-ng-if="showLoader">
+                <div class="loader"></div>
+                <style>
+                    .loader {
+        border: 16px solid #f3f3f3; /* Light grey */
+        border-top: 16px solid #3498db; /* Blue */
+        border-radius: 50%;
+        border-bottom: 16px solid blue;
+        margin-left: 45%;
+        width: 60px;
+        margin-top: 10px;
+        height: 60px;
+        -webkit-animation: spin 2s linear infinite;
+          animation: spin 2s linear infinite;
+        }
+        
+        @-webkit-keyframes spin {
+          0% { -webkit-transform: rotate(0deg); }
+          100% { -webkit-transform: rotate(360deg); }
+        }
+        
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+                </style>
+        </div>
         {{wrongpass}}
     </form>
     

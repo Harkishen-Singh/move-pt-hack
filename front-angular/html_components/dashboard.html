@@ -33,10 +33,14 @@
                 </style>
         </div>
             <!-- <h3>Details Of the Upcoming Ship</h3> -->
-            <div id="display" style="border:2px solid #352c2c;border-radius: 10px;margin-right: 5%;margin-bottom: 20px;padding-top: 10px;padding-bottom: 20px;" 
+            <div id="display" style="border:2px solid #352c2c;background-color: #FAFEFD;
+            border-radius: 10px;margin-right: 5%;margin-bottom: 20px;padding-top: 10px;padding-bottom: 20px;" 
             data-ng-repeat="sc in sched" data-ng-click="fetchSchDetails(sc.consignmentid);fetchAssignee();" >
-
-                <h4 style="text-align:center">Schedule {{$index + 1}}</h4><hr/>
+            <button data-ng-if="sc.type=='incoming' || sc.type=='' || sc.type==null" 
+            style="background-color:yellow;padding:5px;color:black;border-radius: 5px;display: inline;margin-left: 10px;" 
+            >Incoming</button>  
+            <button data-ng-if="sc.type=='outgoing'" style="background-color:red;margin-left: 10px;padding:5px;color:#fff;border-radius: 5px;" >Outgoing</button>  
+                <h4 style="text-align:center;">Schedule {{$index + 1}}</h4><hr/>
                 <p><b >Consignment Id: </b> {{sc.consignmentid}}
                 <b style="margin-left:40px;">Indent Commodity: </b> {{sc.indentcomm}}</p>
                 <p><b >Indent Type Of Train: </b>  {{sc.indenttrain}}

@@ -8,7 +8,17 @@ var global = {
 
 app.config(function($routeProvider,$locationProvider) {
     $routeProvider
-    .when('/',{
+    .when('/#!/%3F%23!',{
+        templateUrl:'./html_components/login.html',
+        controller:'loginController',
+        title:'Login | SignUp',
+    })
+    .when("/",{
+        templateUrl:'./html_components/login.html',
+        controller:'loginController',
+        title:'Login | SignUp',
+    })
+    .when("/login",{
         templateUrl:'./html_components/login.html',
         controller:'loginController',
         title:'Login | SignUp',
@@ -125,13 +135,15 @@ app.controller('asssigneeController', function($scope,$location,$rootScope,$http
 
 app.controller('loginController', function($scope,$location,$rootScope,$http) {
     console.warn('login page called')
+    // $location.path('/login')
     $scope.showHeader = false;
     $rootScope.settingsOption = false;
     $scope.title = 'Login | SignUP'
     $scope.wrongpass = '';
     $rootScope.showSidebar = false;
-    $scope.checkLogin =  function() {
-
+    $scope.checkLogin =  function(v) {
+        console.warn(v);
+        $scope.showLoader=true;
         $http(
             {url:global.url+'/login',
             method:'POST',
@@ -143,15 +155,18 @@ app.controller('loginController', function($scope,$location,$rootScope,$http) {
         .then(resp=>{
             res=resp.data;
             if(res['Success']=='Y'){
+                $scope.showLoader=false;
+                $location.path('/dashboard');
                 console.warn('logged in')
                 global.username = $scope.username;
                 $scope.wrongpass = 'Success';
                 $rootScope.showSidebar = true;
 
-                $location.path('/dashboard');
+                
             }
             else{
                 $scope.wrongpass = 'Wrong Password or Username entered'
+                $scope.showLoader=false;
             }
         })
     }
