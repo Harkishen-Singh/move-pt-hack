@@ -222,6 +222,28 @@ app.controller('dashController', function($scope,$rootScope,$http){
 app.controller('scheduleController', function($scope,$rootScope,$http,$location){
     console.warn('scheduleController called')
     $rootScope.showSidebar = true;
+
+    $scope.deleteSchd = function(id){
+        console.warn('delete schedule called');
+        $http({
+            url:global.url+'/delSchedule',
+            method:'POST',
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            data:'id='+id
+        })
+        .then(resp => {
+            res = resp.data;
+            if(res['Success']=='Y') {
+                alert('Schedule with consignment ID : '+id+' is removed successfully. Refresh to see the effect')
+            }
+            else{
+                alert('Error removing Schedule with consignment ID : '+id)
+            }
+        })
+    }
+
     $scope.addinit = function() {
         console.warn('addinit called');
         
@@ -250,7 +272,7 @@ app.controller('scheduleController', function($scope,$rootScope,$http,$location)
     }
     $scope.addScheduleCont = function(){
         let data = '&consignmentid='+$scope.schedule_form.consignmentid+'&userregtime='+$scope.schedule_form.userregtime+'&indentcomm='+$scope.schedule_form.indentcomm
-            +'&indenttrain='+$scope.schedule_form.indenttrain+'&indentwagon='+$scope.schedule_form.indentwagon+
+            +'&indenttrain='+$scope.schedule_form.indenttrain+'&indentwagon='+$scope.schedule_form.indentwagon+'&type='+$scope.schedule_form.type+
             '&srcstncode='+$scope.schedule_form.srcstncode+'&srcdeptime='+$scope.schedule_form.srcdeptime+'&disttravel='+$scope.schedule_form.disttravel+'&deststncode='+$scope.schedule_form.deststncode+
             '&destarrivaltime='+$scope.schedule_form.destarrivaltime+'&unload_strt_time='+$scope.schedule_form.unload_strt_time+'&unload_end_time='+$scope.schedule_form.unload_end_time;
             $scope.result='';

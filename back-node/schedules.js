@@ -29,6 +29,7 @@ function add(req,res) {
         indentcomm=req.body.indentcomm,
         username=req.body.username,
         indenttrain=req.body.indenttrain,
+        type=req.body.type,
         indentwagon=req.body.indentwagon,
         srcstncode=req.body.srcstncode,
         srcdeptime=req.body.srcdeptime,
@@ -42,6 +43,7 @@ function add(req,res) {
             console.warn('[SUCCESS] connected to the database');
             let db = dbo.db('pt_move');
             let obj = {
+                'type':type,
                 'consignmentid':consignmentid,
                 'userregtime':userregtime,
                 'indentcomm':indentcomm,
@@ -93,6 +95,24 @@ function retriveAll(req, res) {
     } )
 }
 
+function deleteSch(req, res) {
+    let consignmentid = req.body.id;
+    mongo.connect(url, (e, dbo) => {
+        if(e) throw e;
+        console.warn('[SUCCESS] connected to the database');
+        let db = dbo.db('pt_move');
+        
+        db.collection('schedules').deleteOne({'consignmentid':consignmentid}, e => {
+            if(e) throw e;
+            console.warn('Successfully deleted schedule for consignmentid : '+consignmentid);
+            isErr = false;
+            dbo.close()
+            resSend(res);
+        })
+        
+    } )
+}
+
 function details(req, res) {
     let consignmentid = req.body.consignmentid;
     mongo.connect(url, (e, dbo) => {
@@ -117,4 +137,5 @@ module.exports = {
     add:add,
     retriveAll:retriveAll,
     details:details,
+    delete:deleteSch,
 }

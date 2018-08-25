@@ -47,6 +47,9 @@ const app = require('express')(),
     app.post('/scheduleDetails', (req, res) => {
         schedules.details(req,res);
     })
+    app.post('/delSchedule', (req, res) => {
+        schedules.delete(req,res);
+    })
 
 const server = app.listen(port, url, e => {
     if(e) throw e;

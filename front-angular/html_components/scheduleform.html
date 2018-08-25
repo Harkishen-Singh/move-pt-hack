@@ -4,12 +4,18 @@
     <form action="" style="" data-ng-submit="addScheduleCont()" >
         <h3>Schedule details of the ship </h3><hr>
 
+        Type : <select ng-model="schedule_form.type"  style="background-color:white;border-radius:5px;">
+            <option value="incoming" style="background-color:white;border-radius:5px;" >Incoming</option>
+            <option value="outgoing" style="background-color:white;border-radius:5px;">Outgoing</option>
+            </select><br/><br/>
+
         Consignment Id : <input type="number" style="background-color: #F6FFFF;border-radius: 10px;text-align: center;margin-top: 20px;"
             ng-model="schedule_form.consignmentid" 
         /><br/><br/>
         User Indent Reg. Time : <input type="datetime-local" style="background-color: #F6FFFF;border-radius: 10px;text-align: center;margin-top: 20px;"
             ng-model="schedule_form.userregtime" 
         /><br/><br/>
+
         Indent Commodity :<select ng-model="schedule_form.indentcomm"  style="background-color:white;border-radius:5px;">
             <option value="CONT" style="background-color:white;border-radius:5px;" >CONT</option>
             <option value="EOIL" style="background-color:white;border-radius:5px;">EOIL</option>
