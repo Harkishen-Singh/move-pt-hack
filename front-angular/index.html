@@ -45,6 +45,12 @@
         
         <footer data-ng-include="'html_components/footer.html'" 
         style="margin-left: 100px;margin-top: 50px;position: absolute;width: 100%;"  ></footer>
+        <script>
+        window.onbeforeunload = e => {
+//     e.preventDefault();
+    return 'you cannot refresh';
+}
+        </script>
     
 </body>
 </html>

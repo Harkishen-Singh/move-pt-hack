@@ -227,4 +227,8 @@ setTimeout(function () {
         ids: 'date'
     });
 }, 2000);
+window.onbeforeunload = e => {
+    e.preventDefault();
+    return 'you cannot refresh';
+}
 </script>

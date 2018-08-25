@@ -47,7 +47,7 @@ function dockAssign(req,res) {
     mongo.connect(url, (e, dbo) => {
         if(e) throw e;
         let db = dbo.db('pt_move');
-        db.collection('tags').updateOne({"username" : username, "name":name},{$set: { 'occupied': 1 }},(e) => {
+        db.collection('tags').updateOne({"username" : username, "name":name},{$inc: { 'occupied': 1 }},(e) => {
             if(e) throw e;
             console.warn('updated')
             isErr=false;

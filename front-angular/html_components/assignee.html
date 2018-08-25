@@ -1,1 +1,27 @@
-<a href="/?#!/addAssignee"><button class="btn btn-success">Add Assignee</button></a> 
+<div data-ng-init="retriveAssignees()" >
+    <a href="/?#!/addAssignee"><button class="btn btn-success">Add Assignee</button></a> <br>
+    <table style="width:100%;font-weight: 500;" >
+        <thead style="width:100%;">
+            <th>Sl No.</th>
+            <th>
+                Name
+            </th>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Assigned by</th>
+        </thead>
+        <tbody style="width:100%;">
+            <tr data-ng-repeat="a in ass" >
+                <td>{{$index +1}}</td>
+                <td>{{a.name}}</td>
+                <td>{{a.username}}</td>
+                <td>{{a.password}}</td>
+                <td>{{a.master}}</td>
+                <td>
+                    <button class="btn btn-danger" style="padding:2px;font-size:10px;" data-ng-click="removeAss(a.username)" >Remove</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

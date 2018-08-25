@@ -5,6 +5,7 @@ const app = require('express')(),
     tags = require('./tagHandler'),
     schedules=require('./schedules'),
     login=require('./login'),
+    assignee = require('./assignee'),
     url = '0.0.0.0';
 
 
@@ -55,6 +56,15 @@ const app = require('express')(),
     })
     app.post('/assignDock', (req, res) => {
         tags.assign(req,res);
+    })
+    app.post('/assigneeAdd', (req, res) => {
+        assignee.add(req,res);
+    })
+    app.post('/assignee', (req, res) => {
+        assignee.show(req,res);
+    })
+    app.post('/delAssignee', (req, res) => {
+        assignee.remove(req,res);
     })
 
 const server = app.listen(port, url, e => {

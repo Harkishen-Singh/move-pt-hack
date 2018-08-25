@@ -55,8 +55,72 @@ app.controller('asssigneeController', function($scope,$location,$rootScope,$http
     $rootScope.showSidebar = true;
     $rootScope.settingsOption = true;
     $scope.addAssignee = function() {
+        let data = 'username='+$scope.assignee_form.username+'&password='+$scope.assignee_form.password
+            +'&name='+$scope.assignee_form.name+'&master='+global.username
+        $http(
+            {url:global.url+'/assigneeAdd',
+            method:'POST',
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            data:data}
+        )
+        .then(resp=>{
+            res=resp.data;
+            if(res['Success']=='Y'){
+                console.warn('logged in')
+                global.username = $scope.username;
+                $scope.wrongpass = 'Success';
+                $rootScope.showSidebar = true;
+
+                $location.path('/dashboard');
+            }
+            else{
+                $scope.wrongpass = 'Error occurred while Adding assignee'
+            }
+        })
 
     }
+    $scope.retriveAssignees = function(){
+        $http(
+            {url:global.url+'/assignee',
+            method:'POST',
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            data:'master='+global.username
+        }
+        )
+        .then(resp=>{
+            res=resp.data;
+            if(res['Success']=='Y'){
+                $scope.ass = res['result'];
+            }
+            else{
+                console.error('error occurred while requesting for asignee list')
+            }
+        })
+    }
+    $scope.removeAss = function(username) {
+        $http(
+            {url:global.url+'/delAssignee',
+            method:'POST',
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            data:'master='+global.username+'&username='+username
+        }
+        )
+        .then(resp=>{
+            res=resp.data;
+            if(res['Success']=='Y'){
+                alert('Removed Assignee '+username+'. Refresh to see the effect.');
+            }
+            else{
+                alert('Error Removing Assignee '+username);
+            }
+        })
+    } 
 })
 
 app.controller('loginController', function($scope,$location,$rootScope,$http) {
