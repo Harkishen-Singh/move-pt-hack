@@ -30,7 +30,11 @@ height: 80px;
         </style>
 </div>
     <div id="display" style="border:2px solid #352c2c;border-radius: 10px;margin-right: 40%;margin-bottom: 20px;padding-top: 10px;" data-ng-repeat="sc in sched" >
-        <h4 style="text-align:center">Schedule {{$index + 1}}</h4><hr/>
+      <button data-ng-if="sc.type=='incoming' || sc.type=='' || sc.type==null" 
+      style="background-color:yellow;padding:5px;color:black;border-radius: 5px;display: inline;" 
+      >Incoming</button>  
+      <button data-ng-if="sc.type=='outgoing'" style="background-color:red;padding:5px;color:#fff;border-radius: 5px;" >Outgoing</button>  
+      <h4 style="text-align:center">Schedule {{$index + 1}}</h4><hr/>
         <p><b >Consignment Id: </b> {{sc.consignmentid}}
         <b style="padding-left:10px;">User Registration Time:</b>  {{sc.userregtime}}</p>
         <p><b >Indent Commodity: </b> {{sc.indentcomm}}
