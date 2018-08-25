@@ -175,6 +175,7 @@ app.controller('dashController', function($scope,$rootScope,$http){
     $scope.showNone = true;
     $scope.fetchSchedules = function() {
         $scope.showLoading1 = true;
+        
         $http({
             url:global.url+'/schedules',
             method:'POST',
@@ -198,6 +199,23 @@ app.controller('dashController', function($scope,$rootScope,$http){
     $scope.fetchSchDetails = function(id) {
         console.warn('fetchSchDetails called id:'+id)
         $scope.showLoading2 = true;
+
+        $http({
+            url:global.url+'/dockDetails',
+            method:'POST',
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            data:'username='+global.username
+        })
+        .then(resp => {
+            res = resp.data;
+            if(res['Success']=='Y') {
+                console.warn('dock details below');
+                console.warn(res['result'])
+                $scope.docks = res['result'];
+            }
+        })
 
         $http({
             url:global.url+'/scheduleDetails',

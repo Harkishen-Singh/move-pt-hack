@@ -50,6 +50,8 @@ function add(req,res) {
                 'indenttrain':indenttrain,
                 'indentwagon':indentwagon,
                 'username':username,
+                'dockassigned':'',
+                'completed':'',
                 'srcstncode':srcstncode,
                 'srcdeptime':srcdeptime,
                 'disttravel':disttravel,

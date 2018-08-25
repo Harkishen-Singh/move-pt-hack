@@ -42,7 +42,33 @@ function retriveTags(req, res) {
     })
 }
 
-
+function dockDetails(req, res) {
+    let username = req.body.username;
+    mongo.connect(url, (e, dbo) => {
+        if(e) throw e;
+        let db = dbo.db('pt_move');
+        db.collection('tags').find({"username" : username}).toArray((e, result2) => {
+            if(e) throw e;
+            console.warn('from db below')
+            console.warn(result2)
+            let docks=[]
+            for(i=0;i<result2.length;i++){
+                if((result2[i]['type'] == 'Passenger' || result2[i]['type'] == 'Cargo' || result2[i]['type'] == 'Others')
+                &&
+                    (result2[i]['occupied']<result2[i]['capacity'] || result2[i]['occupied']==undefined )  
+            ){
+                    docks.push(result2[i]);
+                }
+            }
+            console.warn('dock details below')
+            console.warn(docks)
+            isErr=false;
+            output.result = docks;
+            resSend(res);
+            dbo.close();
+        })
+    })
+}
 
 function saveTags(req, res) {
     console.log(req.query.object)
@@ -67,4 +93,5 @@ function saveTags(req, res) {
 module.exports = {
     save : saveTags,
     retrive: retriveTags,
+    dockDetails:dockDetails,
 }

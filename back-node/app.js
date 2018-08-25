@@ -50,6 +50,9 @@ const app = require('express')(),
     app.post('/delSchedule', (req, res) => {
         schedules.delete(req,res);
     })
+    app.post('/dockDetails', (req, res) => {
+        tags.dockDetails(req,res);
+    })
 
 const server = app.listen(port, url, e => {
     if(e) throw e;

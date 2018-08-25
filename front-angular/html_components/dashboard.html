@@ -84,7 +84,7 @@
                      distance : {{d.distance}} m
                 </div>
             </div>
-            <div style="height:33%;border-bottom:4px solid #f5f5f5" >
+            <div style="height:33%;border-bottom:4px solid #f5f5f5;overflow-y: auto;" >
 
                 <div data-ng-if="showLoading2">
                     <div class="loader"></div>
@@ -121,10 +121,20 @@
                 <p><b style="color: blue;">Distance Travelled: </b>  {{sc.disttravel}}</p>
                 <p><b style="color: blue;">Destination Arrival Time :</b> {{sc.destarrivaltime.substr(0,25)}}</p> 
                 <p><b style="color: blue;">Unload Start Time : </b> {{sc.unload_strt_time.substr(0,25)}}</p>
-                <p><b style="color: blue;">Unload End Time :</b> {{sc.unload_end_time.substr(0,25)}}</p><br></div>
-            
+                <p><b style="color: blue;">Unload End Time :</b> {{sc.unload_end_time.substr(0,25)}}</p>
+                <p><b style="color: blue;">Dock Assigned :</b> {{sc.dockassigned}}</p>
+                <p><b style="color: blue;">Completed :</b> {{sc.completed}}</p>
+                <div data-ng-if="sc.dockassigned=='' || sc.dockassigned==null" >
+                   <p> <b style="color: blue;">Assign a Dock to this schedule :</b>  </p>
+                <input list="codes2"  data-ng-model="dockAss">
+                <datalist id="codes2" >
+                    <option  data-ng-repeat="c in docks" value="{{c.name}}">Name : {{c.name}} Type : {{c.type}}</option>
+                </datalist><br><br></div>
+                </div>
 
+                
             </div>
+
 
             <div id="chart">
                 <canvas id="LineChart">
