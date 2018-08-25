@@ -56,7 +56,7 @@ app.controller('asssigneeController', function($scope,$location,$rootScope,$http
     $rootScope.settingsOption = true;
     $scope.addAssignee = function() {
         let data = 'username='+$scope.assignee_form.username+'&password='+$scope.assignee_form.password
-            +'&name='+$scope.assignee_form.name+'&master='+global.username
+            +'&name='+$scope.assignee_form.name+'&master='+global.username+'&task='+$scope.assignee_form.task
         $http(
             {url:global.url+'/assigneeAdd',
             method:'POST',
@@ -163,6 +163,31 @@ app.controller('loginController', function($scope,$location,$rootScope,$http) {
 
 app.controller('dashController', function($scope,$rootScope,$http){
     let finalLenghtsArr = [];
+    $scope.fetchAssignee = function(){
+        console.warn('fetch assignee called')
+        $http(
+            {url:global.url+'/assignee',
+            method:'POST',
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            data:'master='+global.username
+        }
+        )
+        .then(resp=>{
+            res=resp.data;
+            if(res['Success']=='Y'){
+                $scope.assss2 = res['result'];
+                console.warn('assignees below')
+                console.warn(res['result'])
+            }
+            else{
+                console.error('error occurred while requesting for asignee list')
+                $scope.showLoading = false;
+            }
+        })
+    }
+
     $scope.defaultDistances = function() {
         var allTags = [];
         console.warn('defaultDistances called');
@@ -233,6 +258,27 @@ app.controller('dashController', function($scope,$rootScope,$http){
         
     }
     // defaultDistances();
+
+    $scope.assigneeParticular = function(username, consignmentid) {
+        console.warn(username+' '+consignmentid)
+        $http({
+            url:global.url+'/assigneeParticular',
+            method:'POST',
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            data:'master='+global.username+'&username='+username+'&id='+consignmentid
+        })
+        .then(resp => {
+            res = resp.data;
+            if(res['Success']=='Y') {
+                alert('Schedule with consignment ID : '+consignmentid+' has been assigned Dock : '+username)
+            }
+            else{
+                alert('Failed to Assign Dock')
+            }
+        })
+    }
     
     $scope.assignDock = function(name,id) {
         $http({

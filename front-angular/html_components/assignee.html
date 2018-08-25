@@ -36,6 +36,7 @@
             <th>Username</th>
             <th>Password</th>
             <th>Assigned by</th>
+            <th>Task</th>
         </thead>
         <tbody style="width:100%;">
             <tr data-ng-repeat="a in ass" >
@@ -44,6 +45,7 @@
                 <td>{{a.username}}</td>
                 <td>{{a.password}}</td>
                 <td>{{a.master}}</td>
+                <td>{{a.task}}</td>
                 <td>
                     <button class="btn btn-danger" style="padding:2px;font-size:10px;" data-ng-click="removeAss(a.username)" >Remove</button>
                 </td>

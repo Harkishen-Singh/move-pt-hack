@@ -66,6 +66,9 @@ const app = require('express')(),
     app.post('/delAssignee', (req, res) => {
         assignee.remove(req,res);
     })
+    app.post('/assigneeParticular', (req, res) => {
+        schedules.assigneeParticular(req,res);
+    })
 
 const server = app.listen(port, url, e => {
     if(e) throw e;

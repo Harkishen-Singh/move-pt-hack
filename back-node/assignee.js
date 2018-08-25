@@ -28,6 +28,7 @@ function addAss(req, res) {
     let username = req.body.username,
         name=req.body.name,
         master=req.body.master,
+        task=req.body.task,
         password=req.body.password;
 
     mongo.connect(url, (e, dbo) => {
@@ -38,6 +39,7 @@ function addAss(req, res) {
             'name':name,
             'password':password,
             'master':master,
+            'task':task,
         };
 
         db.collection('assignee').insertOne(obj, e => {

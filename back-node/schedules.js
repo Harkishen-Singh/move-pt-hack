@@ -52,6 +52,7 @@ function add(req,res) {
                 'username':username,
                 'dockassigned':'',
                 'completed':'',
+                'assignee':'',
                 'srcstncode':srcstncode,
                 'srcdeptime':srcdeptime,
                 'disttravel':disttravel,
@@ -135,9 +136,31 @@ function details(req, res) {
     } )
 }
 
+function assigneeParticular(req, res) {
+    let consignmentid = req.body.id,
+        username = req.body.username,
+        master= req.body.master;
+    mongo.connect(url, (e, dbo) => {
+        if(e) throw e;
+        console.warn('[SUCCESS] connected to the database');
+        let db = dbo.db('pt_move');
+        
+        db.collection('schedules').updateOne({'consignmentid':consignmentid}, {$set : { 'assignee':username }} ,e => {
+            if(e) throw e;
+            console.warn('added assignee for consignmentid : '+consignmentid);
+            isErr = false;
+            dbo.close()
+            resSend(res);
+        })
+        
+    } )
+    
+}
+
 module.exports = {
     add:add,
     retriveAll:retriveAll,
     details:details,
     delete:deleteSch,
+    assigneeParticular:assigneeParticular,
 }

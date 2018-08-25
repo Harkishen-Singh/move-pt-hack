@@ -34,7 +34,7 @@
         </div>
             <!-- <h3>Details Of the Upcoming Ship</h3> -->
             <div id="display" style="border:2px solid #352c2c;border-radius: 10px;margin-right: 5%;margin-bottom: 20px;padding-top: 10px;padding-bottom: 20px;" 
-            data-ng-repeat="sc in sched" data-ng-click="fetchSchDetails(sc.consignmentid)" >
+            data-ng-repeat="sc in sched" data-ng-click="fetchSchDetails(sc.consignmentid);fetchAssignee();" >
 
                 <h4 style="text-align:center">Schedule {{$index + 1}}</h4><hr/>
                 <p><b >Consignment Id: </b> {{sc.consignmentid}}
@@ -122,8 +122,9 @@
                 <p><b style="color: blue;">Destination Arrival Time :</b> {{sc.destarrivaltime.substr(0,25)}}</p> 
                 <p><b style="color: blue;">Unload Start Time : </b> {{sc.unload_strt_time.substr(0,25)}}</p>
                 <p><b style="color: blue;">Unload End Time :</b> {{sc.unload_end_time.substr(0,25)}}</p>
-                <p><b style="color: blue;">Dock Assigned :</b> {{sc.dockassigned}}</p>
+                <p><b style="color: blue;">Dock :</b> {{sc.dockassigned}}</p>
                 <p><b style="color: blue;">Completed :</b> {{sc.completed}}</p>
+                <p><b style="color: blue;">Assignee :</b> {{sc.assignee}}</p>
                 <div data-ng-if="sc.dockassigned=='' || sc.dockassigned==null" >
                    <p> <b style="color: blue;">Assign a Dock to this schedule :</b>  </p>
                 <!-- <input list="codes2"  data-ng-model="dockAss">
@@ -142,6 +143,13 @@
                 </div>
                 
                 <br><br></div>
+                <div data-ng-if="true" >
+                    Assignees below : <br>
+                    <div data-ng-repeat="a in assss2" style="color:black" data-ng-if="a.username!=sc.assignee" >
+                        Username : {{a.username}} <button data-ng-click="assigneeParticular(a.username,sc.consignmentid)" 
+                        style="background-color:white;border-radius: 5px;" >Add</button> &nbsp; &nbsp;
+                    </div>
+                </div>
                 </div>
 
                 
