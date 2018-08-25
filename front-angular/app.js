@@ -68,12 +68,9 @@ app.controller('asssigneeController', function($scope,$location,$rootScope,$http
         .then(resp=>{
             res=resp.data;
             if(res['Success']=='Y'){
-                console.warn('logged in')
-                global.username = $scope.username;
                 $scope.wrongpass = 'Success';
                 $rootScope.showSidebar = true;
-
-                $location.path('/dashboard');
+                setTimeout($location.path('/assignees'),2000)
             }
             else{
                 $scope.wrongpass = 'Error occurred while Adding assignee'

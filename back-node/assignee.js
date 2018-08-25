@@ -73,7 +73,7 @@ function removeAss(req ,res) {
     mongo.connect(url, (e, dbo) => {
         if(e) throw e;
         let db = dbo.db('pt_move');
-        db.collection('assignee').deleteOne({"master" : master},(e, result2) => {
+        db.collection('assignee').deleteOne({"master" : master,"username":username},(e, result2) => {
             if(e) throw e;
             console.warn('removed assignee : '+username+' by master : '+master);
             isErr=false;
