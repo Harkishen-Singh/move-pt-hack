@@ -4,7 +4,7 @@ var global = {
     url:'https://pt-manage-backend.herokuapp.com',
     username:'test',
     map:'',
-    url2:'http://0.0.0.0:5500'
+    url2:'http://move-recomm.herokuapp.com'
 }
 
 app.config(function($routeProvider,$locationProvider) {
