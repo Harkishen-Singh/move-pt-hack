@@ -1,0 +1,40 @@
+{
+  "name": "move-pt-hack",
+  "version": "1.0.0",
+  "description": "hacks port-train move",
+  "main": "app.js",
+  "scripts": {
+    "test": "npm test && node app.js",
+    "start": "http-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Harkishen-Singh/move-pt-hack.git"
+  },
+  "keywords": [
+    "port",
+    "train",
+    "hackthon",
+    "move"
+  ],
+  "author": "JHM",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Harkishen-Singh/move-pt-hack/issues"
+  },
+  "homepage": "https://github.com/Harkishen-Singh/move-pt-hack#readme",
+  "dependencies": {
+    "angular": "^1.7.3",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "fs": "0.0.1-security",
+    "http-server": "^0.11.1",
+    "interactjs": "^1.3.4",
+    "mongodb": "^3.1.3",
+    "multer": "^1.3.1"
+  },
+  "devDependencies": {
+    "csv": "^3.1.0",
+    "csvtojson": "^2.0.8"
+  }
+}

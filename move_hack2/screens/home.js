@@ -95,7 +95,7 @@ export default class Home extends Component {
                     />
                 </Display>
                 <Display enable={!this.state.showActivity} >
-                <View style={{backgroundColor:'#6AF77C', borderRadius:10,margin:10,padding:10}} > 
+                <View style={{ borderRadius:10,margin:10,padding:10}} > 
                     {/* <Text>
                         Consignment ID :  {'\n'}
                         User Registration Time: {'\n'}
@@ -121,7 +121,7 @@ export default class Home extends Component {
             <ListView
                 dataSource={this.state.datasource}
                 renderRow={ data => 
-                    <View style={{flexDirection:'column',backgroundColor:'#6AF77C', borderRadius:10,margin:10,padding:10}} >
+                    <View style={{backgroundColor:'#FAFEFDss',flexDirection:'column',borderRadius:10,margin:10,padding:10}} >
 
                         {/* <Text style={{color:'#fff', fontWeight:'bold'}} >Phone : {data.phone} </Text>
                         <Text style={{color:'#fff', fontWeight:'bold'}}>IP : {data.ip} </Text>

@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import {Text, Button,TouchableOpacity, View, TextInput, ActivityIndicator,
+import {Text, Button,TouchableOpacity, View, TextInput, ActivityIndicator, ImageBackground,Image,
      StyleSheet,KeyboardAvoidingView} from 'react-native';
 import Display from 'react-native-display';
 
-global.url = 'http://192.168.43.51:5000'
+global.url = 'https://pt-manage-backend.herokuapp.com'
 export default class LoginScreen extends Component {
     constructor(props){
         super(props);
@@ -16,8 +16,13 @@ export default class LoginScreen extends Component {
         return(
             <View  style={[styles.container,{backgroundColor:'white', textAlign:'center', flexDirection:'column', flex:1}]} >
             <KeyboardAvoidingView behavior='padding'>
-                <View style={{flexDirection:'column', marginTop:200, marginLeft:80}} >
-                    <View style={{flexDirection:'row', justifyContent:'center'}} >
+            
+                <View style={{flexDirection:'column', marginTop:150}} >
+                <Image
+                source={require('../download.png')} 
+                style={{width:100,height:100,resizeMode:'contain',alignSelf:'center'}}
+            />
+                    <View style={{flexDirection:'row', justifyContent:'center',marginTop:50, marginLeft:80}} >
                         <Text style={[styles.container,  {color:'black', flex:1}]}>
                             Username : 
                         </Text>
@@ -31,7 +36,7 @@ export default class LoginScreen extends Component {
                         />
 
                     </View>
-                    <View style={{flexDirection:'row', justifyContent:'center', marginTop:20}}>
+                    <View style={{flexDirection:'row', justifyContent:'center', marginTop:20, marginLeft:80}}>
                         <Text style={[styles.container,  {color:'black', flex:1}]}>
                         Password : 
                         </Text>
