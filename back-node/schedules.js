@@ -160,7 +160,13 @@ function assigneeParticular(req, res) {
 function assigneeWorks(req, res) {
     let username = req.body.username,
         master=req.body.master;
-    db.collection('schedules').find({'username':master,'assignee':username}).toArray((e, result) => {
+   
+    mongo.connect(url, (e, dbo) => {
+        if(e) throw e;
+        console.warn('[SUCCESS] connected to the database');
+        let db = dbo.db('pt_move');
+        
+        db.collection('schedules').find({'username':master,'assignee':username}).toArray((e, result) => {
             if(e) throw e;
             console.warn('Successfully assigneeWorks : '+username);
             isErr = false;
@@ -175,6 +181,8 @@ function assigneeWorks(req, res) {
             dbo.close()
             resSend(res);
         })
+        
+    } )
     
 }
 

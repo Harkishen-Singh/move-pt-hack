@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Text, Button,TouchableOpacity, View, TextInput, StyleSheet,KeyboardAvoidingView} from 'react-native';
+import {Text, Button,TouchableOpacity, View, TextInput, ActivityIndicator,
+     StyleSheet,KeyboardAvoidingView} from 'react-native';
 import Display from 'react-native-display';
 
 global.url = 'http://192.168.43.51:5000'
@@ -53,6 +54,12 @@ export default class LoginScreen extends Component {
                 >
                     <Text style={{color:'#fff'}} >Submit</Text>
                 </TouchableOpacity>
+                <Display enable={this.state.showActivity} >
+                    <ActivityIndicator 
+                    style={{marginTop:30}}
+                        size='small'
+                    />
+                </Display>
                 <Display enable={this.state.showMess} >
                     <Text style={{textAlign:'center', color:'green', fontSize:20,fontWeight:'bold',marginTop:10}}  >
                         {this.state.mess}
@@ -66,6 +73,7 @@ export default class LoginScreen extends Component {
 
     checkLogin = () => {
         console.warn('reached checklogin' + this.state.username+this.state.password)
+        this.setState({showActivity:true})
         fetch(global.url +  '/assigneeLogin' , {
             method:'POST',
             headers: {
@@ -80,7 +88,7 @@ export default class LoginScreen extends Component {
         .then(resData => resData.json())
         .then(res => {
             if(res['Success']==='Y'){
-                this.setState({showMess:true,mess:'Success'})
+                this.setState({showMess:true,mess:'Success', showActivity:false})
                 global.name= res['result']['name'];
                 console.warn('name is '+global.name)
                 global.username = res['result']['username']
@@ -88,7 +96,7 @@ export default class LoginScreen extends Component {
                 this.props.navigation.navigate('Home')
             }
             else{
-                this.setState({showMess:true,mess:'Login Failed. Username or Password Wrong'})
+                this.setState({showMess:true,mess:'Login Failed. Username or Password Wrong',showActivity:false})
             }
 
             console.warn(res)
