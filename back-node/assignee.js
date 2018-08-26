@@ -92,7 +92,15 @@ function login(req, res) {
             if(e) throw e;
             console.warn('login check below')
             console.warn(result2)
-            isErr=false;
+            if(result2==null ){
+                isErr=true;
+            }
+            else{
+                isErr=false;
+                console.warn(result2)
+            output.result = result2;
+            }
+            
             resSend(res);
             dbo.close();
         })

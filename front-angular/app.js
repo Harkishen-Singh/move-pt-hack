@@ -1,7 +1,7 @@
 var app = angular.module('pt_management', ['ngRoute']);
 
 var global = {
-    url:'http://127.0.0.1:5000',
+    url:'https://pt-manage-backend.herokuapp.com',
     username:'test',
     map:'',
 }

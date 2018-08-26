@@ -148,7 +148,7 @@
                 
                 <br><br></div>
                 <div data-ng-if="true" >
-                    Assignees below : <br>
+                   <span style="color:blue;" > Assignees available :</span> <br>
                     <div data-ng-repeat="a in assss2" style="color:black" data-ng-if="a.username!=sc.assignee" >
                         Username : {{a.username}} <button data-ng-click="assigneeParticular(a.username,sc.consignmentid)" 
                         style="background-color:white;border-radius: 5px;" >Add</button> &nbsp; &nbsp;

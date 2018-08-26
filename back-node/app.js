@@ -70,6 +70,16 @@ const app = require('express')(),
         console.warn('request for login')
         assignee.login(req,res);
     })
+    app.post('/assigneeWorks', (req, res) => {
+        console.warn('request for particular work')
+        schedules.assigneeWorks(req,res);
+    })
+    app.post('/assigneeParticular', (req, res) => {
+        schedules.assigneeParticular(req,res);
+    })
+    app.post('/workComplete', (req, res) => {
+        schedules.complete(req,res);
+    })
 
 
 const server = app.listen(port, url, e => {

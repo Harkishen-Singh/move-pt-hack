@@ -157,10 +157,60 @@ function assigneeParticular(req, res) {
     
 }
 
+function assigneeWorks(req, res) {
+    let username = req.body.username,
+        master=req.body.master;
+   
+    mongo.connect(url, (e, dbo) => {
+        if(e) throw e;
+        console.warn('[SUCCESS] connected to the database');
+        let db = dbo.db('pt_move');
+        
+        db.collection('schedules').find({'username':master,'assignee':username}).toArray((e, result) => {
+            if(e) throw e;
+            console.warn('Successfully assigneeWorks : '+username);
+            isErr = false;
+            console.warn(result)
+            let work = []
+            for(i=0;i<result.length; i++)
+                if(result[i]['assignee']==username)
+                    work.push(result[i])
+            
+
+            output.result = work;
+            dbo.close()
+            resSend(res);
+        })
+        
+    } )
+    
+}
+function complete(req, res) {
+    let consignmentid = req.body.id,
+        assignee = req.body.assignee;
+
+    mongo.connect(url, (e, dbo) => {
+        if(e) throw e;
+        console.warn('[SUCCESS] connected to the database');
+        let db = dbo.db('pt_move');
+        
+        db.collection('schedules').updateOne({'consignmentid':consignmentid, 'assignee':assignee}, {$set : { 'completed':'Yes' }} ,e => {
+            if(e) throw e;
+            console.warn('completed wprk assignee for consignmentid : '+consignmentid);
+            isErr = false;
+            dbo.close()
+            resSend(res);
+        })
+        
+    } )
+}
+
 module.exports = {
     add:add,
     retriveAll:retriveAll,
     details:details,
     delete:deleteSch,
     assigneeParticular:assigneeParticular,
+    assigneeWorks:assigneeWorks,
+    complete:complete,
 }
