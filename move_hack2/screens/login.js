@@ -1,17 +1,20 @@
 import React, {Component} from 'react';
-import {Text, Button,TouchableOpacity, View, TextInput, StyleSheet} from 'react-native';
+import {Text, Button,TouchableOpacity, View, TextInput, StyleSheet,KeyboardAvoidingView} from 'react-native';
+import Display from 'react-native-display';
 
-global.url = 'http://0.0.0.0:5000'
+global.url = 'http://192.168.43.51:5000'
 export default class LoginScreen extends Component {
     constructor(props){
         super(props);
         this.state={
-            username:'', password:'',
+            username:'', password:'',showMess:false,mess:'',
         }
     }
     render(){
+        // const {navigate} = this.props.navigation
         return(
             <View  style={[styles.container,{backgroundColor:'white', textAlign:'center', flexDirection:'column', flex:1}]} >
+            <KeyboardAvoidingView behavior='padding'>
                 <View style={{flexDirection:'column', marginTop:200, marginLeft:80}} >
                     <View style={{flexDirection:'row', justifyContent:'center'}} >
                         <Text style={[styles.container,  {color:'black', flex:1}]}>
@@ -45,20 +48,25 @@ export default class LoginScreen extends Component {
                 </View>
                 
                 
-                <TouchableOpacity style={{alignSelf:'center', marginTop:80 , backgroundColor:'blue',borderRadius:4, padding:10}}
+                <TouchableOpacity style={{alignSelf:'center', marginTop:60 , backgroundColor:'blue',borderRadius:4, padding:10}}
                     onPress={this.checkLogin}
                 >
                     <Text style={{color:'#fff'}} >Submit</Text>
                 </TouchableOpacity>
-
+                <Display enable={this.state.showMess} >
+                    <Text style={{textAlign:'center', color:'green', fontSize:20,fontWeight:'bold',marginTop:10}}  >
+                        {this.state.mess}
+                    </Text>
+                </Display>
                 
+                </KeyboardAvoidingView>
             </View>
         );
     }
 
     checkLogin = () => {
         console.warn('reached checklogin' + this.state.username+this.state.password)
-        fetch('http://192.168.43.51:5000/assigneeLogin' , {
+        fetch(global.url +  '/assigneeLogin' , {
             method:'POST',
             headers: {
                 'Accept':'application/json',
@@ -71,6 +79,18 @@ export default class LoginScreen extends Component {
         })
         .then(resData => resData.json())
         .then(res => {
+            if(res['Success']==='Y'){
+                this.setState({showMess:true,mess:'Success'})
+                global.name= res['result']['name'];
+                console.warn('name is '+global.name)
+                global.username = res['result']['username']
+                global.master =  res['result']['master']
+                this.props.navigation.navigate('Home')
+            }
+            else{
+                this.setState({showMess:true,mess:'Login Failed. Username or Password Wrong'})
+            }
+
             console.warn(res)
         })
         .catch(e => {

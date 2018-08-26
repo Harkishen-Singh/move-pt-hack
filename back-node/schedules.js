@@ -157,10 +157,32 @@ function assigneeParticular(req, res) {
     
 }
 
+function assigneeWorks(req, res) {
+    let username = req.body.username,
+        master=req.body.master;
+    db.collection('schedules').find({'username':master,'assignee':username}).toArray((e, result) => {
+            if(e) throw e;
+            console.warn('Successfully assigneeWorks : '+username);
+            isErr = false;
+            console.warn(result)
+            let work = []
+            for(i=0;i<result.length; i++)
+                if(result[i]['assignee']==username)
+                    work.push(result[i])
+            
+
+            output.result = work;
+            dbo.close()
+            resSend(res);
+        })
+    
+}
+
 module.exports = {
     add:add,
     retriveAll:retriveAll,
     details:details,
     delete:deleteSch,
     assigneeParticular:assigneeParticular,
+    assigneeWorks:assigneeWorks,
 }

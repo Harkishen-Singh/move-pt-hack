@@ -91,8 +91,14 @@ function login(req, res) {
         db.collection('assignee').findOne({"username" : username,"password":password},(e, result2) => {
             if(e) throw e;
             console.warn('login check below')
+            if(result2.length!=0){
+                isErr=false;
+            }
+            else{
+                isErr=true;
+            }
             console.warn(result2)
-            isErr=false;
+            output.result = result2;
             resSend(res);
             dbo.close();
         })
