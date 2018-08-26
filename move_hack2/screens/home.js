@@ -84,7 +84,8 @@ export default class Home extends Component {
     render(){
         const {navigate} = this.props.navigation
         return(
-            <View  style={[styles.container,{backgroundColor:'white', textAlign:'center', flexDirection:'column', flex:1}]}>
+            <View  style={[styles.container,{backgroundColor:'white', textAlign:'center', flexDirection:'column', flex:1,marginBottom:5}]}>
+            <ScrollView>
                 <Text style={{textAlign:'center',marginTop:30,fontWeight:'bold'}} >Welcome {global.name}</Text>
                 <Text style={{textAlign:'center',marginTop:5,fontWeight:'bold'}}>Task Assigned : {global.task} </Text>
                 <Display enable={this.state.showActivity}>
@@ -94,7 +95,7 @@ export default class Home extends Component {
                     />
                 </Display>
                 <Display enable={!this.state.showActivity} >
-                <View style={{backgroundColor:'green', borderRadius:10,margin:10,padding:10}} > 
+                <View style={{backgroundColor:'#6AF77C', borderRadius:10,margin:10,padding:10}} > 
                     {/* <Text>
                         Consignment ID :  {'\n'}
                         User Registration Time: {'\n'}
@@ -120,7 +121,6 @@ export default class Home extends Component {
             <ListView
                 dataSource={this.state.datasource}
                 renderRow={ data => 
-                    <ScrollView>
                     <View style={{flexDirection:'column',backgroundColor:'#6AF77C', borderRadius:10,margin:10,padding:10}} >
 
                         {/* <Text style={{color:'#fff', fontWeight:'bold'}} >Phone : {data.phone} </Text>
@@ -161,12 +161,13 @@ export default class Home extends Component {
                            <Text style={{color:'black'}} >Completed</Text> 
                         </TouchableOpacity>
                         
-                    </View></ScrollView>
+                    </View>
                  }
                 /></ScrollView>
             
                     
                 </View></Display>
+                </ScrollView>
             </View>
         );
     }
