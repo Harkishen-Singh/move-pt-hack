@@ -10,7 +10,7 @@ export default class App extends React.Component {
     );
   }
 }
-
+console.disableYellowBox=true;
 const styles = StyleSheet.create({
   container: {
     flex: 1,

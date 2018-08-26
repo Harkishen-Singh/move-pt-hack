@@ -77,6 +77,9 @@ const app = require('express')(),
     app.post('/assigneeParticular', (req, res) => {
         schedules.assigneeParticular(req,res);
     })
+    app.post('/workComplete', (req, res) => {
+        schedules.complete(req,res);
+    })
 
 
 const server = app.listen(port, url, e => {

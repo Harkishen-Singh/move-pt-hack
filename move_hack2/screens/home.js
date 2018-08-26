@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, Button,TouchableOpacity, View, TextInput, StyleSheet,ActivityIndicator,
+import {Text, Button,TouchableOpacity, View, TextInput, StyleSheet,ActivityIndicator,ToastAndroid,
     ListView, ScrollView,
     KeyboardAvoidingView} from 'react-native';
 import Display from 'react-native-display';
@@ -44,11 +44,49 @@ export default class Home extends Component {
              console.error(e)
         })
     }
+    completeCall = (id, ass) => {
+        console.warn('id is '+id + ' and ass : '+ass)
+        fetch(global.url + '/workComplete' , {
+            method:'POST',
+            headers: {
+                'Accept':'application/json',
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify({
+                'id':id,
+                'assignee':ass,
+            }),
+        })
+        .then(resData => resData.json())
+        .then(res => {
+            if(res['Success']=='Y'){
+                ToastAndroid.showWithGravity(
+                    'Saved Completed Task for consignment ID : '+id,
+                    ToastAndroid.LONG,
+                    ToastAndroid.CENTER
+                )
+            }
+            else{
+                ToastAndroid.showWithGravity(
+                    'Error saving for consignment ID : '+id,
+                    ToastAndroid.LONG,
+                    ToastAndroid.CENTER
+                )
+            }
+
+            console.warn(res)
+        })
+        .catch(e => {
+             alert('Network Request failed')
+             console.error(e)
+        })
+    }
     render(){
         const {navigate} = this.props.navigation
         return(
             <View  style={[styles.container,{backgroundColor:'white', textAlign:'center', flexDirection:'column', flex:1}]}>
                 <Text style={{textAlign:'center',marginTop:30,fontWeight:'bold'}} >Welcome {global.name}</Text>
+                <Text style={{textAlign:'center',marginTop:5,fontWeight:'bold'}}>Task Assigned : {global.task} </Text>
                 <Display enable={this.state.showActivity}>
                     <ActivityIndicator
                         style={{marginTop:200}} 
@@ -82,7 +120,8 @@ export default class Home extends Component {
             <ListView
                 dataSource={this.state.datasource}
                 renderRow={ data => 
-                    <View style={{flexDirection:'column',backgroundColor:'#F4FCF5', borderRadius:10,margin:10,padding:10}} >
+                    <ScrollView>
+                    <View style={{flexDirection:'column',backgroundColor:'#6AF77C', borderRadius:10,margin:10,padding:10}} >
 
                         {/* <Text style={{color:'#fff', fontWeight:'bold'}} >Phone : {data.phone} </Text>
                         <Text style={{color:'#fff', fontWeight:'bold'}}>IP : {data.ip} </Text>
@@ -92,32 +131,40 @@ export default class Home extends Component {
                         <Text style={{color:'#fff', fontWeight:'bold'}}>Message : {data.message} </Text>
                         <Text style={{color:'#fff', fontWeight:'bold'}}>Email : {data.email} </Text>
                         <Text>{'\n'} </Text> */}
-                        <Text>
-                        Consignment ID :  data.consignmentid {'\n'}
-                        User Registration Time: {data.userregtime}{'\n'}
-                        Indent Commodity: {data.indentcomm}{'\n'}
-                        Indent Number of Wagons: {data.indentwagon}{'\n'}
-                        Username : {data.usernmae} {'\n'}
-                        Source Station Code: {data.srcstncode}{'\n'}
-                        Source Departure Time: {data.srcdeptime}{'\n'}
+                    <Text>
+                    <Text style={{fontWeight:'bold'}} >Consignment ID : </Text> {data.consignmentid} {'\n'}
+                    <Text style={{fontWeight:'bold'}} >User Registration Time:</Text> {data.userregtime}{'\n'}
+                    <Text style={{fontWeight:'bold'}} >Indent Commodity:</Text> {data.indentcomm}{'\n'}
+                    <Text style={{fontWeight:'bold'}} >Indent Number of Wagons:</Text> {data.indentwagon}{'\n'}
+                    <Text style={{fontWeight:'bold'}} >Username :</Text> {data.usernmae} {'\n'}
+                    <Text style={{fontWeight:'bold'}} >Source Station Code:</Text> {data.srcstncode}{'\n'}
+                    <Text style={{fontWeight:'bold'}} >Source Departure Time:</Text> {data.srcdeptime}{'\n'}
 
-                        Distance Travelled: {data.disttravel} {'\n'}
-                         Destination Arrival Time : {data.destarrivaltime}{'\n'}
+                        <Text style={{fontWeight:'bold'}} >Distance Travelled:</Text> {data.disttravel} {'\n'}
+                        <Text style={{fontWeight:'bold'}} >Destination Arrival Time :</Text> {data.destarrivaltime}{'\n'}
 
-                        Destination Station Code : {data.deststncode}{'\n'}
+                        <Text style={{fontWeight:'bold'}} >Destination Station Code :</Text> {data.deststncode}{'\n'}
 
-                        Unload Start Time : {data.unload_strt_time}{'\n'}
+                        <Text style={{fontWeight:'bold'}} >Unload Start Time :</Text> {data.unload_strt_time}{'\n'}
 
-                        Unload End Time : {data.unload_end_time}{'\n'}
+                        <Text style={{fontWeight:'bold'}} >Unload End Time : </Text>{data.unload_end_time}{'\n'}
 
-                        Dock Assigned : {data.dockassigned}{'\n'}
+                        <Text style={{fontWeight:'bold'}} >Dock Assigned :</Text> {data.dockassigned}{'\n'}
 
-                        Completed : {data.completed}{'\n'}{'\n'}
+                        <Text style={{fontWeight:'bold'}} >Completed :</Text> {data.completed}{'\n'}{'\n'}
+                        
                     </Text>
-                    </View>
+                    <TouchableOpacity style={{backgroundColor:'yellow', padding:10, position:'absolute',
+                         right:5,bottom:5, borderRadius:6}} 
+                         onPress={()=>this.completeCall(data.consignmentid, data.assignee)}
+                         >
+                           <Text style={{color:'black'}} >Completed</Text> 
+                        </TouchableOpacity>
+                        
+                    </View></ScrollView>
                  }
-                />
-            </ScrollView>
+                /></ScrollView>
+            
                     
                 </View></Display>
             </View>

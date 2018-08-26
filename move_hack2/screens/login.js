@@ -93,6 +93,7 @@ export default class LoginScreen extends Component {
                 console.warn('name is '+global.name)
                 global.username = res['result']['username']
                 global.master =  res['result']['master']
+                global.task = res['result']['task']
                 this.props.navigation.navigate('Home')
             }
             else{

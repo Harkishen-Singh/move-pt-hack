@@ -185,6 +185,25 @@ function assigneeWorks(req, res) {
     } )
     
 }
+function complete(req, res) {
+    let consignmentid = req.body.id,
+        assignee = req.body.assignee;
+
+    mongo.connect(url, (e, dbo) => {
+        if(e) throw e;
+        console.warn('[SUCCESS] connected to the database');
+        let db = dbo.db('pt_move');
+        
+        db.collection('schedules').updateOne({'consignmentid':consignmentid, 'assignee':assignee}, {$set : { 'completed':'Yes' }} ,e => {
+            if(e) throw e;
+            console.warn('completed wprk assignee for consignmentid : '+consignmentid);
+            isErr = false;
+            dbo.close()
+            resSend(res);
+        })
+        
+    } )
+}
 
 module.exports = {
     add:add,
@@ -193,4 +212,5 @@ module.exports = {
     delete:deleteSch,
     assigneeParticular:assigneeParticular,
     assigneeWorks:assigneeWorks,
+    complete:complete,
 }
