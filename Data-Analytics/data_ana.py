@@ -66,23 +66,22 @@ def date_average(src,dept):
                 total_hours.append(0)
         avg_time = round(sum(total_hours)/len(total_hours),2)
         avg_wagon = round(sum(wagonp)/len(wagonp),2)
-        avg.append("JNPT" , arrDiff[i] , avg_time , avg_wagon)
+        avg.append(["JNPT", arrDiff[i] , str(avg_time), str(avg_wagon)])
 
-    with open('date_details.csv', 'w') as file:
-            file.write(str(avg))
-            file.write("\n")
-    
+    with open('date_details.csv', 'w') as csvFile:
+        writer = csv.writer(csvFile)
+        writer.writerows(avg)
 
     fi = open('date_details.csv', 'r')
     f = csv.reader(fi)
     for i in f:
-        if(i[0] == 'JNPT' and i[1] == dep):
-            print("Average Time:%d" %(i[2]))
-            print("Average Wagons%d" %(i[3]))
+        if(i[0] == 'JNPT' and i[1] == dept):
+            # print("Average Time:%s" %(i[2]))
+            # print("Average Wagons:%s" %(i[3]))
+            return (i[2],i[3])
 
 
 
-date_average(src,dept)
 
 
 
