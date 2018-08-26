@@ -4,6 +4,7 @@ var global = {
     url:'https://pt-manage-backend.herokuapp.com',
     username:'test',
     map:'',
+    url2:'http://0.0.0.0:5500'
 }
 
 app.config(function($routeProvider,$locationProvider) {
@@ -339,9 +340,25 @@ app.controller('dashController', function($scope,$rootScope,$http){
         console.warn('assigne called')
 
     }
-    $scope.fetchSchDetails = function(id) {
+    $scope.fetchSchDetails = function(id, src, dest) {
         console.warn('fetchSchDetails called id:'+id)
         $scope.showLoading2 = true;
+        $scope.showRecomm = false;
+        $http({
+            url:global.url2+'/getRecommendation',
+            method:'POST',
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            data:'srccode='+src+'&destcode='+dest
+        })
+        .then(resp => {
+            res = resp.data;
+            console.warn('recomm below')
+            console.warn(res)
+            $scope.showRecomm=true;
+            $scope.recommendation = res;
+        })
 
         $http({
             url:global.url+'/dockDetails',

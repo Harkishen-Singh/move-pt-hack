@@ -35,7 +35,7 @@
             <!-- <h3>Details Of the Upcoming Ship</h3> -->
             <div id="display" style="border:2px solid #352c2c;background-color: #FAFEFD;
             border-radius: 10px;margin-right: 5%;margin-bottom: 20px;padding-top: 10px;padding-bottom: 20px;" 
-            data-ng-repeat="sc in sched" data-ng-click="fetchSchDetails(sc.consignmentid);fetchAssignee();" >
+            data-ng-repeat="sc in sched" data-ng-click="fetchSchDetails(sc.consignmentid, sc.srcstncode, sc.deststncode);fetchAssignee();" >
             <button data-ng-if="sc.type=='incoming' || sc.type=='' || sc.type==null" 
             style="background-color:yellow;padding:5px;color:black;border-radius: 5px;display: inline;margin-left: 10px;" 
             >Incoming</button>  
@@ -86,7 +86,11 @@
                     {{d.station1}} <sup>( {{d.station1Type}} )</sup> m 
                     to {{d.station2}} <sup>( {{d.station2Type}} ) </sup> m 
                      distance : {{d.distance}} m
+                </div  >
+                <div data-ng-if="showRecomm">
+                    Expected Time : <b> {{recommendation}} hours  </b>
                 </div>
+                
             </div>
             <div style="height:33%;border-bottom:4px solid #f5f5f5;overflow-y: auto;" >
 
