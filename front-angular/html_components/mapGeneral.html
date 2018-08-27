@@ -118,7 +118,9 @@ animation: spin 2s linear infinite;
 // }
 // } -->
 Tagser=[];
-tagger = {
+
+function tagsFunction(username,name,type,capacity,marginLeft,marginTop) {
+    tagger = {
         'username':'',
         'name':'',
         'type':'',
@@ -127,7 +129,6 @@ tagger = {
         'marginLeft':'',
         'marginTop':'',
     };
-function tagsFunction(username,name,type,capacity,marginLeft,marginTop) {
     tagger.username = username
     tagger.name = name
     tagger.type = type
