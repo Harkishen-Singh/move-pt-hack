@@ -4,7 +4,7 @@ var global = {
     url:'https://pt-manage-backend.herokuapp.com',
     username:'test',
     map:'',
-    map_url:'',
+    map_url:'./images_of_ports/nhavasheva.png',
     url2:'https://move-recomm.herokuapp.com/'
 }
 
