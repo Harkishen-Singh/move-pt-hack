@@ -5,10 +5,10 @@
     <form action="" style="border:2px solid pink;padding: 20px;margin-left: 20%;margin-right: 20%;
     border-radius: 20px;" name="loginForm" data-ng-submit="checkLogin(loginForm.$valid)" >
         Username : <input type="text" style="background-color: #F6FFFF;border-radius: 10px;text-align: center;"
-            ng-model="username"
+            ng-model="username" required
         /><br/><br/>
         Password : <input type="password" style="background-color: #F6FFFF;border-radius: 10px;text-align: center;" 
-        data-ng-model="password"
+        data-ng-model="password" required
         /><br/><br/>
         <button type="submit" class="btn btn-primary" data-ng-click="" >Submit</button> &nbsp; 
         <a href="/?#!/signUp"><button class="btn btn-primary" >Sign Up</button></a> 

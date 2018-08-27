@@ -13,25 +13,25 @@
             ng-model="schedule_form.consignmentid" required
         /><br/><br/>
         User Indent Reg. Time : <input type="datetime-local" style="background-color: #F6FFFF;border-radius: 10px;text-align: center;margin-top: 20px;"
-            ng-model="schedule_form.userregtime" 
+            ng-model="schedule_form.userregtime" required
         /><br/><br/>
 
-        Indent Commodity :<select ng-model="schedule_form.indentcomm"  style="background-color:white;border-radius:5px;">
+        Indent Commodity :<select ng-model="schedule_form.indentcomm"  style="background-color:white;border-radius:5px;" required>
             <option value="CONT" style="background-color:white;border-radius:5px;" >CONT</option>
             <option value="EOIL" style="background-color:white;border-radius:5px;">EOIL</option>
             <option value="PASSENGER" style="background-color:white;border-radius:5px;">PASSENGER</option>
             </select><br/><br/>
-        Indent Type Of Train : <select ng-model="schedule_form.indenttrain"  style="background-color:white;border-radius:5px;">
+        Indent Type Of Train : <select ng-model="schedule_form.indenttrain"  style="background-color:white;border-radius:5px;" required>
             <option value="CONT" style="background-color:white;border-radius:5px;">CONT</option>
             <option value="TANK" style="background-color:white;border-radius:5px;">TANK</option>
             <option value="PASSENGER" style="background-color:white;border-radius:5px;">PASSENGER</option>
 
             </select><br/><br/>
         Indent No. Of Wagons : <input type="number" style="background-color: #F6FFFF;border-radius: 10px;text-align: center;margin-top: 20px;"
-            ng-model="schedule_form.indentwagon" 
+            ng-model="schedule_form.indentwagon" required
         /><br/><br/>
         Source Station Code : 
-        <input list="codes2"  data-ng-model="schedule_form.srcstncode">
+        <input list="codes2"  data-ng-model="schedule_form.srcstncode" required>
         <datalist id="codes2" >
             <option  data-ng-repeat="c in codes" value="{{c}}">{{c}}</option>
         </datalist><br><br>
@@ -39,13 +39,13 @@
             ng-model="schedule_form.srcstncode" 
         /><br/><br/> -->
         Source Departure Time : <input type="datetime-local" style="background-color: #F6FFFF;border-radius: 10px;text-align: center;margin-top: 20px;"
-            ng-model="schedule_form.srcdeptime" 
+            ng-model="schedule_form.srcdeptime" required
         /><br/><br/>
         Distance Travelled : <input type="number" style="background-color: #F6FFFF;border-radius: 10px;text-align: center;" 
-        data-ng-model="schedule_form.disttravel"
+        data-ng-model="schedule_form.disttravel" required
         /><br/><br/>
         Dest. Station Code : 
-        <input list="codes2"  data-ng-model="schedule_form.deststncode">
+        <input list="codes2"  data-ng-model="schedule_form.deststncode" required>
         <datalist id="codes2" >
             <option  data-ng-repeat="c in codes" value="{{c}}">{{c}}</option>
         </datalist><br><br>

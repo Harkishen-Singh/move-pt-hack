@@ -6,18 +6,19 @@
         <h3>Administrator Port SignUp </h3><hr>
 
         Username : <input type="text" style="background-color: #F6FFFF;border-radius: 10px;text-align: center;margin-top: 20px;"
-            ng-model="signup.username" 
+            ng-model="signup.username" required
         /><br/><br/>
         Password : <input type="password" style="background-color: #F6FFFF;border-radius: 10px;text-align: center;" 
-        data-ng-model="signup.password"
+        data-ng-model="signup.password" required
         /><br/><br/>
         Email : <input type="email" style="background-color: #F6FFFF;border-radius: 10px;text-align: center;" 
-        data-ng-model="signup.email"
+        data-ng-model="signup.email" required
         /><br/><br/>
         Mobile : <input type="number" style="background-color: #F6FFFF;border-radius: 10px;text-align: center;" 
-        data-ng-model="signup.mobile"
+        data-ng-model="signup.mobile" required
         /><br/><br/>
         
+        <b>Select Port:</b>
         <select class="form-control" id="port" data-ng-model="signup.port" style="width: 300px;margin-left: 30%;" >
             <option value="Chenni port" >Chenni port</option>
             <option value="Jawaharlal Nehru Port,Mumbai">Jawaharlal Nehru Port,Mumbai</option>
