@@ -37,7 +37,7 @@
         <header data-ng-include="'html_components/header.html'" ></header>
         <aside data-ng-include="'html_components/sidebar.html'" data-ng-show="showSidebar" ></aside>
         <div data-ng-if="showSidebar" >
-                <main data-ng-view id='mainContent' style="margin-left: 230px;"></main>
+                <main data-ng-view id='mainContent' style="margin-left: 230px; margin-top:20px;"></main>
         </div>
         <div  data-ng-if="!showSidebar" >
                 <main data-ng-view id='mainContent' ></main>
