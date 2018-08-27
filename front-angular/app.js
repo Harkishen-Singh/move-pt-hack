@@ -4,6 +4,7 @@ var global = {
     url:'https://pt-manage-backend.herokuapp.com',
     username:'test',
     map:'',
+    map_url:'',
     url2:'https://move-recomm.herokuapp.com/'
 }
 
@@ -156,6 +157,13 @@ app.controller('loginController', function($scope,$location,$rootScope,$http) {
         .then(resp=>{
             res=resp.data;
             if(res['Success']=='Y'){
+                console.warn(res['result'])
+                global.map = res['result']['port']
+                console.warn('login port is '+global.map)
+                if(global.map == 'Jawaharlal Nehru Port,Mumbai')
+                    global.map_url = './images_of_ports/nhavasheva.png'
+                $scope.showLoader=false;
+
                 $scope.showLoader=false;
                 $location.path('/dashboard');
                 console.warn('logged in')
@@ -483,6 +491,7 @@ app.controller('mapGenController', function($scope,$rootScope,$http){
     console.warn('mapGenController called')
     $rootScope.showSidebar = true;
     $scope.showLoading = true;
+    $scope.map_url = global.map_url;
     $scope.initialise = function(){
         console.warn('init called');
         $http({
@@ -611,6 +620,9 @@ app.controller('signUpcontroller', function($scope, $location, $http,$rootScope)
             console.warn(res)
             if(res['Success']=='Y'){
                 $scope.resultShow = 'Successfully signed up';
+              
+                setTimeout($location.path('/login'),
+                2000);
             }
             else
                 $scope.resultShow = 'Sorry, some error occured';
