@@ -78,21 +78,47 @@ animation: spin 2s linear infinite;
     <!-- <img src="../cropped/pradeep.png" alt="" style="" > -->
     
     <script>
-
-class Tagshandler {
-constructor(){
-    this.Tags = [];
-    this.tag = {
-        'username':'',
-        'name':'',
-        'type':'',
-        'capacity':0,
-        'marginLeft':'',
-        'marginTop':'',
-    };
-}
-pushTag(username,name,type,capacity,marginLeft,marginTop){
-    this.tag = {
+// <!-- 
+// class Tagshandler {
+// constructor(){
+//     this.Tags = [];
+//     this.tag = {
+//         'username':'',
+//         'name':'',
+//         'type':'',
+//         'capacity':0,
+//         'marginLeft':'',
+//         'marginTop':'',
+//     };
+// }
+// pushTag(username,name,type,capacity,marginLeft,marginTop){
+//     this.tag = {
+//         'username':'',
+//         'name':'',
+//         'type':'',
+//         'capacity':0,
+//         'occupied':0,
+//         'marginLeft':'',
+//         'marginTop':'',
+//     };
+//     this.tag.username = username
+//     this.tag.name = name
+//     this.tag.type = type
+//     this.tag.capacity = capacity
+//     this.tag.marginLeft=marginLeft
+//     this.tag.marginTop=marginTop
+//     this.Tags.push(this.tag);
+//     this.displayAll();
+// }
+// displayAll(){
+//     console.warn(this.Tags);
+// }
+// throwObject(){
+//     return this.Tags;
+// }
+// } -->
+Tagser=[];
+tagger = {
         'username':'',
         'name':'',
         'type':'',
@@ -101,25 +127,20 @@ pushTag(username,name,type,capacity,marginLeft,marginTop){
         'marginLeft':'',
         'marginTop':'',
     };
-    this.tag.username = username
-    this.tag.name = name
-    this.tag.type = type
-    this.tag.capacity = capacity
-    this.tag.marginLeft=marginLeft
-    this.tag.marginTop=marginTop
-    this.Tags.push(this.tag);
-    this.displayAll();
+function tagsFunction(username,name,type,capacity,marginLeft,marginTop) {
+    tagger.username = username
+    tagger.name = name
+    tagger.type = type
+    tagger.capacity = capacity
+    tagger.marginLeft=marginLeft
+    tagger.marginTop=marginTop
+    Tagser.push(tagger);
+    console.warn(Tagser)
 }
-displayAll(){
-    console.warn(this.Tags);
-}
-throwObject(){
-    return this.Tags;
-}
-}
-var obj = new Tagshandler();
-    
+
+// let obj = new Tagshandler();
         $(document).ready(() => {
+            
             $('#cancel').hide();
             $('#addDock').hide();
             $('#showTag').hide();
@@ -160,8 +181,8 @@ var obj = new Tagshandler();
             $('#done').hide();
             $('#done').click(()=>{
                 $.ajax({
-                    url:'http://0.0.0.0:5000/addTags2',
-                    data: 'object=' +JSON.stringify(obj.throwObject())  ,
+                    url:'https://pt-manage-backend.herokuapp.com/addTags2',
+                    data: 'object=' +JSON.stringify(Tagser)  ,
                     success: function(r,status){
                         console.warn('ajax request with result: '+r+' status: '+status);
                     },
@@ -291,7 +312,7 @@ return obj.throwObject();
                     submitButton.onclick=() => {
                         console.warn('submitting records');
                         console.error(document.querySelector('#id_dockName').value)
-                        obj.pushTag(
+                        tagsFunction(
                             global.username,
                             document.querySelector('#id_dockName').value,
                             
@@ -383,7 +404,7 @@ return obj.throwObject();
                     submitButton.className='btn btn-successs';
                     submitButton.onclick=() => {
                         console.warn('submitting records');
-                        obj.pushTag(
+                        tagsFunction(
                             global.username,
                             document.querySelector('#warename').value,
                             
@@ -475,7 +496,7 @@ return obj.throwObject();
                     submitButton.className='btn btn-successs';
                     submitButton.onclick=() => {
                         console.warn('submitting records');
-                        obj.pushTag(
+                        tagsFunction(
                             global.username,
                             document.querySelector('#railname').value,
                             
@@ -565,7 +586,7 @@ return obj.throwObject();
                     submitButton.className='btn btn-successs';
                     submitButton.onclick=() => {
                         console.warn('submitting records');
-                        obj.pushTag(
+                        tagsFunction(
                             global.username,
                             document.querySelector('#roadsname').value,
                             

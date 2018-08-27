@@ -5,7 +5,7 @@ var global = {
     username:'test',
     map:'',
     map_url:'./images_of_ports/nhavasheva.png',
-    url2:'https://move-recomm.herokuapp.com/'
+    url2:'https://move-recomm.herokuapp.com'
 }
 
 app.config(function($routeProvider,$locationProvider) {
