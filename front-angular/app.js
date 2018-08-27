@@ -160,11 +160,31 @@ app.controller('loginController', function($scope,$location,$rootScope,$http) {
                 console.warn(res['result'])
                 global.map = res['result']['port']
                 console.warn('login port is '+global.map)
+                $scope.showLoader=false;
                 if(global.map == 'Jawaharlal Nehru Port,Mumbai')
                     global.map_url = './images_of_ports/nhavasheva.png'
-                $scope.showLoader=false;
+                else if(global.map == 'Chennai port')
+                    global.map_url = './images_of_ports/chennaiport.png'
+                else if(global.map == 'Kandla Port,Gujarat')
+                    global.map_url = './images_of_ports/kandla.png'
+                else if(global.map == 'Kochi Port,Kerala')
+                    global.map_url ='./images_of_ports/cochinport.png'
+                else if(global.map == 'Kolkata Port' )
+                    global.map_url ='./images_of_ports/kolkataport.png'
+                else if(global.map == 'Krishnapatnam Port,Andhra Pradesh')
+                    global.map_url ='./images_of_ports/'
+                else if(global.map == 'Mangalore Port')
+                    global.map_url ='./images_of_ports/panambur.png'
+                else if(global.map == 'Mormugao Port' )
+                    global.map_url ='./images_of_ports/mormugao.png'
+                else if(global.map == 'Mumbai Port')
+                    global.map_url ='./images_of_ports/'
+                else if(global.map == 'Paradip Port,Odisha')
+                    global.map_url ='./images_of_ports/paradip.png'
+                else if(global.map == 'Visakapatnam Port')
+                    global.map_url ='./images_of_ports/vizagport.png'
 
-                $scope.showLoader=false;
+                    
                 $location.path('/dashboard');
                 console.warn('logged in')
                 global.username = $scope.username;
