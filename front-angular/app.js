@@ -15,7 +15,7 @@ app.config(function($routeProvider,$locationProvider) {
         title:'Login | SignUp',
     })
     .when("/",{
-        templateUrl:'./html_components/login.html',
+        templateUrl:'./html_components/welcome.html',
         controller:'loginController',
         title:'Login | SignUp',
     })
