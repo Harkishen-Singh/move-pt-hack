@@ -2,7 +2,7 @@
     <a href="/?#!/addAssignee"><button class="btn btn-success">Add Assignee</button></a> <br>
     <div data-ng-if="showLoading">
             <div class="loader"></div>
-            <style>
+            <!-- <style>
                 .loader {
     border: 16px solid #f3f3f3; /* Light grey */
     border-top: 16px solid #3498db; /* Blue */
@@ -25,7 +25,8 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
-            </style>
+            </style> -->
+            <img src="../loader.gif" alt="" style="height:100px;margin-left: 40%;margin-top: 10%;margin-bottom: 20%;">
     </div>
     <table style="width:100%;font-weight: 500;" data-ng-if="!showLoading" >
         <thead style="width:100%;">

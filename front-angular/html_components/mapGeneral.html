@@ -1,5 +1,5 @@
 <!-- <h2>this is general map</h2> --><br/>
-<div data-ng-init="initialise();" >
+<div data-ng-init="initialise();" style="min-height:700px;" >
     <button class="btn btn-success" id="markerAdder" >Add Markers</button>
 
     <button class="btn btn-danger" id="cancel">Cancel</button>
@@ -12,10 +12,10 @@
     
     <p id="showTag" style="color: black;" > Tag :   
     </p>
-    <img data-ng-src ="{{map_url}}"  />
+    <!-- <img data-ng-src ="{{map_url}}"  /> -->
     <!-- <img src="../images_of_ports/nhavasheva.png" alt=""> -->
     <div style="
-    /* background-image: url('../images_of_ports/nhavasheva.png'); */
+    background-image: url('../images_of_ports/nhavasheva.png');
     width: 100%;min-height: 800px;background-repeat: no-repeat;position: absolute;" id="main" >
         <!-- <h3 data-ng-if="showLoading" style="margin-left:30%;margin-top:100px;position: absolute;background-color: white;padding: 20px; -->
             <div data-ng-if="showLoading">
@@ -44,6 +44,7 @@ animation: spin 2s linear infinite;
 100% { transform: rotate(360deg); }
 }
                     </style>
+                    <!-- <img src="../loader.gif" alt="" style="height:100px;margin-left: 40%;margin-top: 10%;margin-bottom: 20%;"> -->
             </div>
   <!-- border-radius: 10px;
 " >Just a moment, fetching files...</h3> -->

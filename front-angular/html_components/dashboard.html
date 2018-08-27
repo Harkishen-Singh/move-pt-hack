@@ -7,7 +7,7 @@
         <div class="col-md-6" style="border-right:4px solid #f5f5f5;height:1000px;overflow-y: auto;"  >
             <div data-ng-if="showLoading1">
                 <div class="loader"></div>
-                <style>
+                <!-- <style>
                     .loader {
         border: 16px solid #f3f3f3; /* Light grey */
         border-top: 16px solid #3498db; /* Blue */
@@ -30,7 +30,8 @@
           0% { transform: rotate(0deg); }
           100% { transform: rotate(360deg); }
         }
-                </style>
+                </style> -->
+                <img src="../loader.gif" alt="" style="height:100px;margin-left: 40%;margin-top: 20%;">
         </div>
             <!-- <h3>Details Of the Upcoming Ship</h3> -->
             <div id="display" style="border:2px solid #352c2c;background-color: #FAFEFD;
@@ -56,7 +57,7 @@
             <div style="height:33%;border-bottom:4px solid #f5f5f5"  >
                     <div data-ng-if="showLoading1">
                             <div class="loader"></div>
-                            <style>
+                            <!-- <style>
                                 .loader {
                     border: 16px solid #f3f3f3; /* Light grey */
                     border-top: 16px solid #3498db; /* Blue */
@@ -79,7 +80,8 @@
                       0% { transform: rotate(0deg); }
                       100% { transform: rotate(360deg); }
                     }
-                            </style>
+                            </style> -->
+                            <img src="../loader.gif" alt="" style="height:100px;margin-left: 40%;margin-top: 20%;">
                     </div>
                 
                 <div id= "display" data-ng-repeat="d in distances" style="overflow-y:auto; font-size: 12px;" >
@@ -96,7 +98,7 @@
 
                 <div data-ng-if="showLoading2">
                     <div class="loader"></div>
-                    <style>
+                    <!-- <style>
                         .loader {
             border: 16px solid #f3f3f3; /* Light grey */
             border-top: 16px solid #3498db; /* Blue */
@@ -119,7 +121,8 @@
               0% { transform: rotate(0deg); }
               100% { transform: rotate(360deg); }
             }
-                    </style>
+                    </style> -->
+                <img src="../loader.gif" alt="" style="height:100px;margin-left: 40%;margin-top: 20%;">
             </div>
 
             <div data-ng-if="!showNone" ><p><b style="color: blue;">User Registration Time:</b>  {{sc.userregtime.substr(0,25)}} </p>
@@ -152,10 +155,11 @@
                 
                 <br><br></div>
                 <div data-ng-if="true" >
-                   <span style="color:blue;" > Assignees available :</span> <br>
+                   <span style="color:blue;font-weight:500;text-align: center;margin-left: 40%;" > Assignees available :</span> <br><hr>
                     <div data-ng-repeat="a in assss2" style="color:black" data-ng-if="a.username!=sc.assignee" >
-                        Username : {{a.username}} <button data-ng-click="assigneeParticular(a.username,sc.consignmentid)" 
+                        <button data-ng-click="assigneeParticular(a.username,sc.consignmentid)" 
                         style="background-color:white;border-radius: 5px;" >Add</button> &nbsp; &nbsp;
+                        {{a.name}} 
                     </div>
                 </div>
                 </div>
