@@ -14,9 +14,9 @@
     </p>
     <!-- <img data-ng-src ="{{map_url}}"  /> -->
     <!-- <img src="../images_of_ports/nhavasheva.png" alt=""> -->
-    <div style="
-    background-image: url('../images_of_ports/nhavasheva.png');
-    width: 100%;min-height: 800px;background-repeat: no-repeat;position: absolute;" id="main" >
+    <div data-ng-style="{
+    'background-image': 'url({{map_url}})',
+    'width': '100%','min-height': '800px','background-repeat': 'no-repeat','position': 'absolute'}" id="main" >
         <!-- <h3 data-ng-if="showLoading" style="margin-left:30%;margin-top:100px;position: absolute;background-color: white;padding: 20px; -->
             <div data-ng-if="showLoading">
                     <div class="loader"></div>
