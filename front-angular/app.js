@@ -158,6 +158,7 @@ app.controller('loginController', function($scope,$location,$rootScope,$http) {
             res=resp.data;
             if(res['Success']=='Y'){
                 console.warn(res['result'])
+                $rootScope.username = res['result']['username']
                 global.map = res['result']['port']
                 console.warn('login port is '+global.map)
                 $scope.showLoader=false;
