@@ -5,7 +5,8 @@ var global = {
     username:'test',
     map:'',
     map_url:'./images_of_ports/nhavasheva.png',
-    url2:'http://35.185.97.7:5500'
+    url2:'http://35.185.97.7:5500',
+    refresh:true,
 }
 
 app.config(function($routeProvider,$locationProvider) {
@@ -66,6 +67,7 @@ app.controller('asssigneeController', function($scope,$location,$rootScope,$http
     console.warn('assignee controller called')
     $rootScope.showSidebar = true;
     $rootScope.settingsOption = true;
+    $scope.refreshStop = global.refresh;
     $scope.addAssignee = function() {
         let data = 'username='+$scope.assignee_form.username+'&password='+$scope.assignee_form.password
             +'&name='+$scope.assignee_form.name+'&master='+global.username+'&task='+$scope.assignee_form.task
@@ -143,6 +145,8 @@ app.controller('loginController', function($scope,$location,$rootScope,$http) {
     $scope.title = 'Login | SignUP'
     $scope.wrongpass = '';
     $rootScope.showSidebar = false;
+    global.refresh = false;
+    $scope.refreshStop = global.refresh;
     $scope.checkLogin =  function(v) {
         console.warn(v);
         $scope.showLoader=true;
@@ -158,6 +162,7 @@ app.controller('loginController', function($scope,$location,$rootScope,$http) {
             res=resp.data;
             if(res['Success']=='Y'){
                 console.warn(res['result'])
+                $scope.refreshStop = false;
                 $rootScope.username = res['result']['username']
                 global.map = res['result']['port']
                 console.warn('login port is '+global.map)
@@ -204,7 +209,9 @@ app.controller('loginController', function($scope,$location,$rootScope,$http) {
 
 
 app.controller('dashController', function($scope,$rootScope,$http){
-    
+    // if($scope.refreshStop == true)
+    // $scope.refreshStop = false;
+    $scope.refreshStop = global.refresh;
     $scope.fetchAssignee = function(){
         console.warn('fetch assignee called')
         $http(
@@ -433,7 +440,7 @@ app.controller('dashController', function($scope,$rootScope,$http){
 app.controller('scheduleController', function($scope,$rootScope,$http,$location){
     console.warn('scheduleController called')
     $rootScope.showSidebar = true;
-
+    $scope.refreshStop = global.refresh;
     $scope.deleteSchd = function(id){
         console.warn('delete schedule called');
         $http({
@@ -515,6 +522,7 @@ app.controller('mapGenController', function($scope,$rootScope,$http){
     $rootScope.showSidebar = true;
     $scope.showLoading = true;
     $scope.map_url = global.map_url;
+    $scope.refreshStop = global.refresh;
     $scope.initialise = function(){
         console.warn('init called');
         $http({

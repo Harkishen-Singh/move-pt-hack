@@ -1,4 +1,8 @@
-<div data-ng-init="retriveAssignees()" >
+<div data-ng-show="refreshStop" >
+    <h2>Please <a href="/?#!/login">Re-login </a> to continue.</h2>
+  </div>
+   
+<div data-ng-init="retriveAssignees()" data-ng-show="!refreshStop" >
     <a href="/?#!/addAssignee"><button class="btn btn-success">Add Assignee</button></a> <br>
     <div data-ng-if="showLoading">
             <div class="loader"></div>

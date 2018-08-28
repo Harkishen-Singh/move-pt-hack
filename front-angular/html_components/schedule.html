@@ -1,6 +1,8 @@
-
+<div data-ng-show="refreshStop" >
+  <h2>Please <a href="/?#!/login">Re-login </a> to continue.</h2>
+</div>
  
-<div data-ng-init='fetchSchedules()' >
+<div data-ng-init='fetchSchedules()' data-ng-show="!refreshStop" >
     <a href="/?#!/addSchedule"> <button class="btn btn-info" > Add Schedule </button></a>
     <div data-ng-if="showLoading">
         <div class="loader"></div>
