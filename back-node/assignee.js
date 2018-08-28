@@ -44,7 +44,7 @@ function addAss(req, res) {
 
         db.collection('assignee').insertOne(obj, e => {
             if(e) console.error(e);
-            console.debug('added assignee with name : '+name);
+            console.error('added assignee with name : '+name);
             isErr=false;
             resSend(res);
         })
