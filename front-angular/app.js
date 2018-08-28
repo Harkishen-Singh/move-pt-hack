@@ -1,11 +1,11 @@
 var app = angular.module('pt_management', ['ngRoute']);
 
 var global = {
-    url:'https://pt-manage-backend.herokuapp.com',
+    url:'http://35.185.97.7:5000',
     username:'test',
     map:'',
     map_url:'./images_of_ports/nhavasheva.png',
-    url2:'https://move-recomm.herokuapp.com'
+    url2:'http://35.185.97.7:5500'
 }
 
 app.config(function($routeProvider,$locationProvider) {
