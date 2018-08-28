@@ -204,7 +204,7 @@ app.controller('loginController', function($scope,$location,$rootScope,$http) {
 
 
 app.controller('dashController', function($scope,$rootScope,$http){
-    let finalLenghtsArr = [];
+    
     $scope.fetchAssignee = function(){
         console.warn('fetch assignee called')
         $http(
@@ -231,7 +231,8 @@ app.controller('dashController', function($scope,$rootScope,$http){
     }
 
     $scope.defaultDistances = function() {
-        var allTags = [];
+        var allTags = [];let finalLenghtsArr = [];
+        $scope.counter = 1;
         console.warn('defaultDistances called');
         $http({
             url:global.url+'/retriveTags',
@@ -373,6 +374,7 @@ app.controller('dashController', function($scope,$rootScope,$http){
         console.warn('fetchSchDetails called id:'+id)
         $scope.showLoading2 = true;
         $scope.showRecomm = false;
+        $scope.counter += 1;
         $http({
             url:global.url2+'/getRecommendation',
             method:'POST',

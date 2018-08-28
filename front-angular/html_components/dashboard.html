@@ -4,7 +4,7 @@
 
 <div class="container" data-ng-init="fetchSchedules();defaultDistances();">
     <div class="row" >
-        <div class="col-md-6" style="border-right:4px solid #f5f5f5;height:1000px;overflow-y: auto;"  >
+        <div class="col-md-6" style="border-right:4px solid #f5f5f5;height:600px;overflow-y: auto;"  >
             <div data-ng-if="showLoading1">
                 <div class="loader"></div>
                 <!-- <style>
@@ -54,7 +54,7 @@
 
 
         <div class="col-md-6">
-            <div style="height:33%;border-bottom:4px solid #f5f5f5;overflow-y: auto;"  >
+            <div style="height:300px;border-bottom:4px solid #f5f5f5;overflow-y: auto;"  >
                     <div data-ng-if="showLoading1">
                             <div class="loader"></div>
                             <!-- <style>
@@ -84,7 +84,7 @@
                             <img src="../loader.gif" alt="" style="height:100px;margin-left: 40%;margin-top: 20%;">
                     </div>
                 
-                <div id= "display" data-ng-repeat="d in distances" style="overflow-y:auto; font-size: 12px;" >
+                <div id= "display" data-ng-repeat="d in distances" style="overflow-y:auto; font-size: 12px;"  >
                     {{d.station1}} <sup>( {{d.station1Type}} )</sup> m 
                     to {{d.station2}} <sup>( {{d.station2Type}} ) </sup> m 
                      distance : {{d.distance}} m
@@ -94,7 +94,7 @@
                 </div>
                 
             </div>
-            <div style="height:33%;border-bottom:4px solid #f5f5f5;overflow-y: auto;" >
+            <div style="height:300px;border-bottom:4px solid #f5f5f5;overflow-y: auto;" >
 
                 <div data-ng-if="showLoading2">
                     <div class="loader"></div>
@@ -168,11 +168,11 @@
             </div>
 
 
-            <div id="chart">
+            <!-- <div id="chart">
                 <canvas id="LineChart">
                     
                 </canvas>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
@@ -199,7 +199,7 @@
         });
     
 </script> -->
-
+<!-- 
 <script>
 var ctx = document.getElementById("LineChart").getContext('2d');
 var chart = c3.generate({
@@ -251,4 +251,4 @@ window.onbeforeunload = e => {
     e.preventDefault();
     return 'you cannot refresh';
 }
-</script>
+</script> -->

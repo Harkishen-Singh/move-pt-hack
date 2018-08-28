@@ -31,7 +31,7 @@ function checkLogin(req,res){
         console.warn("User Details Input:"+ email)
 
         mongo.connect(url, (e, dbo) => {
-        if(e) throw e;
+        if(e) console.error(e);
         console.warn('[SUCCESS] connected to the database');
         let db = dbo.db('pt_move');
         let obj = {
@@ -40,7 +40,7 @@ function checkLogin(req,res){
         }
 
          db.collection('administrator_details').findOne(obj, (e,res2) =>{
-            if(e) throw e;
+            if(e) console.error(e);
             else
                 console.warn('[SUCCESS] user searched with username:'+email);
             console.warn(res2==null)

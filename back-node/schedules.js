@@ -39,7 +39,7 @@ function add(req,res) {
         unload_strt_time=req.body.unload_strt_time,
         unload_end_time=req.body.unload_end_time;
         mongo.connect(url, (e, dbo) => {
-            if(e) throw e;
+            if(e) console.error(e);
             console.warn('[SUCCESS] connected to the database');
             let db = dbo.db('pt_move');
             let obj = {
@@ -62,7 +62,7 @@ function add(req,res) {
                 'unload_end_time':unload_end_time,
             }
             db.collection('schedules').insertOne(obj, (e,res1) =>{
-                if(e) throw e;
+                if(e) console.error(e);
                 else
                     console.warn('[SUCCESS] inserted into the database with username : '+
                     username+' and condignmentid : '+consignmentid);
@@ -81,12 +81,12 @@ function add(req,res) {
 function retriveAll(req, res) {
     let username = req.body.username;
     mongo.connect(url, (e, dbo) => {
-        if(e) throw e;
+        if(e) console.error(e);
         console.warn('[SUCCESS] connected to the database');
         let db = dbo.db('pt_move');
         
         db.collection('schedules').find({'username':username}).toArray((e, result) => {
-            if(e) throw e;
+            if(e) console.error(e);
             console.warn('Successfully retrived schedules for username : '+username);
             isErr = false;
             console.warn(result)
@@ -101,12 +101,12 @@ function retriveAll(req, res) {
 function deleteSch(req, res) {
     let consignmentid = req.body.id;
     mongo.connect(url, (e, dbo) => {
-        if(e) throw e;
+        if(e) console.error(e);
         console.warn('[SUCCESS] connected to the database');
         let db = dbo.db('pt_move');
         
         db.collection('schedules').deleteOne({'consignmentid':consignmentid}, e => {
-            if(e) throw e;
+            if(e) console.error(e);
             console.warn('Successfully deleted schedule for consignmentid : '+consignmentid);
             isErr = false;
             dbo.close()
@@ -119,12 +119,12 @@ function deleteSch(req, res) {
 function details(req, res) {
     let consignmentid = req.body.consignmentid;
     mongo.connect(url, (e, dbo) => {
-        if(e) throw e;
+        if(e) console.error(e);
         console.warn('[SUCCESS] connected to the database');
         let db = dbo.db('pt_move');
         
         db.collection('schedules').findOne({'consignmentid':consignmentid},(e, result) => {
-            if(e) throw e;
+            if(e) console.error(e);
             console.warn('Successfully retrived schedules for consignmentid : '+consignmentid);
             isErr = false;
             console.warn(result)
@@ -141,12 +141,12 @@ function assigneeParticular(req, res) {
         username = req.body.username,
         master= req.body.master;
     mongo.connect(url, (e, dbo) => {
-        if(e) throw e;
+        if(e) console.error(e);
         console.warn('[SUCCESS] connected to the database');
         let db = dbo.db('pt_move');
         
         db.collection('schedules').updateOne({'consignmentid':consignmentid}, {$set : { 'assignee':username }} ,e => {
-            if(e) throw e;
+            if(e) console.error(e);
             console.warn('added assignee for consignmentid : '+consignmentid);
             isErr = false;
             dbo.close()
@@ -162,12 +162,12 @@ function assigneeWorks(req, res) {
         master=req.body.master;
    
     mongo.connect(url, (e, dbo) => {
-        if(e) throw e;
+        if(e) console.error(e);
         console.warn('[SUCCESS] connected to the database');
         let db = dbo.db('pt_move');
         
         db.collection('schedules').find({'username':master,'assignee':username}).toArray((e, result) => {
-            if(e) throw e;
+            if(e) console.error(e);
             console.warn('Successfully assigneeWorks : '+username);
             isErr = false;
             console.warn(result)
@@ -190,12 +190,12 @@ function complete(req, res) {
         assignee = req.body.assignee;
 
     mongo.connect(url, (e, dbo) => {
-        if(e) throw e;
+        if(e) console.error(e);
         console.warn('[SUCCESS] connected to the database');
         let db = dbo.db('pt_move');
         
         db.collection('schedules').updateOne({'consignmentid':consignmentid, 'assignee':assignee}, {$set : { 'completed':'Yes' }} ,e => {
-            if(e) throw e;
+            if(e) console.error(e);
             console.warn('completed wprk assignee for consignmentid : '+consignmentid);
             isErr = false;
             dbo.close()

@@ -28,10 +28,10 @@ function retriveTags(req, res) {
     let username = req.body.username;
     console.warn('requested username : '+username)
     mongo.connect(url, (e, dbo) => {
-        if(e) throw e;
+        if(e) console.error(e);
         let db = dbo.db('pt_move');
         db.collection('tags').find({"username" : username}).toArray((e, result2) => {
-            if(e) throw e;
+            if(e) console.error(e);
             console.warn('from db below')
             console.warn(result2)
             isErr=false;
@@ -45,10 +45,10 @@ function retriveTags(req, res) {
 function dockAssign(req,res) {
     let username = req.body.username, name=req.body.name,id=req.body.id;
     mongo.connect(url, (e, dbo) => {
-        if(e) throw e;
+        if(e) console.error(e);
         let db = dbo.db('pt_move');
         db.collection('tags').updateOne({"username" : username, "name":name},{$inc: { 'occupied': 1 }},(e) => {
-            if(e) throw e;
+            if(e) console.error(e);
             console.warn('updated')
             isErr=false;
             dbo.close();
@@ -57,10 +57,10 @@ function dockAssign(req,res) {
     })
 
     mongo.connect(url, (e, dbo) => {
-        if(e) throw e;
+        if(e) console.error(e);
         let db = dbo.db('pt_move');
         db.collection('schedules').updateOne({"username" : username, "consignmentid":id},{$set: { 'dockassigned': name }},(e) => {
-            if(e) throw e;
+            if(e) console.error(e);
             console.warn('updated')
             isErr=false;
             resSend(res);
@@ -73,10 +73,10 @@ function dockAssign(req,res) {
 function dockDetails(req, res) {
     let username = req.body.username;
     mongo.connect(url, (e, dbo) => {
-        if(e) throw e;
+        if(e) console.error(e);
         let db = dbo.db('pt_move');
         db.collection('tags').find({"username" : username}).toArray((e, result2) => {
-            if(e) throw e;
+            if(e) console.error(e);
             console.warn('from db below')
             console.warn(result2)
             let docks=[]
@@ -105,10 +105,10 @@ function saveTags(req, res) {
     console.debug(ainJson) // save this to mongo
     let data = ainJson;
     mongo.connect(url, (e, dbo) => {
-        if(e) throw e;
+        if(e) console.error(e);
         let db = dbo.db('pt_move');
         db.collection('tags').insertMany(data, (e) => {
-            if(e) throw e;
+            if(e) console.error(e);
             else
                 console.warn('inserted multiple records');
                 isErr=false;

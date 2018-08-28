@@ -32,7 +32,7 @@ function addAss(req, res) {
         password=req.body.password;
 
     mongo.connect(url, (e, dbo) => {
-        if(e) throw e;
+        if(e) console.error(e);
         let db = dbo.db('pt_move');
         let obj = {
             'username':username,
@@ -43,7 +43,7 @@ function addAss(req, res) {
         };
 
         db.collection('assignee').insertOne(obj, e => {
-            if(e) throw e;
+            if(e) console.error(e);
             console.debug('added assignee with name : '+name);
             isErr=false;
             resSend(res);
@@ -54,10 +54,10 @@ function addAss(req, res) {
 function showAll(req, res) {
     let master = req.body.master;
     mongo.connect(url, (e, dbo) => {
-        if(e) throw e;
+        if(e) console.warn(e);
         let db = dbo.db('pt_move');
         db.collection('assignee').find({"master" : master}).toArray((e, result2) => {
-            if(e) throw e;
+            if(e) console.error(e);
             console.warn('from db below showing assignees')
             console.warn(result2)
             isErr=false;
@@ -71,10 +71,10 @@ function removeAss(req ,res) {
     let username=req.body.username,
         master = req.body.master;
     mongo.connect(url, (e, dbo) => {
-        if(e) throw e;
+        if(e) console.error(e);
         let db = dbo.db('pt_move');
         db.collection('assignee').deleteOne({"master" : master,"username":username},(e, result2) => {
-            if(e) throw e;
+            if(e) console.error(e);
             console.warn('removed assignee : '+username+' by master : '+master);
             isErr=false;
             resSend(res);
@@ -86,10 +86,10 @@ function login(req, res) {
     let username=req.body.username,
         password = req.body.password;
     mongo.connect(url, (e, dbo) => {
-        if(e) throw e;
+        if(e) console.error(e);
         let db = dbo.db('pt_move');
         db.collection('assignee').findOne({"username" : username,"password":password},(e, result2) => {
-            if(e) throw e;
+            if(e) console.error(e);
             console.warn('login check below')
             console.warn(result2)
             if(result2==null ){

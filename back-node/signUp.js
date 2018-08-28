@@ -33,7 +33,7 @@ function signUps(req, res) {
         port = req.body.port
     
     mongo.connect(url, (e, dbo) => {
-        if(e) throw e;
+        if(e) console.error(e);
         console.warn('[SUCCESS] connected to the database');
         let db = dbo.db('pt_move');
         colle =  db.listCollections();
@@ -45,7 +45,7 @@ function signUps(req, res) {
             'port':port,
         }
         db.collection('administrator_details').insertOne(obj, (e,res1) =>{
-            if(e) throw e;
+            if(e) console.error(e);
             else
                 console.warn('[SUCCESS] inserted into the database with username='+username);
             console.warn(res1)
@@ -57,7 +57,7 @@ function signUps(req, res) {
         
     } )
 
-    console.debug(email+username+password+mobile+port)
+    // console.debug(email+username+password+mobile+port)
 }
 
 module.exports = {
