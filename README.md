@@ -18,3 +18,8 @@ schedule : Schedules detailed
 Assignee : Adding staff assignee individually
 
 Mobile App : Details of work assigned to staff, options to communicate with the Administration.
+
+## :wrench: Technology used
+* **Backend** NodeJs
+* **Frontend** AngularJs
+* **Mobile app** React-Native
