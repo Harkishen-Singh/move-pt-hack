@@ -3,7 +3,7 @@ import {Text, Button,TouchableOpacity, View, TextInput, ActivityIndicator, Image
      StyleSheet,KeyboardAvoidingView} from 'react-native';
 import Display from 'react-native-display';
 
-global.url = 'https://pt-manage-backend.herokuapp.com'
+global.url = 'http://localhost:8080'
 export default class LoginScreen extends Component {
     constructor(props){
         super(props);
@@ -111,29 +111,6 @@ export default class LoginScreen extends Component {
              alert('Network Request failed')
              console.error(e)
         })
-        // fetch('https://weatherdatabackend.herokuapp.com/loginOperations', {
-        //     method:'POST',
-        //     headers: {
-        //         'Accept':'application/json',
-        //         'Content-Type':'application/json'
-        //     },
-        //     body: JSON.stringify({
-        //         'username':this.state.username,
-        //         'password':this.state.password,
-        //     }),
-        // })
-        // .then(resData => resData.json())
-        // .then(res => {
-        //     console.warn('Received as '+res);
-        //     this.setState({showMessage:'Succesfully Logged In. Welcome '+res['first_name']+' '+res['second_name'],
-        //         showMessageCheck:true, loginSuccess:true
-        //         });
-        // })
-        // .catch(err => {
-        //     this.setState({showMessage:'Logged In Unsuccessful',
-        //     showMessageCheck:true, loginSuccess:false
-        //     });
-        // });
     }
 }
 

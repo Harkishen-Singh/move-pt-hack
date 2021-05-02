@@ -1,11 +1,13 @@
 var app = angular.module('pt_management', ['ngRoute']);
 
 var global = {
-    url:'http://35.185.97.7:5000',
+    // url:'http://35.185.97.7:5000',
+    url:'http://localhost:5000',
     username:'test',
     map:'',
     map_url:'./images_of_ports/nhavasheva.png',
-    url2:'http://35.185.97.7:5500',
+    // url2:'http://35.185.97.7:5500',
+    url2:'http://localhost:5500',
     refresh:true,
 }
 

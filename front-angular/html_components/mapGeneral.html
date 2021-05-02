@@ -185,12 +185,12 @@ function tagsFunction(username,name,type,capacity,marginLeft,marginTop) {
             $('#done').hide();
             $('#done').click(()=>{
                 $.ajax({
-                    url:'https://pt-manage-backend.herokuapp.com/addTags2',
+                    url:'http://localhost:5000/addTags2',
                     data: 'object=' +JSON.stringify(Tagser)  ,
                     success: function(r,status){
                         console.warn('ajax request with result: '+r+' status: '+status);
                     },
-                    error: function(xhr,status,error){
+                    error: function(xhr,status,er8080ror){
                         throw error;
                     }
                 })

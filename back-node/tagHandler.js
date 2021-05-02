@@ -1,6 +1,6 @@
 const mongo = require('mongodb').MongoClient,
-    url='mongodb+srv://muskan:movehack@cluster0-ldloc.mongodb.net/pt_move?retryWrites=true'
-    // url='mongodb://127.0.0.1:27017'
+    // url='mongodb+srv://muskan:movehack@cluster0-ldloc.mongodb.net/pt_move?retryWrites=true'
+    url='mongodb://127.0.0.1:27017'
 ;
 var output = {
     'Success':'N',
@@ -107,6 +107,7 @@ function saveTags(req, res) {
     mongo.connect(url, (e, dbo) => {
         if(e) console.error(e);
         let db = dbo.db('pt_move');
+        console.log('tags incoming is', data)
         db.collection('tags').insertMany(data, (e) => {
             if(e) console.error(e);
             else

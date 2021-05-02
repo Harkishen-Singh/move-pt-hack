@@ -1,0 +1,5 @@
+ 1. Install nodejs, mongodb
+ 2. Install http-server
+ 3. Make sure that mongo server is running at 127.0.0.1:27017 with protocol URL being mongodb:127.0.0.1:27017
+ 4. Open terminal and go into backend and run `node app.js`. Do not close this.
+ 5. Open new terminal and go into front-end and run `http-server`. Do not close this.
